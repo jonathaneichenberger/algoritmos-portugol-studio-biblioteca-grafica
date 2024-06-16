@@ -50,6 +50,8 @@ programa
 	real fonte_padrao = 20.0
 	cadeia titulo
 	cadeia mensagem1, mensagem2
+	inteiro digitar = 0
+	cadeia texto
 	
 	
 	funcao inicio()
@@ -177,7 +179,30 @@ programa
 	}
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
-		
+
+		carregar_tela_celular()
+
+		topo()
+
+		titulo = "      ADICIONAR LIVRO"
+
+		carregar_titulo()
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(35, 300, 330, 30, verdadeiro, falso)
+
+		se(m.posicao_x() >= 35 e m.posicao_x() <= 365 e m.posicao_y() >= 300 e m.posicao_y() <= 330)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				g.definir_cor(0xdfdfdf)
+				g.desenhar_retangulo(36, 301, 328, 28, verdadeiro, verdadeiro)
+			
+				g.definir_cor(g.COR_PRETO)
+				g.definir_estilo_texto(falso,falso, falso)
+
+			}
+		}
 	}
 
 	funcao desempilhar()
@@ -190,6 +215,7 @@ programa
 		titulo = " REMOVER ÚLTIMO LIVRO"
 
 		carregar_titulo()
+
 
 		
 		se(ponteiro==0)
@@ -303,18 +329,23 @@ programa
 
 	funcao carregar_titulo()
 	{
-
+		//Colocando uma borda preta em volta do titulo
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, falso)
+		
+		//Preenchendo com cor de fundo cinza atrás do título
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(23, 159, (largura_janela - 44), 50, falso, verdadeiro)
+		
 		//Defininndo cor e tamanho do titulo- BIBLIOTECA DE LIVROS
 		g.definir_cor(g.COR_PRETO)
 		g.definir_tamanho_texto(27.0)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 
 		//Imprimindo na tela o título
-		g.desenhar_texto(22, 170, titulo)
+		g.desenhar_texto(22, 171, titulo)
 
-		//Colocando uma borda preta em volta do titulo
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, falso)
+		
 		
 	}
 
@@ -365,7 +396,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 9743; 
+ * @POSICAO-CURSOR = 5792; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
