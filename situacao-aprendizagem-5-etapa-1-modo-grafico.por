@@ -41,13 +41,15 @@ programa
 	inteiro pilha_livros = 0
 	inteiro lista_vazia = 0
 	inteiro sair_do_programa = 0
-	inteiro cursor = 0
+	inteiro icone_alerta = 0
+	inteiro botao_voltar = 0
 	
 	inteiro ponteiro = 0
 	inteiro livros[total]
 	inteiro opcao = 0
 	real fonte_padrao = 20.0
 	cadeia titulo
+	cadeia mensagem1, mensagem2
 	
 	
 	funcao inicio()
@@ -60,13 +62,21 @@ programa
 		{
 	          se(m.botao_pressionado(m.BOTAO_ESQUERDO))
 			{	
-		          se(m.posicao_x() >= 25 e m.posicao_x() <= 550 e m.posicao_y() >= 100 e m.posicao_y() <= 150)
+		          se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 220 e m.posicao_y() <= 260)
 				{
 					opcao = 1
 				}
 			}
-				menu()
-            		g.renderizar()
+			 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
+			{	
+		          se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 280 e m.posicao_y() <= 320)
+				{
+					opcao = 2
+				}
+			}
+			
+			menu()
+            	g.renderizar()
 
 			escolha(opcao)
 			{
@@ -78,8 +88,17 @@ programa
 						empilhar()
 					     g.renderizar()
 					}
-					
 				}
+				caso 2:
+				{	
+					enquanto(opcao == 2)
+					{
+						
+						desempilhar()
+					     g.renderizar()
+					}
+				}
+				
 			}
 		}
 		
@@ -91,7 +110,7 @@ programa
 
 		topo()
 
-		titulo = "BIBLIOTECA DE LIVROS"
+		titulo = "  BIBLIOTECA DE LIVROS"
 
 		carregar_titulo()
 
@@ -160,6 +179,30 @@ programa
 	{	
 		
 	}
+
+	funcao desempilhar()
+	{
+		
+		carregar_tela_celular()
+
+		topo()
+
+		titulo = " REMOVER ÚLTIMO LIVRO"
+
+		carregar_titulo()
+
+		
+		se(ponteiro==0)
+		{
+			mensagem1 = "Não foi encontrado nenhum"
+			mensagem2 = "             livro na Pilha!"
+			alerta()
+			
+		}
+			
+		
+	}
+
 	funcao definir_tela()
 	{
 		
@@ -205,8 +248,12 @@ programa
 		sair_do_programa = g.redimensionar_imagem(temp_img, 40 , 40, verdadeiro)
 		g.liberar_imagem(temp_img)
 
-		temp_img = g.carregar_imagem("imagem/cursor.png")
-		cursor = g.redimensionar_imagem(temp_img, 5 , 5, verdadeiro)
+		temp_img = g.carregar_imagem("imagem/icone_alerta.png")
+		icone_alerta = g.redimensionar_imagem(temp_img, 60 , 60, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/botao_voltar.png")
+		botao_voltar = g.redimensionar_imagem(temp_img, 50 , 40, verdadeiro)
 		g.liberar_imagem(temp_img)
 
 	}
@@ -247,6 +294,7 @@ programa
 		g.definir_estilo_texto(verdadeiro,falso, falso)
 		g.definir_tamanho_texto(14.0)
 		g.desenhar_texto(125, 605, "Criado e Desenvolvido por")
+		
 		g.definir_estilo_texto(verdadeiro,verdadeiro, falso)
 		g.definir_tamanho_texto(16.0)
 		g.desenhar_texto(85, 625, "Jonathan Reinaldo Eichenberger")
@@ -262,12 +310,53 @@ programa
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 
 		//Imprimindo na tela o título
-		g.desenhar_texto(40, 170, titulo)
+		g.desenhar_texto(22, 170, titulo)
 
 		//Colocando uma borda preta em volta do titulo
 		g.definir_cor(g.COR_PRETO)
 		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, falso)
 		
+	}
+
+	funcao alerta()
+	{
+	
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(100, 250, 200, 120, verdadeiro, falso)
+		
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(101, 251, 198, 118, verdadeiro, verdadeiro)
+		
+		g.desenhar_imagem(170, 260, icone_alerta)
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_imagem(176, 588, botao_voltar)
+		g.desenhar_retangulo(166, 578, 70, 60, verdadeiro, falso)
+
+		g.definir_estilo_texto(falso,verdadeiro, falso)
+		g.definir_tamanho_texto(22.0)
+		
+		g.desenhar_texto(150, 335, "ALERTA!!!")
+		
+		g.definir_tamanho_texto(26.0)
+		
+		g.desenhar_texto(30, 400, mensagem1)
+		g.desenhar_texto(30, 425, mensagem2)
+
+		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 578 e m.posicao_y() <= 638)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(167, 579, 68, 58, verdadeiro, verdadeiro)
+			g.desenhar_imagem(176, 588, botao_voltar)
+			
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO))
+			{
+				
+				opcao = 0
+		
+			}
+		}
+	
 	}
 }
 
@@ -276,8 +365,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2550; 
- * @DOBRAMENTO-CODIGO = [162, 172, 213, 231, 239, 255];
+ * @POSICAO-CURSOR = 9743; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
