@@ -44,7 +44,15 @@ programa
 	inteiro icone_alerta = 0
 	inteiro botao_voltar = 0
 	inteiro logo_harry_potter = 0
+	inteiro pedra_filosofal = 0
+	inteiro prisioneiro_de_azkaban = 0
+	inteiro camara_secreta = 0
+	inteiro calice_de_fogo = 0
+	inteiro enigma_do_principe = 0
+	inteiro ordem_da_fenix = 0
+
 	
+	//Outras variaveis necessarias
 	inteiro ponteiro = 0
 	inteiro livros[total]
 	inteiro opcao = 0
@@ -102,6 +110,15 @@ programa
 					     g.renderizar()
 					}
 				}
+				caso 6:
+				{
+					enquanto(opcao == 6)
+					{
+						
+						colecao_harry_potter()
+					     g.renderizar()
+					}
+				}
 				
 			}
 		}
@@ -113,7 +130,9 @@ programa
 		carregar_tela_celular()
 
 		topo()
-
+		
+		g.definir_tamanho_texto(27.0)
+		
 		titulo = "  BIBLIOTECA DE LIVROS"
 
 		carregar_titulo()
@@ -182,39 +201,48 @@ programa
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
 		
-		carregar_tela_celular()
-
-		topo()
-
-		titulo = "   COLEÇÕES DE LIVROS"
-
-		carregar_titulo()
-
-		g.definir_cor(0xE09553)
-		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
 		
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
-		
-		g.desenhar_imagem(121, 215, logo_harry_potter)
-		
+			carregar_tela_celular()
+	
+			topo()
 
-		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
-		{
-			g.definir_cor(0xC38248)
+			g.definir_tamanho_texto(27.0)
+			
+			titulo = "   COLEÇÕES DE LIVROS"
+	
+			carregar_titulo()
+	
+			g.definir_cor(0xE09553)
 			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
-		
+			
 			g.definir_cor(g.COR_PRETO)
 			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
-		
+			
 			g.desenhar_imagem(121, 215, logo_harry_potter)
-
-			 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
-			 {
-			 	lista_colecoes = 1
-			 }
-		}
-		
+			
+	
+			se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+			{
+				g.definir_cor(0xC38248)
+				g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
+			
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
+			
+				g.desenhar_imagem(121, 215, logo_harry_potter)
+		 
+			}
+			se(nao m.botao_pressionado(m.BOTAO_ESQUERDO))
+			{
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+				{
+					se(m.ler_botao() == m.BOTAO_ESQUERDO)
+					{
+						opcao = 6
+					}
+				}
+			}
+			
 	}
 
 	funcao desempilhar()
@@ -224,13 +252,15 @@ programa
 
 		topo()
 
+		g.definir_tamanho_texto(27.0)
+		
 		titulo = " REMOVER ÚLTIMO LIVRO"
 
 		carregar_titulo()
 
 
 		
-		se(ponteiro==0)
+		se(ponteiro == 0)
 		{
 			mensagem1 = "Não foi encontrado nenhum"
 			mensagem2 = "             livro na Pilha!"
@@ -297,7 +327,30 @@ programa
 		temp_img = g.carregar_imagem("imagem/harry_potter/logo_harry_potter.png")
 		logo_harry_potter = g.redimensionar_imagem(temp_img, 160 , 40, verdadeiro)
 		g.liberar_imagem(temp_img)
+		
+		temp_img = g.carregar_imagem("imagem/harry_potter/pedra_filosofal.png")
+		pedra_filosofal = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
 
+		temp_img = g.carregar_imagem("imagem/harry_potter/prisioneiro_de_azkaban.png")
+		prisioneiro_de_azkaban = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/camara_secreta.png")
+		camara_secreta = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/calice_de_fogo.png")
+		calice_de_fogo = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/enigma_do_principe.png")
+		enigma_do_principe = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/ordem_da_fenix.png")
+		ordem_da_fenix = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
 
 	}
 
@@ -356,7 +409,6 @@ programa
 		
 		//Defininndo cor e tamanho do titulo- BIBLIOTECA DE LIVROS
 		g.definir_cor(g.COR_PRETO)
-		g.definir_tamanho_texto(27.0)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 
 		//Imprimindo na tela o título
@@ -378,6 +430,7 @@ programa
 		g.desenhar_imagem(170, 260, icone_alerta)
 
 		g.definir_cor(g.COR_PRETO)
+		
 		g.desenhar_imagem(176, 588, botao_voltar)
 		g.desenhar_retangulo(166, 578, 70, 60, verdadeiro, falso)
 
@@ -399,13 +452,85 @@ programa
 			
 			se(m.botao_pressionado(m.BOTAO_ESQUERDO))
 			{
-				
 				opcao = 0
-		
 			}
 		}
 	
 	}
+
+	funcao colecao_harry_potter()
+	{
+		carregar_tela_celular()
+
+		g.definir_cor(0xE1BF41)
+		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+
+		topo()
+
+		g.definir_tamanho_texto(26.0)
+		
+		titulo = " COLEÇÃO HARRY POTTER"
+
+		carregar_titulo()
+
+		cabecalho()
+
+		g.desenhar_imagem(34, 220, pedra_filosofal)
+		g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
+		g.desenhar_imagem(268, 220, camara_secreta)
+		g.desenhar_imagem(34, 380, calice_de_fogo)
+		g.desenhar_imagem(151, 380, enigma_do_principe)
+		g.desenhar_imagem(268, 380, ordem_da_fenix)
+		
+		se(m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(31, 217, pedra_filosofal)
+		}
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(148, 217, prisioneiro_de_azkaban)
+		}
+		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(265, 217, camara_secreta)
+		}
+		
+		se(m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			g.desenhar_imagem(31, 377, calice_de_fogo)
+		}
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			g.desenhar_imagem(148, 377, enigma_do_principe)
+		}
+		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			g.desenhar_imagem(265, 377, ordem_da_fenix)
+		}
+
+		g.definir_cor(0xA48B30)
+		g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
+		g.desenhar_imagem(176, 545, botao_voltar)
+
+		se(m.posicao_x() >= 166 e m.posicao_x() <= 216 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+		{
+			g.definir_cor(0xC3A539)
+			g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
+			g.desenhar_imagem(176, 545, botao_voltar)
+			
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO))
+			{
+				opcao = 0
+			}
+		}
+	}
+	funcao redimensionar()
+	{
+		temp_img = g.carregar_imagem("imagem/harry_potter/pedra_filosofal.png")
+		pedra_filosofal = g.redimensionar_imagem(temp_img, 110 , 160, verdadeiro)
+		g.liberar_imagem(temp_img)
+	}
+
 }
 
 /* $$$ Portugol Studio $$$ 
@@ -413,9 +538,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5337; 
+ * @POSICAO-CURSOR = 14231; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {lista_colecoes, 64, 9, 14};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
