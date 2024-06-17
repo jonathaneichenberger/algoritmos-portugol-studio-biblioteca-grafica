@@ -43,6 +43,7 @@ programa
 	inteiro sair_do_programa = 0
 	inteiro icone_alerta = 0
 	inteiro botao_voltar = 0
+	inteiro logo_harry_potter = 0
 	
 	inteiro ponteiro = 0
 	inteiro livros[total]
@@ -52,6 +53,7 @@ programa
 	cadeia mensagem1, mensagem2
 	inteiro digitar = 0
 	cadeia texto
+	inteiro lista_colecoes = 0
 	
 	
 	funcao inicio()
@@ -179,30 +181,40 @@ programa
 	}
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
-
+		
 		carregar_tela_celular()
 
 		topo()
 
-		titulo = "      ADICIONAR LIVRO"
+		titulo = "   COLEÇÕES DE LIVROS"
 
 		carregar_titulo()
 
+		g.definir_cor(0xE09553)
+		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
+		
 		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(35, 300, 330, 30, verdadeiro, falso)
+		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
+		
+		g.desenhar_imagem(121, 215, logo_harry_potter)
+		
 
-		se(m.posicao_x() >= 35 e m.posicao_x() <= 365 e m.posicao_y() >= 300 e m.posicao_y() <= 330)
+		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
 		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				g.definir_cor(0xdfdfdf)
-				g.desenhar_retangulo(36, 301, 328, 28, verdadeiro, verdadeiro)
-			
-				g.definir_cor(g.COR_PRETO)
-				g.definir_estilo_texto(falso,falso, falso)
+			g.definir_cor(0xC38248)
+			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
+		
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
+		
+			g.desenhar_imagem(121, 215, logo_harry_potter)
 
-			}
+			 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
+			 {
+			 	lista_colecoes = 1
+			 }
 		}
+		
 	}
 
 	funcao desempilhar()
@@ -281,6 +293,11 @@ programa
 		temp_img = g.carregar_imagem("imagem/botao_voltar.png")
 		botao_voltar = g.redimensionar_imagem(temp_img, 50 , 40, verdadeiro)
 		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/logo_harry_potter.png")
+		logo_harry_potter = g.redimensionar_imagem(temp_img, 160 , 40, verdadeiro)
+		g.liberar_imagem(temp_img)
+
 
 	}
 
@@ -396,7 +413,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5792; 
+ * @POSICAO-CURSOR = 5337; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
