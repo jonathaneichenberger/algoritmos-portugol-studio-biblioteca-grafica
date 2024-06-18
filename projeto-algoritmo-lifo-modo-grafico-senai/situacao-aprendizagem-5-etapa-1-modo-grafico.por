@@ -1,20 +1,3 @@
-/*
-                escreva("| 1 |- Adicionar livro à Pilha           |\n")
-			escreva("+----------------------------------------+\n")
-			escreva("| 2 |- Remover último livro da Pilha     |\n")
-			escreva("+----------------------------------------+\n")
-			escreva("| 3 |- Remover todos os livros da Pilha  |\n")
-			escreva("+----------------------------------------+\n")
-			escreva("| 4 |- Mostrar livros Empilhados         |\n")
-			escreva("+----------------------------------------+\n")
-			escreva("| 5 |- Verificar a Pilha está vazia      |\n")
-			escreva("+----------------------------------------+\n")
-			escreva("| 6 |- Sair do Programa                  |\n")
-			escreva("+----------------------------------------+\n")
- */
-
-
-
 programa
 {
 	inclua biblioteca Teclado --> t
@@ -835,9 +818,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 21571; 
+ * @POSICAO-CURSOR = 0; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {livros, 65, 9, 6}-{voltar, 73, 9, 6};
+ * @SIMBOLOS-INSPECIONADOS = {livros, 48, 9, 6}-{voltar, 56, 9, 6};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
