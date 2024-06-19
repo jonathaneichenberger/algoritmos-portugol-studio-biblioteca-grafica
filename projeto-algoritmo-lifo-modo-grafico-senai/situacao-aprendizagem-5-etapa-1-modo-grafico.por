@@ -146,10 +146,44 @@ programa
 
 		carregar_titulo()
 
+		cabecalho()
+
 		g.definir_estilo_texto(falso,verdadeiro, falso)
 		g.definir_cor(g.COR_PRETO)
 		g.definir_tamanho_texto(fonte_padrao)
 		
+		//colocando contorno cinza em volta da opção quando o mouse passar sobre a area demarcada
+		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 270)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 210, (largura_janela - 42), 60, falso, verdadeiro)		
+		}
+		senao se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 270 e m.posicao_y() <= 330)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 270, (largura_janela - 42), 60, verdadeiro, verdadeiro)	
+		}
+		senao se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 330 e m.posicao_y() <= 390)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 330, (largura_janela - 42), 60, verdadeiro, verdadeiro)	
+		}
+		senao se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 390 e m.posicao_y() <= 450)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 390, (largura_janela - 42), 60, verdadeiro, verdadeiro)	
+		}
+		senao se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 450 e m.posicao_y() <= 510)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 450, (largura_janela - 42), 60, verdadeiro, verdadeiro)	
+		}
+		senao se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 510 e m.posicao_y() <= 570)
+		{
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(22, 510, (largura_janela - 42), 60, verdadeiro, verdadeiro)	
+		}
+
 		//Adicionando os ícones do menu principal
 		g.desenhar_imagem(25, 220, botao_adicionar)
 		g.desenhar_imagem(25, 280, remover_ultimo_livro)
@@ -157,38 +191,6 @@ programa
 		g.desenhar_imagem(25, 400, pilha_livros)
 		g.desenhar_imagem(25, 460, lista_vazia)
 		g.desenhar_imagem(25, 520, sair_do_programa)
-
-		//colocando contorno cinza em volta da opção quando o mouse passar sobre a area demarcada
-		se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 220 e m.posicao_y() <= 260)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 220, 300, 40, verdadeiro, verdadeiro)		
-		}
-		senao se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 280 e m.posicao_y() <= 320)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 280, 300, 40, verdadeiro, verdadeiro)	
-		}
-		senao se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 340 e m.posicao_y() <= 380)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 340, 300, 40, verdadeiro, verdadeiro)	
-		}
-		senao se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 400 e m.posicao_y() <= 440)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 400, 300, 40, verdadeiro, verdadeiro)	
-		}
-		senao se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 460 e m.posicao_y() <= 500)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 460, 300, 40, verdadeiro, verdadeiro)	
-		}
-		senao se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 520 e m.posicao_y() <= 560)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(70, 520, 300, 40, verdadeiro, verdadeiro)	
-		}
 
 		//Definindo estilo, tamanho e cor da fonte que será colocada na frente dos ícones do menu principal
 		g.definir_estilo_texto(falso,verdadeiro, falso)
@@ -204,7 +206,7 @@ programa
 		g.desenhar_texto(75, 470, "Verificar se a Pilha está vazia")
 		g.desenhar_texto(75, 530, "Sair do Programa")
 		
-		cabecalho()
+		
 		
 	}
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
@@ -438,13 +440,15 @@ programa
 
 	funcao carregar_titulo()
 	{
+		
 		//Colocando uma borda preta em volta do titulo
 		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, falso)
+		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, verdadeiro)
 		
 		//Preenchendo com cor de fundo cinza atrás do título
 		g.definir_cor(0xdfdfdf)
 		g.desenhar_retangulo(23, 159, (largura_janela - 44), 50, falso, verdadeiro)
+		
 		
 		//Defininndo cor e tamanho do titulo- BIBLIOTECA DE LIVROS
 		g.definir_cor(g.COR_PRETO)
@@ -818,7 +822,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 0; 
+ * @POSICAO-CURSOR = 2807; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {livros, 48, 9, 6}-{voltar, 56, 9, 6};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
