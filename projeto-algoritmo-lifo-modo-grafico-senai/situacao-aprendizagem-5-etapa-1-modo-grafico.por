@@ -41,6 +41,7 @@ programa
 	inteiro capa_ordem_da_fenix = 0
 	inteiro botao_negar = 0
 	inteiro botao_confirmar = 0
+	inteiro senai_logo_carregamento = 0
 
 	
 	//Outras variaveis necessarias
@@ -54,6 +55,8 @@ programa
 	cadeia texto
 	inteiro lista_colecoes = 0
 	inteiro voltar = 0
+	inteiro loading = 0
+	inteiro aparecer_logo = 0
 	
 	
 	
@@ -62,6 +65,13 @@ programa
 		definir_tela()
 
           carregar_imagens()
+          
+          enquanto(loading < 276)
+          {
+          	tela_carregamento()
+          	g.renderizar()
+          	
+          }
 	
 		escolha(opcao)
 		{
@@ -120,6 +130,207 @@ programa
 			}
 		}
 	}
+
+	funcao tela_carregamento()
+	{
+		carregar_tela_celular()
+		
+		g.definir_cor(0x006BB7)
+		g.desenhar_retangulo(22, 98, (largura_janela - 42), 550, falso, verdadeiro)
+		g.desenhar_imagem(101, 200, senai_logo_carregamento)
+
+		se(aparecer_logo < 78 )
+		{
+			g.definir_cor(0x006BB7)
+			g.desenhar_retangulo(98, 199, 104 - aparecer_logo, 72, verdadeiro, verdadeiro)
+
+			g.definir_cor(0x006BB7)
+			g.desenhar_retangulo(200 + aparecer_logo, 199, 104 - aparecer_logo , 72, verdadeiro, verdadeiro)
+			
+			aparecer_logo++
+			
+			u.aguarde(10)
+		}
+		se(aparecer_logo > 75)
+		{
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(60, 354, 282, 22, verdadeiro, falso)
+			g.desenhar_retangulo(61, 355, 280, 20, verdadeiro, falso)
+			g.desenhar_retangulo(62, 356, 278, 18, verdadeiro, falso)
+			
+			se(loading < 277)
+			{	
+				g.definir_cor(g.COR_BRANCO)
+				g.desenhar_retangulo(63, 357, loading, 16, verdadeiro, verdadeiro)
+				loading++
+				u.aguarde(10)
+				
+				
+				g.definir_estilo_texto(falso,verdadeiro, falso)
+				g.definir_cor(0xEDA832)
+				g.definir_fonte_texto("Arial")
+				g.definir_tamanho_texto(14.0)
+				
+				se( loading > 0 e  loading < 50)
+				{
+					g.desenhar_texto(60, 335, "Preparando para carregar sistema...")
+					u.aguarde(30)
+					
+				}
+				se(loading > 50 e  loading < 54)
+				{
+					g.desenhar_texto(60, 335, "carregar/tela_celular.png")
+					u.aguarde(30)
+			
+				}
+				se(loading > 54 e  loading < 58)
+				{
+					g.desenhar_texto(60, 335, "carregar/senai_logo.png")
+					u.aguarde(30)
+				}
+				se(loading > 58 e  loading < 62)
+				{
+					g.desenhar_texto(60, 335, "carregar/botao_adicionar.png")
+					u.aguarde(30)
+				}
+				se(loading > 62 e  loading < 66)
+				{
+					g.desenhar_texto(60, 335, "carregar/remover_ultimo_livro.png")
+					u.aguarde(30)
+				}
+				se(loading > 66 e  loading < 70)
+				{
+					g.desenhar_texto(60, 335, "carregarremover_tudo.png")
+					u.aguarde(30)
+				}
+				se(loading > 70 e  loading < 74)
+				{
+					g.desenhar_texto(60, 335, "carregar/pilha_livros.png")
+					u.aguarde(30)
+				}
+				se(loading > 74 e  loading < 78)
+				{
+					g.desenhar_texto(60, 335, "carregar/lista_vazia.png")
+					u.aguarde(30)
+					
+				}
+				se(loading > 78 e  loading < 82)
+				{
+					g.desenhar_texto(60, 335, "carregar/sair_do_programa.png")
+					u.aguarde(30)
+				}
+				se(loading > 82 e  loading < 86)
+				{
+					g.desenhar_texto(60, 335, "carregar/icone_alerta.png")
+					u.aguarde(30)
+				}
+				se(loading > 86 e  loading < 90)
+				{
+					g.desenhar_texto(60, 335, "carregar/botao_voltar.png")
+					u.aguarde(30)
+					
+				}
+				se(loading > 90 e  loading < 94)
+				{
+					g.desenhar_texto(60, 335, "carregar/botao_confirmar.png")
+					u.aguarde(30)
+				}
+				se(loading > 94 e  loading < 98)
+				{
+					g.desenhar_texto(60, 335, "carregar/botao_negar.png")
+					u.aguarde(30)
+				}
+				se(loading > 98 e  loading < 102)
+				{
+					g.desenhar_texto(60, 335, "carregar/logo_harry_potter.png")
+					u.aguarde(30)
+				}
+				se(loading > 102 e  loading < 106)
+				{
+					g.desenhar_texto(60, 335, "carregar/pedra_filosofal.png")
+					u.aguarde(30)
+				}
+				se(loading > 106 e  loading < 110)
+				{
+					g.desenhar_texto(60, 335, "carregar/prisioneiro_de_azkaban.png")
+					u.aguarde(30)
+				}
+				se(loading > 110 e  loading < 114)
+				{
+					g.desenhar_texto(60, 335, "carregar/camara_secreta.png")
+					u.aguarde(30)
+				}
+				se(loading > 114 e  loading < 118)
+				{
+					g.desenhar_texto(60, 335, "carregar/calice_de_fogo.png")
+					u.aguarde(30)
+				}
+				se(loading > 118 e  loading < 122)
+				{
+					g.desenhar_texto(60, 335, "carregar/enigma_do_principe.png")
+					u.aguarde(30)
+				}
+				se(loading > 122 e  loading < 126)
+				{
+					g.desenhar_texto(60, 335, "carregar/enigma_do_principe.png")
+					u.aguarde(30)
+				}
+				se(loading > 126 e  loading < 130)
+				{
+					g.desenhar_texto(60, 335, "carregar/ordem_da_fenix.png")
+					u.aguarde(30)
+				}
+				se(loading > 130 e  loading < 134)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_pedra_filosofal.png")
+					u.aguarde(30)
+				}
+				se(loading > 134 e  loading < 138)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_prisioneiro_de_azkaban.png")
+					u.aguarde(30)
+				}
+				se(loading > 138 e  loading < 142)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_camara_secreta.png")
+					u.aguarde(30)
+				}
+				se(loading > 142 e  loading < 146)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_calice_de_fogo.png")
+					u.aguarde(30)
+				}
+				se(loading > 146 e  loading < 150)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_enigma_do_principe.png")
+					u.aguarde(30)
+				}
+				se(loading > 150 e  loading < 155)
+				{
+					g.desenhar_texto(60, 335, "carregar/capa_ordem_da_fenix.png")
+					u.aguarde(30)
+				}
+				se(loading > 160 e  loading < 200)
+				{
+					g.desenhar_texto(60, 335, "Carregando versão V.1.0.3 Beta")
+					u.aguarde(30)
+				}
+				
+				se(loading > 200 e  loading < 276)
+				{
+					g.desenhar_texto(60, 335, "Inicializando sistema...")
+					u.aguarde(30)
+				}
+				
+			}
+			se(loading == 276)
+			{
+				u.aguarde(500)
+				opcao = 0
+			}
+		}
+	}
+	
 	funcao menu()
 	{
 		
@@ -137,6 +348,7 @@ programa
 
 		g.definir_estilo_texto(falso,verdadeiro, falso)
 		g.definir_cor(g.COR_PRETO)
+		g.definir_fonte_texto("Arial")
 		g.definir_tamanho_texto(fonte_padrao)
 		
 		//colocando contorno cinza em volta da opção quando o mouse passar sobre a area demarcada
@@ -409,6 +621,10 @@ programa
 
 		temp_img = g.carregar_imagem("imagem/harry_potter/capa_ordem_da_fenix.png")
 		capa_ordem_da_fenix = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/senai_logo.png")
+		senai_logo_carregamento = g.redimensionar_imagem(temp_img, 200 , 70, verdadeiro)
 		g.liberar_imagem(temp_img)
 
 	}
@@ -838,7 +1054,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2117; 
+ * @POSICAO-CURSOR = 2882; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
