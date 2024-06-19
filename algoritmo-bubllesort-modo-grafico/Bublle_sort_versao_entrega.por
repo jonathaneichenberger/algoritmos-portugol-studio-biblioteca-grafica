@@ -43,6 +43,9 @@ programa
 	cadeia texto[20]
 	inteiro posicao[22]
 	inteiro auxiliar_troca = 0
+	inteiro carregar_fontes = 0
+	inteiro alternar_enter = 0
+	inteiro limite_vetor = 18
 	
 	funcao inicio()
 	{
@@ -131,13 +134,14 @@ programa
          		 	g.definir_titulo_janela("SITUAÇÃO DE APREDIZAGEM 6 ETAPA 1 -- BUBLLE SORT --")
 
           		contador = u.numero_elementos(numeros)
+          		
           		enquanto(nao t.tecla_pressionada(t.TECLA_ENTER))
           		{
+          			
           			definir_tela()
           			definir_tela_enter()
           			g.renderizar()
           		}
-
 				enquanto(nao t.tecla_pressionada(t.TECLA_ESC))
 				{
 					
@@ -145,7 +149,8 @@ programa
 		     		desenhar()
 		     		g.renderizar()
 		     		ponteiro++
-		     		u.aguarde(5)	
+		     	
+		     		
 				} 
 	
 			}
@@ -385,9 +390,14 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 
 	funcao bubllesort_modo_grafico()
 	{
-		se( n == 18)
+		se( n == limite_vetor)
 		{
 			n = 0
+			se(limite_vetor > 0)
+			{
+				limite_vetor--
+			}
+			
 		}
 		se(ponteiro < 55)
 		{
@@ -400,7 +410,7 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 		}
 		senao
 		{
-			se(n < 18)
+			se(n < limite_vetor)
 			{
 				n++
 			}
@@ -413,6 +423,7 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 				auxiliar_troca = palheta_de_cores[n + 1]
 				palheta_de_cores[n + 1] = palheta_de_cores[n]
 				palheta_de_cores[n] = auxiliar_troca
+
 			}
 		
 			ponteiro = 0
@@ -436,6 +447,7 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 			g.desenhar_retangulo((63 + i * (largura_bloco + 2)) + posicao[i], 450 - (numeros[i] * 3 + 50) + 3  , largura_bloco - 6, (numeros[i] * 3 + 50) - 6, verdadeiro, verdadeiro)
 
 			g.definir_cor(g.COR_PRETO)
+			g.definir_fonte_texto("Arial")
 			g.definir_estilo_texto(falso, verdadeiro, falso)
 			g.definir_tamanho_texto(32.0)
 			
@@ -447,6 +459,30 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 			{
 				g.desenhar_texto( (64 + 3 +(i * (largura_bloco + 2))+ posicao[i]), 450, texto[i])
 			}
+			se(limite_vetor == 0)
+			{
+		
+				se(alternar_enter <= 200)
+				{
+					g.definir_cor(g.COR_PRETO)
+					g.definir_estilo_texto(falso, verdadeiro, falso)
+					g.definir_fonte_texto("Star Jedi")
+					g.definir_tamanho_texto(40.0)
+					g.desenhar_texto(180, 30, "vetor totalmente ordenado ! ! !")
+					u.aguarde(5)
+					alternar_enter++
+					
+				}
+				senao se(alternar_enter > 200 e alternar_enter < 300)
+				{
+					u.aguarde(5)
+					alternar_enter++
+				}
+				senao se(alternar_enter >=  300)
+				{
+					alternar_enter = 0
+				}
+			}
 			
 		}
 		
@@ -454,36 +490,68 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 
 	funcao definir_tela()
 	{
+		se(carregar_fontes == 0)
+		{
+			g.carregar_fonte("./fontes/poetsen_one_regular.ttf")
+			g.carregar_fonte("./fontes/Starjedi.ttf")
+			g.carregar_fonte("./fontes/Starjhol.ttf")
+		}
+		
 		g.definir_cor(0x32C1ED)
 		g.desenhar_retangulo(0, 0, 1200, 800, falso, verdadeiro)
 
-		g.definir_cor(0x3B32ED)
-		g.desenhar_retangulo(0, 760, 1200, 40, falso, verdadeiro)
-		
 		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(0, 760, 1200, 40, falso, verdadeiro)
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(162, 567, 876, 166, verdadeiro, verdadeiro)
+
+		g.definir_cor(0x3A00DD)
+		g.desenhar_retangulo(165, 570, 870, 160, verdadeiro, verdadeiro)
+		
+		
+		g.definir_cor(g.COR_BRANCO)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_fonte_texto("Tahoma")
+		g.definir_fonte_texto("Star Jedi Hollow")
 		g.definir_tamanho_texto(100.0)
-		g.desenhar_texto(320, 600, "Bublle Sort")
+		g.desenhar_texto(190, 600, "Bublle Sort")
 
 		g.definir_cor(g.COR_BRANCO)
 		g.definir_fonte_texto("Arial")
 		g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
 		g.definir_tamanho_texto(22.0)
-		g.desenhar_texto(48, 769, "Criado e desenvolvido por :")
+		g.desenhar_texto(170, 769, "Criado e desenvolvido por : ")
 		g.definir_estilo_texto(verdadeiro, falso, falso)
-		g.definir_tamanho_texto(18.0)
-		g.desenhar_texto(334, 771, "Jonathan Reinaldo Eichenberger e Felipe Fernandes Ribeiro Vulgo ' Fan Boy '")
+		g.definir_tamanho_texto(22.0)
+		g.desenhar_texto(456, 771, "Jonathan Reinaldo Eichenberger e Felipe Fernandes Ribeiro")
+		
 	}
 
 	funcao definir_tela_enter()
 	{
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_fonte_texto("Comic Sans")
-		g.definir_tamanho_texto(40.0)
-		g.desenhar_texto(320, 400, "Pressione ENTER para começar")
+		se(alternar_enter <= 400)
+		{
+			g.definir_cor(g.COR_PRETO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_fonte_texto("Star Jedi")
+			g.definir_tamanho_texto(40.0)
+			g.desenhar_texto(210, 400, "Pressione ENTER para começar")
+			alternar_enter++
+			
+		}
+		senao se(alternar_enter > 400 e alternar_enter < 600)
+		{
+			
+			alternar_enter++
+		}
+		senao se(alternar_enter ==  600)
+		{
+			alternar_enter = 0
+		}
+		
 	}
+	
+				
 }
 
 
@@ -492,9 +560,9 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 9541; 
+ * @POSICAO-CURSOR = 9462; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {alternar_enter, 47, 9, 14};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
