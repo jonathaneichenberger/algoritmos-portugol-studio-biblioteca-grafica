@@ -63,75 +63,62 @@ programa
 
           carregar_imagens()
 	
-		enquanto(opcao == 0)
+		escolha(opcao)
 		{
-	          se(m.botao_pressionado(m.BOTAO_ESQUERDO))
-			{	
-		          se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 220 e m.posicao_y() <= 260)
+			caso 0:
+			{
+				enquanto(opcao == 0)
 				{
-					opcao = 1
-				}
-			}
-			 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
-			{	
-		          se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 280 e m.posicao_y() <= 320)
-				{
-					opcao = 2
-				}
-			}
-			 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
-			{	
-		          se(m.posicao_x() >= 70 e m.posicao_x() <= (largura_janela - borda_direita) e m.posicao_y() >= 380 e m.posicao_y() <= 420)
-				{
-					opcao = 4
+					menu()
+       				g.renderizar()
+       				
 				}
 			}
 			
-			menu()
-            	g.renderizar()
-
-			escolha(opcao)
+			caso 1:
+			{	
+				enquanto(opcao == 1)
+				{
+					
+					empilhar()
+				     g.renderizar()
+				     
+				}
+			}
+			
+			caso 2:
+			{	
+				enquanto(opcao == 2)
+				{
+					
+					desempilhar()
+				     g.renderizar()
+				     
+				}
+			}
+			
+			caso 4:
 			{
-				caso 1:
-				{	
-					enquanto(opcao == 1)
-					{
-						
-						empilhar()
-					     g.renderizar()
-					}
-				}
-				caso 2:
-				{	
-					enquanto(opcao == 2)
-					{
-						
-						desempilhar()
-					     g.renderizar()
-					}
-				}
-				caso 4:
+				enquanto(opcao == 4)
 				{
-					enquanto(opcao == 4)
-					{
-						
-						listar_pilha()
-					     g.renderizar()
-					}
+					
+					listar_pilha()
+				     g.renderizar()
+				     
 				}
-				caso 6:
+			}
+			
+			caso 6:
+			{
+				enquanto(opcao == 6)
 				{
-					enquanto(opcao == 6)
-					{
-						
-						colecao_harry_potter()
-					     g.renderizar()
-					}
+					
+					colecao_harry_potter()
+				     g.renderizar()
+				     
 				}
-				
 			}
 		}
-		
 	}
 	funcao menu()
 	{
@@ -205,14 +192,43 @@ programa
 		g.desenhar_texto(75, 410, "Mostrar livros Empilhados")
 		g.desenhar_texto(75, 470, "Verificar se a Pilha está vazia")
 		g.desenhar_texto(75, 530, "Sair do Programa")
-		
-		
-		
+
+		 se(m.botao_pressionado(m.BOTAO_ESQUERDO))
+			{	
+		          se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 270)
+				{
+					opcao = 1
+				}
+
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 270 e m.posicao_y() <= 330)
+				{
+					opcao = 2
+				}
+
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 330 e m.posicao_y() <= 390)
+				{
+					opcao = 3
+				}
+
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 390 e m.posicao_y() <= 450)
+				{
+					opcao = 4
+				}
+
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 450 e m.posicao_y() <= 510)
+				{
+					opcao = 5
+				}
+
+				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 510 e m.posicao_y() <= 570)
+				{
+					opcao = 6
+				}
+			}
+									  					
 	}
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
-		
-		
 			carregar_tela_celular()
 	
 			topo()
@@ -822,9 +838,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2807; 
+ * @POSICAO-CURSOR = 2117; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {livros, 48, 9, 6}-{voltar, 56, 9, 6};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
