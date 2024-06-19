@@ -57,21 +57,26 @@ programa
 	inteiro voltar = 0
 	inteiro loading = 0
 	inteiro aparecer_logo = 0
+	inteiro definir_tela_inicio = 0
 	
 	
 	
 	funcao inicio()
 	{
-		definir_tela()
-
-          carregar_imagens()
+		se(definir_tela_inicio == 0)
+		{
+			definir_tela()
+			carregar_imagens()
+			definir_tela_inicio++
+		}
           
-          enquanto(loading < 276)
+          
+         /* enquanto(loading < 276)
           {
           	tela_carregamento()
           	g.renderizar()
           	
-          }
+          }*/
 	
 		escolha(opcao)
 		{
@@ -765,19 +770,21 @@ programa
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
 		{
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_pedra_filosofal
+						ponteiro++
+						u.aguarde(500)
+					}	
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_pedra_filosofal
-					ponteiro++
-					u.aguarde(500)
-				}
-					
 			}
 		}
 			
@@ -787,19 +794,21 @@ programa
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
 		{
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_prisioneiro_de_azkaban
+						ponteiro++
+						u.aguarde(500)
+					}
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_prisioneiro_de_azkaban
-					ponteiro++
-					u.aguarde(500)
-				}
-				
 			}
 				
 		}
@@ -809,19 +818,21 @@ programa
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
 		{
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_camara_secreta
+						ponteiro++
+						u.aguarde(500)
+					}
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_camara_secreta
-					ponteiro++
-					u.aguarde(500)
-				}
-				
 			}
 				
 		}
@@ -832,19 +843,21 @@ programa
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
 		{
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_calice_de_fogo
+						ponteiro++
+						u.aguarde(500)
+					}
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_calice_de_fogo
-					ponteiro++
-					u.aguarde(500)
-				}
-				
 			}
 				
 		}
@@ -855,44 +868,48 @@ programa
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
 		{
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_enigma_do_principe
+						ponteiro++
+						u.aguarde(500)
+					}
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_enigma_do_principe
-					ponteiro++
-					u.aguarde(500)
-				}
-				
 			}
+		
 				
 		}
 		
-		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
 		{
 			g.desenhar_imagem(265, 377, ordem_da_fenix)
 		}
 		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
 		{
-			u.aguarde(50)
 			
-			se(ponteiro < total)
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(voltar == 0)
+				se(ponteiro < total)
 				{
-					confirmar_livro()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_ordem_da_fenix
+						ponteiro++
+						u.aguarde(500)
+					}
 				}
-				se(voltar == 1)
-				{
-					livros[ponteiro] = capa_ordem_da_fenix
-					ponteiro++
-					
-				}
-				
 			}
 				
 		}
@@ -909,9 +926,11 @@ programa
 			
 			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				opcao = 0
+				opcao = 1
+				inicio()
 			}
 		}
+		
 		voltar = 0
 	}
 
@@ -1054,9 +1073,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2882; 
+ * @POSICAO-CURSOR = 1669; 
+ * @DOBRAMENTO-CODIGO = [491, 517, 527, 636, 652, 660, 677, 700];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {livros, 49, 9, 6};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
