@@ -133,6 +133,41 @@ programa
 				     
 				}
 			}
+
+			caso 5:
+			{
+
+				enquanto(opcao == 5)
+				{
+
+					carregar_tela_celular()
+
+					topo()
+
+					g.definir_tamanho_texto(27.0)
+		
+					titulo = " REMOVER ÚLTIMO LIVRO"
+
+					carregar_titulo()
+
+					cabecalho()
+					
+					se(ponteiro == 0)
+					{
+						mensagem1 = "            VERDADEIRO"
+						mensagem2 = "  Nenhum livro encontrado"	
+					}
+					
+					se(ponteiro > 0)
+					{
+						mensagem1 = "                  FALSO "
+						mensagem2 = "     Existem livros na Pilha"	
+					}
+					alerta()
+					g.renderizar()
+					
+				}
+			}
 			caso 6:
 			{
 				enquanto(opcao == 6)
@@ -538,6 +573,8 @@ programa
 
 		carregar_titulo()
 
+		cabecalho()
+
 		g.definir_cor(0xE09553)
 		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
 		
@@ -783,6 +820,8 @@ programa
 		titulo = " REMOVER ÚLTIMO LIVRO"
 
 		carregar_titulo()
+		
+		cabecalho()
 
 		se(ponteiro == 0)
 		{
@@ -901,6 +940,8 @@ programa
 
 		carregar_titulo()
 
+		cabecalho()
+
 		se(ponteiro == 0)
 		{
 			
@@ -1009,6 +1050,15 @@ programa
 
 		cabecalho()
 
+		se(ponteiro == 0)
+		{
+			
+			mensagem1 = "Não foi encontrado nenhum"
+			mensagem2 = "             livro na Pilha!"
+			alerta()
+			
+		}
+
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(verdadeiro, falso, falso)
 		g.definir_tamanho_texto(12.0)
@@ -1027,7 +1077,7 @@ programa
 			inicio()
 		}
 	}
-
+	
 	funcao confirmar_livro()
 	{
 		
@@ -1360,8 +1410,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 27997; 
- * @DOBRAMENTO-CODIGO = [160, 413, 773, 891, 997, 1030, 1175, 1284, 1294, 1310, 1318, 1338];
+ * @POSICAO-CURSOR = 2826; 
+ * @DOBRAMENTO-CODIGO = [195, 448, 563, 617, 810, 930, 1080, 1184, 1225, 1334, 1344, 1360, 1368, 1388];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {loading, 59, 9, 7};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
