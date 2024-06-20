@@ -42,6 +42,19 @@ programa
 	inteiro botao_negar = 0
 	inteiro botao_confirmar = 0
 	inteiro senai_logo_carregamento = 0
+	inteiro fundo_harry_potter = 0
+	inteiro logo_game_of_thrones = 0
+	inteiro fundo_game_of_thrones = 0
+	inteiro game_of_thrones = 0
+	inteiro clash_of_kings = 0
+	inteiro feast_for_crows = 0
+	inteiro storm_of_swords = 0
+	inteiro dance_with_dragons = 0
+	inteiro capa_game_of_thrones = 0
+	inteiro capa_clash_of_kings = 0
+	inteiro capa_feast_for_crows = 0
+	inteiro capa_storm_of_swords = 0
+	inteiro capa_dance_with_dragons = 0
 
 	
 	//Outras variaveis necessarias
@@ -73,7 +86,7 @@ programa
 		}
           
           
-         /* enquanto(loading < 276)
+         /*	enquanto(loading < 276)
           {
           	tela_carregamento()
           	g.renderizar()
@@ -190,6 +203,18 @@ programa
 				     
 				}
 			}
+
+			caso 8:
+			{
+				enquanto(opcao == 8)
+				{
+					
+					colecao_game_of_thrones()
+				     g.renderizar()
+				     
+				}
+			}
+			
 		}
 	}
 
@@ -581,7 +606,7 @@ programa
 		g.definir_cor(g.COR_PRETO)
 		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
 		
-		g.desenhar_imagem(121, 215, logo_harry_potter)
+		g.desenhar_imagem(101, 215, logo_harry_potter)
 		
 
 		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
@@ -592,7 +617,28 @@ programa
 			g.definir_cor(g.COR_PRETO)
 			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
 		
-			g.desenhar_imagem(121, 215, logo_harry_potter)
+			g.desenhar_imagem(101, 215, logo_harry_potter)
+	 
+		}
+
+		g.definir_cor(0x65DEEB)
+		g.desenhar_retangulo(22, 260, 358, 50, verdadeiro, verdadeiro)
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(22, 260, 358, 50, verdadeiro, falso)
+		
+		g.desenhar_imagem(101, 265, logo_game_of_thrones)
+		
+
+		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 260 e m.posicao_y() <= 310)
+		{
+			g.definir_cor(0x58C2CD)
+			g.desenhar_retangulo(22, 260, 358, 50, verdadeiro, verdadeiro)
+		
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(22, 260, 358, 50, verdadeiro, falso)
+		
+			g.desenhar_imagem(101, 265, logo_game_of_thrones)
 	 
 		}
 		
@@ -602,6 +648,15 @@ programa
 			{
 				u.aguarde(100)
 				opcao = 7
+				inicio()
+			}
+		}
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 260 e m.posicao_y() <= 310)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				u.aguarde(100)
+				opcao = 8
 				inicio()
 			}
 		}
@@ -621,6 +676,7 @@ programa
 
 		g.definir_cor(0xE1BF41)
 		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+		g.desenhar_imagem(22, 210, fundo_harry_potter)
 
 		topo()
 
@@ -794,6 +850,175 @@ programa
 					}
 				}
 			}		
+		}
+		
+		se(t.tecla_pressionada(t.TECLA_ESC))
+		{
+			
+			u.aguarde(300)
+			opcao = 1
+			inicio()
+			
+		}
+		
+		voltar = 0
+	}
+
+	funcao colecao_game_of_thrones()
+	{
+		carregar_tela_celular()
+
+		g.definir_cor(0x65DEEB)
+		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+		g.desenhar_imagem(22, 210, fundo_game_of_thrones)
+
+		topo()
+
+		g.definir_tamanho_texto(24.5)
+		g.definir_fonte_texto("Tahoma")
+		g.definir_estilo_texto(falso, falso, falso)
+		titulo = "COLEÇÃO GAME OF THRONES"
+
+		carregar_titulo()
+
+		cabecalho()
+
+		g.desenhar_imagem(34, 220, game_of_thrones)
+		g.desenhar_imagem(151, 220, clash_of_kings)
+		g.desenhar_imagem(268, 220, storm_of_swords)
+		g.desenhar_imagem(34, 380, feast_for_crows)
+		g.desenhar_imagem(151, 380, dance_with_dragons)
+		
+		
+		
+
+		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(31, 217, game_of_thrones)	
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_game_of_thrones
+						nome_livros[ponteiro] = "GOT- A Game Of Thrones"
+						ponteiro++
+						u.aguarde(500)
+					}	
+				}
+			}
+		}
+			
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(148, 217, clash_of_kings)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_clash_of_kings
+						nome_livros[ponteiro] = "GOT- A Clash Of Kings"
+						ponteiro++
+						u.aguarde(500)
+					}
+				}
+			}				
+		}
+		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{			
+			g.desenhar_imagem(265, 217, storm_of_swords)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_storm_of_swords
+						nome_livros[ponteiro] = "GOT- A Storm Of Swords"
+						ponteiro++
+						u.aguarde(500)
+					}
+				}
+			}		
+		}
+		
+		se(m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			g.desenhar_imagem(31, 377, feast_for_crows)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{						
+						livros[ponteiro] = capa_feast_for_crows
+						nome_livros[ponteiro] = "GOT- A Feast For Crows"
+						ponteiro++
+						u.aguarde(500)						
+					}
+				}
+			}	
+		}
+		
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			g.desenhar_imagem(148, 377, dance_with_dragons)			
+		}
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{				
+				se(ponteiro < total)
+				{					
+					se(voltar == 0)
+					{						
+						confirmar_livro()
+						
+					}
+					se(voltar == 1)
+					{						
+						livros[ponteiro] = capa_dance_with_dragons
+						nome_livros[ponteiro] = "GOT- A Dance With Dragons"
+						ponteiro++
+						u.aguarde(500)						
+					}
+				}
+			}	
 		}
 		
 		se(t.tecla_pressionada(t.TECLA_ESC))
@@ -1083,29 +1308,56 @@ programa
 		
 		enquanto(voltar == 0)
 		{
+			se(opcao == 7)
+			{
+				carregar_tela_celular()
 
-			carregar_tela_celular()
-
-			g.definir_cor(0xE1BF41)
-			g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
-	
-			topo()
-	
-			g.definir_tamanho_texto(26.0)
-			
-			titulo = " COLEÇÃO HARRY POTTER"
-	
-			carregar_titulo()
-	
-			cabecalho()
-	
-			g.desenhar_imagem(34, 220, pedra_filosofal)
-			g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
-			g.desenhar_imagem(268, 220, camara_secreta)
-			g.desenhar_imagem(34, 380, calice_de_fogo)
-			g.desenhar_imagem(151, 380, enigma_do_principe)
-			g.desenhar_imagem(268, 380, ordem_da_fenix)
+				g.definir_cor(0xE1BF41)
+				g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+				g.desenhar_imagem(22, 210, fundo_harry_potter)
 		
+				topo()
+		
+				g.definir_tamanho_texto(26.0)
+				
+				titulo = " COLEÇÃO HARRY POTTER"
+		
+				carregar_titulo()
+		
+				cabecalho()
+		
+				g.desenhar_imagem(34, 220, pedra_filosofal)
+				g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
+				g.desenhar_imagem(268, 220, camara_secreta)
+				g.desenhar_imagem(34, 380, calice_de_fogo)
+				g.desenhar_imagem(151, 380, enigma_do_principe)
+				g.desenhar_imagem(268, 380, ordem_da_fenix)
+			}
+
+			se(opcao == 8)
+			{
+				carregar_tela_celular()
+
+				g.definir_cor(0x65DEEB)
+				g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+				g.desenhar_imagem(22, 210, fundo_game_of_thrones)
+		
+				topo()
+		
+				g.definir_tamanho_texto(26.0)
+				
+				titulo = " COLEÇÃO HARRY POTTER"
+		
+				carregar_titulo()
+		
+				cabecalho()
+		
+				g.desenhar_imagem(34, 220, game_of_thrones)
+				g.desenhar_imagem(151, 220, clash_of_kings)
+				g.desenhar_imagem(268, 220, storm_of_swords)
+				g.desenhar_imagem(34, 380, feast_for_crows)
+				g.desenhar_imagem(151, 380, dance_with_dragons)
+			}
 			
 			g.definir_cor(0xdfdfdf)
 			g.desenhar_retangulo(50, 240, 304, 230, falso, verdadeiro)
@@ -1275,7 +1527,7 @@ programa
 		g.liberar_imagem(temp_img)
 
 		temp_img = g.carregar_imagem("imagem/harry_potter/logo_harry_potter.png")
-		logo_harry_potter = g.redimensionar_imagem(temp_img, 160 , 40, verdadeiro)
+		logo_harry_potter = g.redimensionar_imagem(temp_img, 200 , 40, verdadeiro)
 		g.liberar_imagem(temp_img)
 		
 		temp_img = g.carregar_imagem("imagem/harry_potter/pedra_filosofal.png")
@@ -1329,6 +1581,60 @@ programa
 		temp_img = g.carregar_imagem("imagem/senai_logo.png")
 		senai_logo_carregamento = g.redimensionar_imagem(temp_img, 200 , 70, verdadeiro)
 		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/harry_potter/fundo_harry_potter.png")
+		fundo_harry_potter = g.redimensionar_imagem(temp_img, 358 , 438, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/logo_game_of_thrones.png")
+		logo_game_of_thrones = g.redimensionar_imagem(temp_img, 200 , 40, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/fundo_game_of_thrones.png")
+		fundo_game_of_thrones = g.redimensionar_imagem(temp_img, 358 , 438, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/game_of_thrones.png")
+		game_of_thrones = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/clash_of_kings.png")
+		clash_of_kings = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/feast_for_crows.png")
+		feast_for_crows = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/storm_of_swords.png")
+		storm_of_swords = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/dance_with_dragons.png")
+		dance_with_dragons = g.redimensionar_imagem(temp_img, 100 , 150, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_game_of_thrones.png")
+		capa_game_of_thrones = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_clash_of_kings.png")
+		capa_clash_of_kings = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_feast_for_crows.png")
+		capa_feast_for_crows = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_storm_of_swords.png")
+		capa_storm_of_swords = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_dance_with_dragons.png")
+		capa_dance_with_dragons = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
+		g.liberar_imagem(temp_img)
+
+		
 
 	}
 
@@ -1410,10 +1716,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 2826; 
- * @DOBRAMENTO-CODIGO = [195, 448, 563, 617, 810, 930, 1080, 1184, 1225, 1334, 1344, 1360, 1368, 1388];
+ * @POSICAO-CURSOR = 23123; 
+ * @DOBRAMENTO-CODIGO = [97, 220, 473, 588, 672, 1035, 1155, 1263, 1305, 1436, 1477, 1640, 1650, 1666, 1674, 1694];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {loading, 59, 9, 7};
+ * @SIMBOLOS-INSPECIONADOS = {loading, 72, 9, 7};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
