@@ -60,8 +60,8 @@ programa
 	inteiro aparecer_logo = 0
 	inteiro definir_tela_inicio = 0
 	inteiro tamanho_texto = 0
-	
-	
+	inteiro carregamento_inicial = 0
+	inteiro aux_loading = 0
 	
 	funcao inicio()
 	{
@@ -113,6 +113,15 @@ programa
 				     
 				}
 			}
+			caso 3:
+			{
+
+				enquanto(opcao == 3)
+				{
+					remover_todos_livros()
+					g.renderizar()
+				}
+			}
 			
 			caso 4:
 			{
@@ -124,10 +133,21 @@ programa
 				     
 				}
 			}
-			
 			caso 6:
 			{
 				enquanto(opcao == 6)
+				{
+					
+					carregamento_inicial = 1
+					tela_carregamento()
+				     g.renderizar()
+				     
+				}
+			}
+			
+			caso 7:
+			{
+				enquanto(opcao == 7)
 				{
 					
 					colecao_harry_potter()
@@ -158,14 +178,14 @@ programa
 			
 			u.aguarde(10)
 		}
-		se(aparecer_logo > 75)
+		se(aparecer_logo > 75 e carregamento_inicial == 0)
 		{
 			g.definir_cor(g.COR_PRETO)
 			g.desenhar_retangulo(60, 354, 282, 22, verdadeiro, falso)
 			g.desenhar_retangulo(61, 355, 280, 20, verdadeiro, falso)
 			g.desenhar_retangulo(62, 356, 278, 18, verdadeiro, falso)
 			
-			se(loading < 277)
+			se(loading < 277 e carregamento_inicial == 0)
 			{	
 				g.definir_cor(g.COR_BRANCO)
 				g.desenhar_retangulo(63, 357, loading, 16, verdadeiro, verdadeiro)
@@ -328,12 +348,65 @@ programa
 					g.desenhar_texto(60, 335, "Inicializando sistema...")
 					u.aguarde(30)
 				}
-				
 			}
 			se(loading == 276)
 			{
 				u.aguarde(500)
 				opcao = 0
+			}
+		}
+		
+		se(aparecer_logo > 75 e carregamento_inicial == 1)
+		{
+			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
+			g.definir_cor(g.COR_BRANCO)
+			g.definir_fonte_texto("Tahoma")
+			g.definir_tamanho_texto(30.0)
+			
+			se(aux_loading >= 0 e  aux_loading <= 15)
+			{
+				g.desenhar_texto(120, 350, "AGUARDE")
+				g.desenhar_texto(60, 390, "Estamos Finalizando")
+				g.desenhar_texto(120, 420, "o sistema ")
+				u.aguarde(30)
+				aux_loading++
+			}
+			se(aux_loading >=15  e  aux_loading <= 30)
+			{
+				g.desenhar_texto(120, 350, "AGUARDE")
+				g.desenhar_texto(60, 390, "Estamos Finalizando")
+				g.desenhar_texto(120, 420, "o sistema. ")
+				u.aguarde(30)
+				aux_loading++
+			}
+			se(aux_loading >= 30 e  aux_loading <= 45)
+			{
+				
+				g.desenhar_texto(120, 350, "AGUARDE")
+				g.desenhar_texto(60, 390, "Estamos Finalizando")
+				g.desenhar_texto(120, 420, "o sistema..")
+				u.aguarde(30)
+				aux_loading++
+			}
+			se(aux_loading >= 45 e  aux_loading <= 60)
+			{
+				
+				g.desenhar_texto(120, 350, "AGUARDE")
+				g.desenhar_texto(60, 390, "Estamos Finalizando")
+				g.desenhar_texto(120, 420, "o sistema...")
+				u.aguarde(30)
+				aux_loading++
+			}
+			se(aux_loading == 60)
+			{
+				aux_loading = 0
+			}
+			
+			loading++
+				
+			se(loading == 276)
+			{
+				opcao = 10
 			}
 		}
 	}
@@ -455,73 +528,247 @@ programa
 	
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
-			carregar_tela_celular()
-	
-			topo()
+		carregar_tela_celular()
 
-			g.definir_tamanho_texto(27.0)
-			
-			titulo = "   COLEÇÕES DE LIVROS"
-	
-			carregar_titulo()
-	
-			g.definir_cor(0xE09553)
+		topo()
+
+		g.definir_tamanho_texto(27.0)
+		
+		titulo = "   COLEÇÕES DE LIVROS"
+
+		carregar_titulo()
+
+		g.definir_cor(0xE09553)
+		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
+		
+		g.desenhar_imagem(121, 215, logo_harry_potter)
+		
+
+		se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+		{
+			g.definir_cor(0xC38248)
 			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
-			
+		
 			g.definir_cor(g.COR_PRETO)
 			g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
-			
+		
 			g.desenhar_imagem(121, 215, logo_harry_potter)
-			
-	
-			se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+	 
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				g.definir_cor(0xC38248)
-				g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, verdadeiro)
-			
-				g.definir_cor(g.COR_PRETO)
-				g.desenhar_retangulo(22, 210, 358, 50, verdadeiro, falso)
-			
-				g.desenhar_imagem(121, 215, logo_harry_potter)
-		 
+				u.aguarde(100)
+				opcao = 7
+				inicio()
 			}
-			
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+		}
+		
+		se(t.tecla_pressionada(t.TECLA_ESC))
+		{
+			u.aguarde(300)
+			opcao = 0
+			inicio()
+		}
+	
+	}
+
+	funcao colecao_harry_potter()
+	{
+		carregar_tela_celular()
+
+		g.definir_cor(0xE1BF41)
+		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
+
+		topo()
+
+		g.definir_tamanho_texto(26.0)
+		
+		titulo = " COLEÇÃO HARRY POTTER"
+
+		carregar_titulo()
+
+		cabecalho()
+
+		g.desenhar_imagem(34, 220, pedra_filosofal)
+		g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
+		g.desenhar_imagem(268, 220, camara_secreta)
+		g.desenhar_imagem(34, 380, calice_de_fogo)
+		g.desenhar_imagem(151, 380, enigma_do_principe)
+		g.desenhar_imagem(268, 380, ordem_da_fenix)
+		
+		
+
+		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(31, 217, pedra_filosofal)	
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				se(m.ler_botao() == m.BOTAO_ESQUERDO)
+				se(ponteiro < total)
 				{
-					u.aguarde(100)
-					opcao = 6
-					inicio()
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_pedra_filosofal
+						nome_livros[ponteiro] = "Harry Potter-Pedra Filosofal"
+						ponteiro++
+						u.aguarde(500)
+					}	
 				}
 			}
+		}
 			
-			
-			g.definir_cor(g.COR_PRETO)
-			g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
-			g.desenhar_imagem(176, 545, botao_voltar)
-
-			se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			g.desenhar_imagem(148, 217, prisioneiro_de_azkaban)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
-				g.definir_cor(0xdfdfdf)
-				g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
-				g.desenhar_imagem(176, 545, botao_voltar)
-				
-			}
-
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
-			{
-				
-				se(m.ler_botao() == m.BOTAO_ESQUERDO)
+				se(ponteiro < total)
 				{
-					
-					u.aguarde(100)
-					opcao = 0
-					inicio()
-	
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_prisioneiro_de_azkaban
+						nome_livros[ponteiro] = "Harry Potter-Prisioneiro de Azkaban"
+						ponteiro++
+						u.aguarde(500)
+					}
+				}
+			}				
+		}
+		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{			
+			g.desenhar_imagem(265, 217, camara_secreta)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_camara_secreta
+						nome_livros[ponteiro] = "Harry Potter-Camara Secreta"
+						ponteiro++
+						u.aguarde(500)
+					}
+				}
+			}		
+		}
+		
+		se(m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			g.desenhar_imagem(31, 377, calice_de_fogo)
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				se(ponteiro < total)
+				{
+					se(voltar == 0)
+					{
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{						
+						livros[ponteiro] = capa_calice_de_fogo
+						nome_livros[ponteiro] = "Harry Potter-Calice de Fogo"
+						ponteiro++
+						u.aguarde(500)						
+					}
 				}
 			}	
-
+		}
+		
+		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			g.desenhar_imagem(148, 377, enigma_do_principe)			
+		}
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{				
+				se(ponteiro < total)
+				{					
+					se(voltar == 0)
+					{						
+						confirmar_livro()
+						
+					}
+					se(voltar == 1)
+					{						
+						livros[ponteiro] = capa_enigma_do_principe
+						nome_livros[ponteiro] = "Harry Potter-Enigma do Principe"
+						ponteiro++
+						u.aguarde(500)						
+					}
+				}
+			}	
+		}
+		
+		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			g.desenhar_imagem(265, 377, ordem_da_fenix)			
+		}
+		
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
+		{			
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{				
+				se(ponteiro < total)
+				{				
+					se(voltar == 0)
+					{						
+						confirmar_livro()
+					}
+					se(voltar == 1)
+					{
+						livros[ponteiro] = capa_ordem_da_fenix
+						nome_livros[ponteiro] = "Harry Potter-Ordem da Fenix"
+						ponteiro++
+						u.aguarde(500)	
+					}
+				}
+			}		
+		}
+		
+		se(t.tecla_pressionada(t.TECLA_ESC))
+		{
+			
+			u.aguarde(300)
+			opcao = 1
+			inicio()
+			
+		}
+		
+		voltar = 0
 	}
 
 	funcao desempilhar()
@@ -572,8 +819,6 @@ programa
 			
 			g.definir_estilo_texto(falso,verdadeiro, falso)
 			g.definir_tamanho_texto(20.0)
-			
-			tamanho_texto = txt.numero_caracteres(nome_livros[ponteiro - 1])
 			
 			g.desenhar_imagem(151, 460, livros[ponteiro -1])
 			g.desenhar_texto(30 , 490, nome_livros[ponteiro - 1])
@@ -634,26 +879,300 @@ programa
 
 			}
 		
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
 			{
 				u.aguarde(100)
 				opcao = 0
-				
+				inicio()
 				
 			}
 		}
 	}
 
-	funcao definir_tela()
+	funcao remover_todos_livros()
+	{
+		carregar_tela_celular()
+
+		topo()
+
+		g.definir_tamanho_texto(27.0)
+		
+		titulo = " REMOVER ÚLTIMO LIVRO"
+
+		carregar_titulo()
+
+		se(ponteiro == 0)
+		{
+			
+			mensagem1 = "Não foi encontrado nenhum"
+			mensagem2 = "             livro na Pilha!"
+			alerta()
+			
+		}
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(100, 250, 200, 120, verdadeiro, falso)
+		
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(101, 251, 198, 118, verdadeiro, verdadeiro)
+		
+		g.desenhar_imagem(170, 260, icone_alerta)
+
+		g.definir_cor(g.COR_PRETO)
+
+		g.definir_estilo_texto(falso,verdadeiro, falso)
+		g.definir_tamanho_texto(22.0)
+		
+		g.desenhar_texto(150, 335, "ALERTA!!!")
+		
+		g.definir_tamanho_texto(26.0)
+		
+		se(ponteiro > 0)
+		{
+			g.desenhar_texto(40, 400, "    Gostaria de remover ")
+			g.desenhar_texto(40, 425, "todos os livros da pilha?")
+
+			g.definir_cor(g.COR_VERDE)
+			g.desenhar_retangulo(50, 550, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(50, 550, 152, 50, falso, falso)
+			
+			g.definir_cor(g.COR_VERMELHO)
+			g.desenhar_retangulo(202, 550, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(202, 550, 152, 50, falso, falso)
+			
+			g.desenhar_imagem(100, 555, botao_confirmar)
+			g.desenhar_imagem(264, 555, botao_negar)
+
+			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
+			g.definir_tamanho_texto(32.0)
+
+			se(m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+				
+				g.definir_cor(g.COR_VERDE)
+				g.desenhar_retangulo(47, 547, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(47, 547, 152, 50, falso, falso)
+
+				g.desenhar_imagem(100, 555, botao_confirmar)				
+
+			}
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+				
+				u.aguarde(100)
+				opcao = 0
+				ponteiro = 0
+				inicio()
+				
+			}
+			
+			se(m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+
+				g.definir_cor(g.COR_VERMELHO)
+				g.desenhar_retangulo(199, 547, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(199, 547, 152, 50, falso, falso)
+
+				g.desenhar_imagem(264, 555, botao_negar)
+
+			}
+		
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+				
+				u.aguarde(100)
+				opcao = 0
+				
+			}
+		}
+	}
+
+	funcao listar_pilha()
+	{
+		carregar_tela_celular()
+		
+		topo()
+
+		g.definir_tamanho_texto(27.0)
+		
+		titulo = "       LIVROS NA PILHA"
+
+		carregar_titulo()
+
+		cabecalho()
+
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(verdadeiro, falso, falso)
+		g.definir_tamanho_texto(12.0)
+		
+		para(inteiro i = 0; i < ponteiro; i++)
+		{
+			g.desenhar_imagem(50, 570 - (18 * i), livros[i])
+			g.desenhar_texto(174, 573 - (18 * i), nome_livros[i])
+			
+		}
+		
+		se(t.tecla_pressionada(t.TECLA_ESC))
+		{
+			u.aguarde(300)
+			opcao = 0
+			inicio()
+		}
+	}
+
+	funcao confirmar_livro()
 	{
 		
-		g.iniciar_modo_grafico(verdadeiro)
-		g.definir_dimensoes_janela(largura_janela, altura_janela)
-		g.definir_fonte_texto("Arial")
-          g.definir_titulo_janela("BIBLIOTECA SENAI")
-          
-	}
+		enquanto(voltar == 0)
+		{
+
+			carregar_tela_celular()
+
+			g.definir_cor(0xE1BF41)
+			g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
 	
+			topo()
+	
+			g.definir_tamanho_texto(26.0)
+			
+			titulo = " COLEÇÃO HARRY POTTER"
+	
+			carregar_titulo()
+	
+			cabecalho()
+	
+			g.desenhar_imagem(34, 220, pedra_filosofal)
+			g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
+			g.desenhar_imagem(268, 220, camara_secreta)
+			g.desenhar_imagem(34, 380, calice_de_fogo)
+			g.desenhar_imagem(151, 380, enigma_do_principe)
+			g.desenhar_imagem(268, 380, ordem_da_fenix)
+		
+			
+			g.definir_cor(0xdfdfdf)
+			g.desenhar_retangulo(50, 240, 304, 230, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(50, 240, 304, 230, falso, falso)
+
+			g.desenhar_imagem(170, 250, icone_alerta)
+
+			g.definir_cor(g.COR_VERDE)
+			g.desenhar_retangulo(50, 420, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(50, 420, 152, 50, falso, falso)
+			
+			g.definir_cor(g.COR_VERMELHO)
+			g.desenhar_retangulo(202, 420, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(202, 420, 152, 50, falso, falso)
+			
+			g.desenhar_imagem(100, 425, botao_confirmar)
+			g.desenhar_imagem(264, 425, botao_negar)
+
+			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
+			g.definir_tamanho_texto(32.0)
+
+			g.desenhar_texto(70, 320, "Deseja adicionar")
+			g.desenhar_texto(70, 360, "o livro na pilha?")
+
+			se(m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+				
+				g.definir_cor(g.COR_VERDE)
+				g.desenhar_retangulo(47, 417, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(47, 417, 152, 50, falso, falso)
+
+				g.desenhar_imagem(100, 425, botao_confirmar)				
+
+			}
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+				
+				voltar = 1
+				
+			}
+			
+			se(m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+
+				g.definir_cor(g.COR_VERMELHO)
+				g.desenhar_retangulo(199, 417, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(199, 417, 152, 50, falso, falso)
+
+				g.desenhar_imagem(264, 425, botao_negar)
+
+			}
+		
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+				
+				voltar = 2
+				
+			}
+			
+			g.renderizar()
+			
+			u.aguarde(5)
+
+		}
+	}
+
+	funcao alerta()
+	{
+	
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(100, 250, 200, 120, verdadeiro, falso)
+		
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(101, 251, 198, 118, verdadeiro, verdadeiro)
+		
+		g.desenhar_imagem(170, 260, icone_alerta)
+
+		g.definir_cor(g.COR_PRETO)
+
+		g.definir_estilo_texto(falso,verdadeiro, falso)
+		g.definir_tamanho_texto(22.0)
+		
+		g.desenhar_texto(150, 335, "ALERTA!!!")
+		
+		g.definir_tamanho_texto(26.0)
+		
+		g.desenhar_texto(30, 400, mensagem1)
+		g.desenhar_texto(30, 425, mensagem2)
+		
+		se(ponteiro > 0)
+		{
+			g.definir_estilo_texto(falso,verdadeiro, falso)
+			g.definir_tamanho_texto(20.0)
+			
+			g.desenhar_imagem(151, 460, livros[ponteiro -1])
+			g.desenhar_texto(30, 480, nome_livros[ponteiro - 1])
+
+		}
+		
+		se(t.tecla_pressionada(t.TECLA_ESC))
+		{
+			u.aguarde(300)
+			opcao = 0
+			inicio()
+		}	
+	}
+
 	funcao carregar_imagens()
 	{
 		
@@ -763,6 +1282,16 @@ programa
 
 	}
 
+	funcao definir_tela()
+	{
+		
+		g.iniciar_modo_grafico(verdadeiro)
+		g.definir_dimensoes_janela(largura_janela, altura_janela)
+		g.definir_fonte_texto("Arial")
+          g.definir_titulo_janela("BIBLIOTECA SENAI")
+          
+	}
+
 	funcao carregar_tela_celular()
 	{
 
@@ -787,6 +1316,26 @@ programa
 		
 	}
 
+	funcao carregar_titulo()
+	{
+		
+		//Colocando uma borda preta em volta do titulo
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, verdadeiro)
+		
+		//Preenchendo com cor de fundo cinza atrás do título
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(23, 159, (largura_janela - 44), 50, falso, verdadeiro)
+		
+		//Defininndo cor e tamanho do titulo- BIBLIOTECA DE LIVROS
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+
+		//Imprimindo na tela o título
+		g.desenhar_texto(22, 171, titulo)
+
+	}
+
 	funcao cabecalho()
 	{
 		
@@ -803,432 +1352,7 @@ programa
 		g.desenhar_texto(85, 625, "Jonathan Reinaldo Eichenberger")
 		
 	}
-
-	funcao carregar_titulo()
-	{
-		
-		//Colocando uma borda preta em volta do titulo
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(22, 158, (largura_janela - 42), 52, falso, verdadeiro)
-		
-		//Preenchendo com cor de fundo cinza atrás do título
-		g.definir_cor(0xdfdfdf)
-		g.desenhar_retangulo(23, 159, (largura_janela - 44), 50, falso, verdadeiro)
-		
-		
-		//Defininndo cor e tamanho do titulo- BIBLIOTECA DE LIVROS
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-
-		//Imprimindo na tela o título
-		g.desenhar_texto(22, 171, titulo)
-
-		
-		
-	}
-
-	funcao alerta()
-	{
 	
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(100, 250, 200, 120, verdadeiro, falso)
-		
-		g.definir_cor(0xdfdfdf)
-		g.desenhar_retangulo(101, 251, 198, 118, verdadeiro, verdadeiro)
-		
-		g.desenhar_imagem(170, 260, icone_alerta)
-
-		g.definir_cor(g.COR_PRETO)
-
-		g.definir_estilo_texto(falso,verdadeiro, falso)
-		g.definir_tamanho_texto(22.0)
-		
-		g.desenhar_texto(150, 335, "ALERTA!!!")
-		
-		g.definir_tamanho_texto(26.0)
-		
-		g.desenhar_texto(30, 400, mensagem1)
-		g.desenhar_texto(30, 425, mensagem2)
-		
-		se(ponteiro > 0)
-		{
-			g.definir_estilo_texto(falso,verdadeiro, falso)
-			g.definir_tamanho_texto(20.0)
-			
-			g.desenhar_imagem(151, 460, livros[ponteiro -1])
-			g.desenhar_texto(30, 480, nome_livros[ponteiro - 1])
-
-		}
-		
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
-		g.desenhar_imagem(176, 545, botao_voltar)
-
-		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
-			g.desenhar_imagem(176, 545, botao_voltar)
-			
-		}
-
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
-		{
-			
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				
-				u.aguarde(100)
-				opcao = 0
-				inicio()
-
-			}
-		}	
-	}
-
-	funcao colecao_harry_potter()
-	{
-		carregar_tela_celular()
-
-		g.definir_cor(0xE1BF41)
-		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
-
-		topo()
-
-		g.definir_tamanho_texto(26.0)
-		
-		titulo = " COLEÇÃO HARRY POTTER"
-
-		carregar_titulo()
-
-		cabecalho()
-
-		g.desenhar_imagem(34, 220, pedra_filosofal)
-		g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
-		g.desenhar_imagem(268, 220, camara_secreta)
-		g.desenhar_imagem(34, 380, calice_de_fogo)
-		g.desenhar_imagem(151, 380, enigma_do_principe)
-		g.desenhar_imagem(268, 380, ordem_da_fenix)
-		
-		
-
-		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			g.desenhar_imagem(31, 217, pedra_filosofal)	
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_pedra_filosofal
-						nome_livros[ponteiro] = "Harry Potter-Pedra Filosofal"
-						ponteiro++
-						u.aguarde(500)
-					}	
-				}
-			}
-		}
-			
-		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			g.desenhar_imagem(148, 217, prisioneiro_de_azkaban)
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_prisioneiro_de_azkaban
-						nome_livros[ponteiro] = "Harry Potter-Prisioneiro de Azkaban"
-						ponteiro++
-						u.aguarde(500)
-					}
-				}
-			}
-				
-		}
-		se(m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			g.desenhar_imagem(265, 217, camara_secreta)
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
-		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_camara_secreta
-						nome_livros[ponteiro] = "Harry Potter-Camara Secreta"
-						ponteiro++
-						u.aguarde(500)
-					}
-				}
-			}
-				
-		}
-		
-		se(m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			g.desenhar_imagem(31, 377, calice_de_fogo)
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_calice_de_fogo
-						nome_livros[ponteiro] = "Harry Potter-Calice de Fogo"
-						ponteiro++
-						u.aguarde(500)
-					}
-				}
-			}
-				
-		}
-		
-		se(m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			g.desenhar_imagem(148, 377, enigma_do_principe)
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 151 e m.posicao_x() <= 251 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_enigma_do_principe
-						nome_livros[ponteiro] = "Harry Potter-Enigma do Principe"
-						ponteiro++
-						u.aguarde(500)
-					}
-				}
-			}
-		
-				
-		}
-		
-		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			g.desenhar_imagem(265, 377, ordem_da_fenix)
-		}
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 268 e m.posicao_x() <= 368 e m.posicao_y() >= 380 e m.posicao_y() <= 530)
-		{
-			
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				se(ponteiro < total)
-				{
-					se(voltar == 0)
-					{
-						confirmar_livro()
-					}
-					se(voltar == 1)
-					{
-						livros[ponteiro] = capa_ordem_da_fenix
-						nome_livros[ponteiro] = "Harry Potter-Ordem da Fenix"
-						ponteiro++
-						u.aguarde(500)
-					}
-				}
-			}
-				
-		}
-		
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
-		g.desenhar_imagem(176, 545, botao_voltar)
-
-		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
-		{
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
-			g.desenhar_imagem(176, 545, botao_voltar)
-			
-		}
-
-		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
-		{
-			
-			se(m.ler_botao() == m.BOTAO_ESQUERDO)
-			{
-				
-				u.aguarde(100)
-				opcao = 1
-				inicio()
-
-			}
-		}	
-		
-		voltar = 0
-	}
-
-	funcao listar_pilha()
-	{
-		carregar_tela_celular()
-		
-		topo()
-
-		g.definir_tamanho_texto(27.0)
-		
-		titulo = "       LIVROS NA PILHA"
-
-		carregar_titulo()
-
-		cabecalho()
-
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(verdadeiro, falso, falso)
-		g.definir_tamanho_texto(12.0)
-		
-		para(inteiro i = 0; i < ponteiro; i++)
-		{
-			g.desenhar_imagem(50, 570 - (18 * i), livros[i])
-			g.desenhar_texto(174, 573 - (18 * i), "Harry potter-")
-			
-		}
-
-		
-		
-	}
-	
-	funcao confirmar_livro()
-	{
-		
-		enquanto(voltar == 0)
-		{
-
-			carregar_tela_celular()
-
-			g.definir_cor(0xE1BF41)
-			g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
-	
-			topo()
-	
-			g.definir_tamanho_texto(26.0)
-			
-			titulo = " COLEÇÃO HARRY POTTER"
-	
-			carregar_titulo()
-	
-			cabecalho()
-	
-			g.desenhar_imagem(34, 220, pedra_filosofal)
-			g.desenhar_imagem(151, 220, prisioneiro_de_azkaban)
-			g.desenhar_imagem(268, 220, camara_secreta)
-			g.desenhar_imagem(34, 380, calice_de_fogo)
-			g.desenhar_imagem(151, 380, enigma_do_principe)
-			g.desenhar_imagem(268, 380, ordem_da_fenix)
-		
-			
-			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(50, 240, 304, 230, falso, verdadeiro)
-
-			g.definir_cor(g.COR_PRETO)
-			g.desenhar_retangulo(50, 240, 304, 230, falso, falso)
-
-			g.desenhar_imagem(170, 250, icone_alerta)
-
-			g.definir_cor(g.COR_VERDE)
-			g.desenhar_retangulo(50, 420, 152, 50, falso, verdadeiro)
-
-			g.definir_cor(g.COR_PRETO)
-			g.desenhar_retangulo(50, 420, 152, 50, falso, falso)
-			
-			g.definir_cor(g.COR_VERMELHO)
-			g.desenhar_retangulo(202, 420, 152, 50, falso, verdadeiro)
-
-			g.definir_cor(g.COR_PRETO)
-			g.desenhar_retangulo(202, 420, 152, 50, falso, falso)
-			
-			g.desenhar_imagem(100, 425, botao_confirmar)
-			g.desenhar_imagem(264, 425, botao_negar)
-
-			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
-			g.definir_tamanho_texto(32.0)
-
-			g.desenhar_texto(70, 320, "Deseja adicionar")
-			g.desenhar_texto(70, 360, "o livro na pilha?")
-
-			se(m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
-			{
-				
-				g.definir_cor(g.COR_VERDE)
-				g.desenhar_retangulo(47, 417, 152, 50, falso, verdadeiro)
-
-				g.definir_cor(g.COR_PRETO)
-				g.desenhar_retangulo(47, 417, 152, 50, falso, falso)
-
-				g.desenhar_imagem(100, 425, botao_confirmar)
-				
-
-			}
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
-			{
-				
-				voltar = 1
-				
-			}
-			
-			se(m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
-			{
-
-				g.definir_cor(g.COR_VERMELHO)
-				g.desenhar_retangulo(199, 417, 152, 50, falso, verdadeiro)
-
-				g.definir_cor(g.COR_PRETO)
-				g.desenhar_retangulo(199, 417, 152, 50, falso, falso)
-
-				g.desenhar_imagem(264, 425, botao_negar)
-
-			}
-		
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
-			{
-				voltar = 2
-				
-			}
-			
-			g.renderizar()
-			
-			u.aguarde(5)
-
-			
-		}
-	}
 }
 
 /* $$$ Portugol Studio $$$ 
@@ -1236,10 +1360,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 13892; 
- * @DOBRAMENTO-CODIGO = [340, 646, 765, 781, 789, 806, 1098];
+ * @POSICAO-CURSOR = 27997; 
+ * @DOBRAMENTO-CODIGO = [160, 413, 773, 891, 997, 1030, 1175, 1284, 1294, 1310, 1318, 1338];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {ponteiro, 48, 9, 8}-{opcao, 51, 9, 5};
+ * @SIMBOLOS-INSPECIONADOS = {loading, 59, 9, 7};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
