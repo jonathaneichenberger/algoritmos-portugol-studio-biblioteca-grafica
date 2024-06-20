@@ -46,6 +46,7 @@ programa
 	inteiro carregar_fontes = 0
 	inteiro alternar_enter = 0
 	inteiro limite_vetor = 18
+	inteiro tempo_bubllesort = 0
 	
 	funcao inicio()
 	{
@@ -126,9 +127,7 @@ programa
 			{
 				n = 0
 
-				g.iniciar_modo_grafico(verdadeiro)
-				g.definir_cor(0x67C2E6)
-				g.definir_dimensoes_janela(largura_janela, altura_janela)
+				iniciar_modo_grafico()
 	
 				g.definir_fonte_texto("Arial")
          		 	g.definir_titulo_janela("SITUAÇÃO DE APREDIZAGEM 6 ETAPA 1 -- BUBLLE SORT --")
@@ -137,9 +136,9 @@ programa
           		
           		enquanto(nao t.tecla_pressionada(t.TECLA_ENTER))
           		{
-          			
-          			definir_tela()
-          			definir_tela_enter()
+          			montar_grafico()
+          			//definir_tela()
+          			//definir_tela_enter()
           			g.renderizar()
           		}
 				enquanto(nao t.tecla_pressionada(t.TECLA_ESC))
@@ -291,13 +290,22 @@ programa
 			total--
 		}
 		fim_contagem = u.tempo_decorrido()
+
+		tempo_bubllesort = fim_contagem - comeco_contagem
+
+		enquanto(nao t.tecla_pressionada(t.TECLA_ENTER))
+          {
+          	montar_grafico()
+          	g.renderizar()
+          }
 		
-		escreva("Tempo decorrido: ", fim_contagem - comeco_contagem, " Milissegundos\n\n")
+		escreva("Tempo decorrido: ", tempo_bubllesort, " Milissegundos\n\n")
 
 		escreva("\nPressione [ENTER] para voltar ao menu \n")
 		leia(enter)
 
 		limpa()
+		
 		inicio()
 	}
 
@@ -548,10 +556,52 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
 		{
 			alternar_enter = 0
 		}
+	}	
+
+	funcao montar_grafico() //tempo_bubllesort
+	{
+		inteiro incremento_vertical = 60
+		inteiro incremento_horizontal = 90
+		
+		g.definir_rotacao(0)
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo(0, 0, 1200, 800, falso, verdadeiro)
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(150, 650, 900, 5, falso, verdadeiro)
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(150, 50, 5, 600, falso, verdadeiro)
+
+		para(inteiro r = 0; r < 10; r++)
+		{
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(100, 650 - r * incremento_vertical, 50, 5, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(150 + r * incremento_horizontal, 655, 5, 50, falso, verdadeiro)
+		}
+
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_fonte_texto("Poetsen One")
+		g.definir_tamanho_texto(30.0)
+		g.definir_rotacao(-90)
+		g.desenhar_texto(80, 120, "Tempo(ms)")
+		g.definir_rotacao(0)
+		g.desenhar_texto(125, 700, "0")
+		g.desenhar_texto(75, 655, "0")
+		g.desenhar_texto(800, 610, "Tamanho(vetor)")
+		
+
 		
 	}
-	
-				
+
+	funcao iniciar_modo_grafico()
+	{
+		g.iniciar_modo_grafico(verdadeiro)
+		g.definir_cor(0x67C2E6)
+		g.definir_dimensoes_janela(largura_janela, altura_janela)
+	}
 }
 
 
@@ -560,7 +610,7 @@ funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 9462; 
+ * @POSICAO-CURSOR = 11489; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {alternar_enter, 47, 9, 14};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

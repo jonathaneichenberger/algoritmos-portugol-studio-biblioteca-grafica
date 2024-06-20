@@ -414,31 +414,37 @@ programa
 			{	
 		          se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 270)
 				{
+					u.aguarde(100)
 					opcao = 1
 				}
 
 				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 270 e m.posicao_y() <= 330)
 				{
+					u.aguarde(100)
 					opcao = 2
 				}
 
 				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 330 e m.posicao_y() <= 390)
 				{
+					u.aguarde(100)
 					opcao = 3
 				}
 
 				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 390 e m.posicao_y() <= 450)
 				{
+					u.aguarde(100)
 					opcao = 4
 				}
 
 				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 450 e m.posicao_y() <= 510)
 				{
+					u.aguarde(100)
 					opcao = 5
 				}
 
 				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 510 e m.posicao_y() <= 570)
 				{
+					u.aguarde(100)
 					opcao = 6
 				}
 			}
@@ -476,17 +482,43 @@ programa
 				g.desenhar_imagem(121, 215, logo_harry_potter)
 		 
 			}
-			se(nao m.botao_pressionado(m.BOTAO_ESQUERDO))
+			
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
 			{
-				se(m.posicao_x() >= 22 e m.posicao_x() <= 380 e m.posicao_y() >= 210 e m.posicao_y() <= 260)
+				se(m.ler_botao() == m.BOTAO_ESQUERDO)
 				{
-					se(m.ler_botao() == m.BOTAO_ESQUERDO)
-					{
-						opcao = 6
-					}
+					u.aguarde(100)
+					opcao = 6
+					inicio()
 				}
 			}
 			
+			
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
+			g.desenhar_imagem(176, 545, botao_voltar)
+
+			se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+			{
+				g.definir_cor(0xdfdfdf)
+				g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
+				g.desenhar_imagem(176, 545, botao_voltar)
+				
+			}
+
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+			{
+				
+				se(m.ler_botao() == m.BOTAO_ESQUERDO)
+				{
+					
+					u.aguarde(100)
+					opcao = 0
+					inicio()
+	
+				}
+			}	
+
 	}
 
 	funcao desempilhar()
@@ -913,23 +945,31 @@ programa
 			}
 				
 		}
-
-		g.definir_cor(0xA48B30)
+		
+		g.definir_cor(g.COR_PRETO)
 		g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
 		g.desenhar_imagem(176, 545, botao_voltar)
 
-		se(m.posicao_x() >= 166 e m.posicao_x() <= 216 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
 		{
-			g.definir_cor(0xC3A539)
+			g.definir_cor(0xdfdfdf)
 			g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
 			g.desenhar_imagem(176, 545, botao_voltar)
 			
+		}
+
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+		{
+			
 			se(m.ler_botao() == m.BOTAO_ESQUERDO)
 			{
+				
+				u.aguarde(100)
 				opcao = 1
 				inicio()
+
 			}
-		}
+		}	
 		
 		voltar = 0
 	}
@@ -1073,10 +1113,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1669; 
- * @DOBRAMENTO-CODIGO = [491, 517, 527, 636, 652, 660, 677, 700];
+ * @POSICAO-CURSOR = 24735; 
+ * @DOBRAMENTO-CODIGO = [523, 549, 559, 668, 684, 692, 709, 732];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {livros, 49, 9, 6};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
