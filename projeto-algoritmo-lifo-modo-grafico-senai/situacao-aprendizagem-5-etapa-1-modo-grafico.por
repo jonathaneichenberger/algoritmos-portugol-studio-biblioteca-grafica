@@ -85,7 +85,7 @@ programa
 			definir_tela_inicio++
 		}
     
-         	enquanto(loading < 276)
+         	enquanto(loading < 276 e carregamento_inicial == 0)
           {
           	tela_carregamento()
           	g.renderizar()
@@ -410,12 +410,16 @@ programa
 			se(loading == 276)
 			{
 				u.aguarde(500)
+				carregamento_inicial = 1
+				loading = 0
 				opcao = 0
+				
 			}
 		}
 		
 		se(aparecer_logo > 75 e carregamento_inicial == 1)
 		{
+			
 			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
 			g.definir_cor(g.COR_BRANCO)
 			g.definir_fonte_texto("Tahoma")
@@ -428,6 +432,7 @@ programa
 				g.desenhar_texto(120, 420, "o sistema ")
 				u.aguarde(30)
 				aux_loading++
+				loading++
 			}
 			se(aux_loading >=15  e  aux_loading <= 30)
 			{
@@ -436,6 +441,7 @@ programa
 				g.desenhar_texto(120, 420, "o sistema. ")
 				u.aguarde(30)
 				aux_loading++
+				loading++
 			}
 			se(aux_loading >= 30 e  aux_loading <= 45)
 			{
@@ -445,6 +451,7 @@ programa
 				g.desenhar_texto(120, 420, "o sistema..")
 				u.aguarde(30)
 				aux_loading++
+				loading++
 			}
 			se(aux_loading >= 45 e  aux_loading <= 60)
 			{
@@ -454,15 +461,14 @@ programa
 				g.desenhar_texto(120, 420, "o sistema...")
 				u.aguarde(30)
 				aux_loading++
+				loading++
 			}
 			se(aux_loading == 60)
 			{
 				aux_loading = 0
 			}
-			
-			loading++
 				
-			se(loading == 276)
+			se(loading > 180)
 			{
 				opcao = 10
 			}
@@ -1702,10 +1708,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 8778; 
- * @DOBRAMENTO-CODIGO = [585, 669, 863, 1029];
+ * @POSICAO-CURSOR = 10427; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {loading, 72, 9, 7};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
