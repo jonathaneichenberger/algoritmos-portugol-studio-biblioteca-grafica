@@ -47,6 +47,7 @@ programa
 	//Outras variaveis necessarias
 	inteiro ponteiro = 0
 	inteiro livros[total]
+	cadeia nome_livros[total]
 	inteiro opcao = 0
 	real fonte_padrao = 20.0
 	cadeia titulo
@@ -58,6 +59,7 @@ programa
 	inteiro loading = 0
 	inteiro aparecer_logo = 0
 	inteiro definir_tela_inicio = 0
+	inteiro tamanho_texto = 0
 	
 	
 	
@@ -450,6 +452,7 @@ programa
 			}
 									  					
 	}
+	
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
 	{	
 			carregar_tela_celular()
@@ -534,17 +537,111 @@ programa
 
 		carregar_titulo()
 
-
-		
 		se(ponteiro == 0)
 		{
+			
 			mensagem1 = "Não foi encontrado nenhum"
 			mensagem2 = "             livro na Pilha!"
 			alerta()
 			
 		}
-			
+
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(100, 250, 200, 120, verdadeiro, falso)
 		
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(101, 251, 198, 118, verdadeiro, verdadeiro)
+		
+		g.desenhar_imagem(170, 260, icone_alerta)
+
+		g.definir_cor(g.COR_PRETO)
+
+		g.definir_estilo_texto(falso,verdadeiro, falso)
+		g.definir_tamanho_texto(22.0)
+		
+		g.desenhar_texto(150, 335, "ALERTA!!!")
+		
+		g.definir_tamanho_texto(26.0)
+		
+		
+		
+		se(ponteiro > 0)
+		{
+			g.desenhar_texto(40, 400, "   Gostaria de retirar o")
+			g.desenhar_texto(40, 425, "   último livro da pilha?")
+			
+			g.definir_estilo_texto(falso,verdadeiro, falso)
+			g.definir_tamanho_texto(20.0)
+			
+			tamanho_texto = txt.numero_caracteres(nome_livros[ponteiro - 1])
+			
+			g.desenhar_imagem(151, 460, livros[ponteiro -1])
+			g.desenhar_texto(30 , 490, nome_livros[ponteiro - 1])
+
+			
+
+			g.definir_cor(g.COR_VERDE)
+			g.desenhar_retangulo(50, 550, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(50, 550, 152, 50, falso, falso)
+			
+			g.definir_cor(g.COR_VERMELHO)
+			g.desenhar_retangulo(202, 550, 152, 50, falso, verdadeiro)
+
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(202, 550, 152, 50, falso, falso)
+			
+			g.desenhar_imagem(100, 555, botao_confirmar)
+			g.desenhar_imagem(264, 555, botao_negar)
+
+			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
+			g.definir_tamanho_texto(32.0)
+
+
+			se(m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+				
+				g.definir_cor(g.COR_VERDE)
+				g.desenhar_retangulo(47, 547, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(47, 547, 152, 50, falso, falso)
+
+				g.desenhar_imagem(100, 555, botao_confirmar)
+				
+
+			}
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+				u.aguarde(100)
+				opcao = 0
+				ponteiro--
+				inicio()
+				
+			}
+			
+			se(m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
+			{
+
+				g.definir_cor(g.COR_VERMELHO)
+				g.desenhar_retangulo(199, 547, 152, 50, falso, verdadeiro)
+
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_retangulo(199, 547, 152, 50, falso, falso)
+
+				g.desenhar_imagem(264, 555, botao_negar)
+
+			}
+		
+			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 202 e m.posicao_x() <= 354 e m.posicao_y() >= 420 e m.posicao_y() <= 470)
+			{
+				u.aguarde(100)
+				opcao = 0
+				
+				
+			}
+		}
 	}
 
 	funcao definir_tela()
@@ -742,9 +839,6 @@ programa
 		g.desenhar_imagem(170, 260, icone_alerta)
 
 		g.definir_cor(g.COR_PRETO)
-		
-		g.desenhar_imagem(176, 588, botao_voltar)
-		g.desenhar_retangulo(166, 578, 70, 60, verdadeiro, falso)
 
 		g.definir_estilo_texto(falso,verdadeiro, falso)
 		g.definir_tamanho_texto(22.0)
@@ -755,19 +849,41 @@ programa
 		
 		g.desenhar_texto(30, 400, mensagem1)
 		g.desenhar_texto(30, 425, mensagem2)
+		
+		se(ponteiro > 0)
+		{
+			g.definir_estilo_texto(falso,verdadeiro, falso)
+			g.definir_tamanho_texto(20.0)
+			
+			g.desenhar_imagem(151, 460, livros[ponteiro -1])
+			g.desenhar_texto(30, 480, nome_livros[ponteiro - 1])
 
-		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 578 e m.posicao_y() <= 638)
+		}
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(166, 540, 70, 50, verdadeiro, falso)
+		g.desenhar_imagem(176, 545, botao_voltar)
+
+		se(m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
 		{
 			g.definir_cor(0xdfdfdf)
-			g.desenhar_retangulo(167, 579, 68, 58, verdadeiro, verdadeiro)
-			g.desenhar_imagem(176, 588, botao_voltar)
+			g.desenhar_retangulo(167, 541, 68, 48, verdadeiro, verdadeiro)
+			g.desenhar_imagem(176, 545, botao_voltar)
 			
-			se(m.botao_pressionado(m.BOTAO_ESQUERDO))
-			{
-				opcao = 0
-			}
 		}
-	
+
+		se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 166 e m.posicao_x() <= 236 e m.posicao_y() >= 540 e m.posicao_y() <= 590)
+		{
+			
+			se(m.ler_botao() == m.BOTAO_ESQUERDO)
+			{
+				
+				u.aguarde(100)
+				opcao = 0
+				inicio()
+
+			}
+		}	
 	}
 
 	funcao colecao_harry_potter()
@@ -813,6 +929,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_pedra_filosofal
+						nome_livros[ponteiro] = "Harry Potter-Pedra Filosofal"
 						ponteiro++
 						u.aguarde(500)
 					}	
@@ -837,6 +954,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_prisioneiro_de_azkaban
+						nome_livros[ponteiro] = "Harry Potter-Prisioneiro de Azkaban"
 						ponteiro++
 						u.aguarde(500)
 					}
@@ -861,6 +979,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_camara_secreta
+						nome_livros[ponteiro] = "Harry Potter-Camara Secreta"
 						ponteiro++
 						u.aguarde(500)
 					}
@@ -886,6 +1005,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_calice_de_fogo
+						nome_livros[ponteiro] = "Harry Potter-Calice de Fogo"
 						ponteiro++
 						u.aguarde(500)
 					}
@@ -911,6 +1031,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_enigma_do_principe
+						nome_livros[ponteiro] = "Harry Potter-Enigma do Principe"
 						ponteiro++
 						u.aguarde(500)
 					}
@@ -938,6 +1059,7 @@ programa
 					se(voltar == 1)
 					{
 						livros[ponteiro] = capa_ordem_da_fenix
+						nome_livros[ponteiro] = "Harry Potter-Ordem da Fenix"
 						ponteiro++
 						u.aguarde(500)
 					}
@@ -1002,6 +1124,7 @@ programa
 		
 		
 	}
+	
 	funcao confirmar_livro()
 	{
 		
@@ -1113,10 +1236,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 24735; 
- * @DOBRAMENTO-CODIGO = [523, 549, 559, 668, 684, 692, 709, 732];
+ * @POSICAO-CURSOR = 13892; 
+ * @DOBRAMENTO-CODIGO = [340, 646, 765, 781, 789, 806, 1098];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {ponteiro, 48, 9, 8}-{opcao, 51, 9, 5};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
