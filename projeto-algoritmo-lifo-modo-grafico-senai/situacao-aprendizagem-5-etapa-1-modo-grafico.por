@@ -84,14 +84,13 @@ programa
 			carregar_imagens()
 			definir_tela_inicio++
 		}
-          
-          
-         /*	enquanto(loading < 276)
+    
+         	enquanto(loading < 276)
           {
           	tela_carregamento()
           	g.renderizar()
           	
-          }*/
+          }
 	
 		escolha(opcao)
 		{
@@ -213,8 +212,7 @@ programa
 				     g.renderizar()
 				     
 				}
-			}
-			
+			}			
 		}
 	}
 
@@ -399,7 +397,7 @@ programa
 				}
 				se(loading > 160 e  loading < 200)
 				{
-					g.desenhar_texto(60, 335, "Carregando versão V.1.0.3 Beta")
+					g.desenhar_texto(60, 335, "Carregando versão V.0.8.7.3 Beta")
 					u.aguarde(30)
 				}
 				
@@ -582,8 +580,7 @@ programa
 					u.aguarde(100)
 					opcao = 6
 				}
-			}
-									  					
+			}									  					
 	}
 	
 	funcao empilhar() //Função para fazer o cadastramentos dos elementos que serão empilhados.
@@ -889,9 +886,6 @@ programa
 		g.desenhar_imagem(34, 380, feast_for_crows)
 		g.desenhar_imagem(151, 380, dance_with_dragons)
 		
-		
-		
-
 		se(nao m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 34 e m.posicao_x() <= 134 e m.posicao_y() >= 220 e m.posicao_y() <= 370)
 		{
 			g.desenhar_imagem(31, 217, game_of_thrones)	
@@ -1074,8 +1068,6 @@ programa
 		
 		g.definir_tamanho_texto(26.0)
 		
-		
-		
 		se(ponteiro > 0)
 		{
 			g.desenhar_texto(40, 400, "   Gostaria de retirar o")
@@ -1107,7 +1099,6 @@ programa
 			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
 			g.definir_tamanho_texto(32.0)
 
-
 			se(m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
 			{
 				
@@ -1118,7 +1109,6 @@ programa
 				g.desenhar_retangulo(47, 547, 152, 50, falso, falso)
 
 				g.desenhar_imagem(100, 555, botao_confirmar)
-				
 
 			}
 			se(m.botao_pressionado(m.BOTAO_ESQUERDO) e m.posicao_x() >= 50 e m.posicao_x() <= 202 e m.posicao_y() >= 550 e m.posicao_y() <= 600)
@@ -1430,7 +1420,6 @@ programa
 			g.renderizar()
 			
 			u.aguarde(5)
-
 		}
 	}
 
@@ -1457,7 +1446,7 @@ programa
 		g.desenhar_texto(30, 400, mensagem1)
 		g.desenhar_texto(30, 425, mensagem2)
 		
-		se(ponteiro > 0)
+		/*se(ponteiro > 0)
 		{
 			g.definir_estilo_texto(falso,verdadeiro, falso)
 			g.definir_tamanho_texto(20.0)
@@ -1465,7 +1454,7 @@ programa
 			g.desenhar_imagem(151, 460, livros[ponteiro -1])
 			g.desenhar_texto(30, 480, nome_livros[ponteiro - 1])
 
-		}
+		}*/
 		
 		se(t.tecla_pressionada(t.TECLA_ESC))
 		{
@@ -1633,9 +1622,7 @@ programa
 		temp_img = g.carregar_imagem("imagem/game_of_thrones/capa_dance_with_dragons.png")
 		capa_dance_with_dragons = g.redimensionar_imagem(temp_img, 120 , 18, verdadeiro)
 		g.liberar_imagem(temp_img)
-
-		
-
+	
 	}
 
 	funcao definir_tela()
@@ -1708,7 +1695,6 @@ programa
 		g.desenhar_texto(85, 625, "Jonathan Reinaldo Eichenberger")
 		
 	}
-	
 }
 
 /* $$$ Portugol Studio $$$ 
@@ -1716,8 +1702,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 23123; 
- * @DOBRAMENTO-CODIGO = [97, 220, 473, 588, 672, 1035, 1155, 1263, 1305, 1436, 1477, 1640, 1650, 1666, 1674, 1694];
+ * @POSICAO-CURSOR = 8778; 
+ * @DOBRAMENTO-CODIGO = [585, 669, 863, 1029];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {loading, 72, 9, 7};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
