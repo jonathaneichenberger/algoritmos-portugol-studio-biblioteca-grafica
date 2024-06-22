@@ -42,9 +42,7 @@ programa
 	inteiro botao_negar = 0
 	inteiro botao_confirmar = 0
 	inteiro senai_logo_carregamento = 0
-	inteiro fundo_harry_potter = 0
 	inteiro logo_game_of_thrones = 0
-	inteiro fundo_game_of_thrones = 0
 	inteiro game_of_thrones = 0
 	inteiro clash_of_kings = 0
 	inteiro feast_for_crows = 0
@@ -679,7 +677,7 @@ programa
 
 		g.definir_cor(0xE1BF41)
 		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
-		g.desenhar_imagem(22, 210, fundo_harry_potter)
+		
 
 		topo()
 
@@ -873,7 +871,7 @@ programa
 
 		g.definir_cor(0x65DEEB)
 		g.desenhar_retangulo(22, 210, (largura_janela - 42), 438, falso, verdadeiro)
-		g.desenhar_imagem(22, 210, fundo_game_of_thrones)
+		
 
 		topo()
 
@@ -1577,16 +1575,8 @@ programa
 		senai_logo_carregamento = g.redimensionar_imagem(temp_img, 200 , 70, verdadeiro)
 		g.liberar_imagem(temp_img)
 
-		temp_img = g.carregar_imagem("imagem/harry_potter/fundo_harry_potter.png")
-		fundo_harry_potter = g.redimensionar_imagem(temp_img, 358 , 438, verdadeiro)
-		g.liberar_imagem(temp_img)
-
 		temp_img = g.carregar_imagem("imagem/game_of_thrones/logo_game_of_thrones.png")
 		logo_game_of_thrones = g.redimensionar_imagem(temp_img, 200 , 40, verdadeiro)
-		g.liberar_imagem(temp_img)
-
-		temp_img = g.carregar_imagem("imagem/game_of_thrones/fundo_game_of_thrones.png")
-		fundo_game_of_thrones = g.redimensionar_imagem(temp_img, 358 , 438, verdadeiro)
 		g.liberar_imagem(temp_img)
 
 		temp_img = g.carregar_imagem("imagem/game_of_thrones/game_of_thrones.png")
@@ -1708,7 +1698,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 10427; 
+ * @POSICAO-CURSOR = 1244; 
+ * @DOBRAMENTO-CODIGO = [1257, 1299, 1429];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
