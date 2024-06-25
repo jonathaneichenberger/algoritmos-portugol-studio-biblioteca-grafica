@@ -1,16 +1,15 @@
 /*
 Alunos: Jonathan Reinaldo Eichenberger e Felipe
 Curso: Desenvolvimento de sistemas
-Mﾃｳdulo: Lﾃｳgica de Programaﾃｧﾃ｣o
+Módulo: Lógica de Programação
 Professor: Christian Daniel Licnerski Marques Pinheiro
-Tipo de Entrega: Nﾃ｣o Avaliativa
-Atividade: Stiuaﾃｧﾃ｣o de Aprendizagem 6 - Etapa 1
+Tipo de Entrega: Não Avaliativa
+Atividade: Stiuação de Aprendizagem 6 - Etapa 1
 */
 
 
 programa
 {
-	inclua biblioteca Matematica --> m
 
 	inclua biblioteca Tipos --> tp
 	inclua biblioteca Teclado --> t
@@ -29,7 +28,6 @@ programa
 	inteiro comeco_contagem = 0
 	inteiro fim_contagem = 0
 	inteiro i = 0
-	inteiro total_grafico = 0
 
 	//Constante e variaveis para o sistema no modo grafico
 	inteiro palheta_de_cores[20] = {0xEAE600 ,0xCD0036,0x8F001D, 0xE50C00, 0xE58900,0xE66002, 0x008F00 ,0x4D000A,
@@ -48,30 +46,349 @@ programa
 	inteiro carregar_fontes = 0
 	inteiro alternar_enter = 0
 	inteiro limite_vetor = 18
-	real tempo_bubllesort[20]
-	real tempo_mergesort[20]
-	inteiro ponteiro_bubllesort = 0
-	inteiro ponteiro_mergesort = 0
-	real tamanho_vetor[20]
-	inteiro incremento_posicao_vetor = 0
-	inteiro total_final = 0
 	
 	funcao inicio()
 	{
-		n = 0
-
-		iniciar_modo_grafico()
-
-		g.definir_fonte_texto("Arial")
-		g.definir_titulo_janela("SITUAÇÃO DE APREDIZAGEM 6 ETAPA 1 -- BUBLLE SORT --")
+		/*escreva("Bem vindo")
+		u.aguarde(1000)
+		limpa()*/
 		
-		enquanto(nao t.tecla_pressionada(t.TECLA_ESC))
-		{	
-			bubllesort_modo_grafico()
-     		desenhar()
-     		g.renderizar()
-     		ponteiro++   		
-		} 
+		escreva("MENU GERAL \n\n")
+		
+		escreva("1 - Preencher o vetor\n")
+		escreva("2 - Ver lista de números\n")
+		escreva("3 - Embaralhar números com fisher yates\n")
+		escreva("4 - Organizar com bublle sort\n")
+		escreva("5 - Organizar com merge sort\n")
+		escreva("6 - Sair\n\n")
+		
+		escreva("Opção ")
+		leia(opcao)
+
+		menu()
+		
+	}
+
+	funcao menu()
+	{
+		limpa()
+		escolha(opcao)
+		{
+			caso 1:
+			{
+				preencher()
+				pare
+			}
+
+			caso 2:
+			{
+				listar()
+				pare
+			}
+			caso 3:
+			{
+				embaralhar()
+				pare
+			}
+			caso 4:
+			{
+				bublle_sort()
+				pare
+			}
+			caso 5:
+			{
+				escreva("Organizando vetor com método Merge Sort:\n\n")
+				
+				comeco_contagem = 0
+				fim_contagem = 0
+				
+				comeco_contagem = u.tempo_decorrido()
+				
+				merge_sort(numero, 0, tamanho - 1)
+
+				fim_contagem = u.tempo_decorrido()
+		
+				escreva("Tempo decorrido: ", fim_contagem - comeco_contagem, " Milissegundos\n\n")
+				
+			 	escreva("\nPressione [ENTER] para voltar ao menu \n")
+				leia(enter)
+
+				limpa()
+				inicio()
+				pare	
+			}
+			caso 6:
+			{
+				sair()
+				pare
+			}
+			caso 7:
+			{
+				n = 0
+
+				g.iniciar_modo_grafico(verdadeiro)
+				g.definir_cor(0x67C2E6)
+				g.definir_dimensoes_janela(largura_janela, altura_janela)
+	
+				g.definir_fonte_texto("Arial")
+         		 	g.definir_titulo_janela("SITUAÇÃO DE APREDIZAGEM 6 ETAPA 1 -- BUBLLE SORT --")
+
+          		contador = u.numero_elementos(numeros)
+          		
+          		enquanto(nao t.tecla_pressionada(t.TECLA_ENTER))
+          		{
+          			
+          			definir_tela()
+          			definir_tela_enter()
+          			g.renderizar()
+          		}
+				enquanto(nao t.tecla_pressionada(t.TECLA_ESC))
+				{
+					
+					bubllesort_modo_grafico()
+		     		desenhar()
+		     		g.renderizar()
+		     		ponteiro++
+		     	
+		     		
+				} 
+	
+			}
+
+			caso contrario:
+			{
+				escreva("ATENCÃO: OPÇÃO INVÁLIDA")
+				u.aguarde(2000)
+				limpa()
+				inicio()
+			}
+			
+		}
+	}
+	funcao preencher()
+	{
+		comeco_contagem = 0
+		fim_contagem = 0
+		
+		escreva("PREENCHER \n\n")
+
+		comeco_contagem = u.tempo_decorrido()
+		
+		para(n = 0 ; n < tamanho; n++)
+		{
+			numero[n] = n + 1
+			
+		}
+		
+		fim_contagem = u.tempo_decorrido()
+		
+		escreva("Salvando os numeros.") u.aguarde(100) 
+		escreva(".") u.aguarde(100) 
+		escreva(".") u.aguarde(100)
+
+		limpa()
+		escreva("PREENCHER \n\n")
+		escreva("Números salvos com sucesso\n\n")
+		
+		escreva("Tempo decorrido: ", fim_contagem - comeco_contagem, " Milissegundos\n\n")
+		
+		escreva("Pressione [ENTER] para voltar ao menu \n")
+		leia(enter)
+		
+		limpa()
+		inicio()
+	}
+
+	funcao listar()
+	{
+		escreva("Listando os primeiros 50 números do vetor: \n\n")
+
+		se(tamanho > 0 e tamanho <= 50)
+		{
+			para(inteiro listagem = 0; listagem < total; listagem++)
+			{
+				
+				escreva(numero[listagem], " ")
+			
+			}
+			
+			escreva("\n\nPressione [ENTER] para voltar ao menu\n")
+			leia(enter)
+
+			limpa()
+			inicio()	
+		}
+		senao se(tamanho > 50)
+		{
+			para(inteiro listagem = 0; listagem < 50; listagem++)
+			{
+				
+				escreva(numero[listagem], " ")
+				
+			}
+			
+			
+			escreva("\n\nPressione [ENTER] para voltar ao menu \n")
+			leia(enter)
+
+			limpa()
+			inicio()	
+		}
+		senao
+		{
+			escreva("Nenhum número foi adicionado até o momento!")
+		}
+	}
+
+	funcao embaralhar()
+	{
+		comeco_contagem = 0
+		fim_contagem = 0
+
+		escreva("Embaralhando vetor com método Fisher-Yates:\n\n")
+		
+		comeco_contagem = u.tempo_decorrido()
+		
+		para(n = tamanho - 1; n >= 0; n--)
+		{
+			 c = u.sorteia(0, tamanho - 1)
+			auxiliar = numero[n]
+  			numero[n] = numero[c]
+  			numero[c] = auxiliar
+		}
+		
+		fim_contagem = u.tempo_decorrido()
+		
+		escreva("Tempo decorrido: ", fim_contagem - comeco_contagem, " Milissegundos\n\n")
+		
+		escreva("\nPressione [ENTER] para voltar ao menu \n")
+		leia(enter)
+
+		limpa()
+		inicio()
+		
+	}
+
+	funcao bublle_sort()
+	{ 	
+		total = tamanho
+		comeco_contagem = 0
+		fim_contagem = 0
+		
+		escreva("Organizando vetor com método Bublle Sort:\n\n")
+
+		comeco_contagem = u.tempo_decorrido()
+		
+		para(n = 0; n < tamanho; n++)
+		{
+			para(c = 0; c < total - 1; c++ )
+			{
+				se( numero[c] > numero[c + 1])
+				{
+					auxiliar = numero[c]
+					numero[c] = numero[c + 1]
+					numero[c + 1] = auxiliar
+				}
+			}
+			
+			total--
+		}
+		fim_contagem = u.tempo_decorrido()
+		
+		escreva("Tempo decorrido: ", fim_contagem - comeco_contagem, " Milissegundos\n\n")
+
+		escreva("\nPressione [ENTER] para voltar ao menu \n")
+		leia(enter)
+
+		limpa() 
+		inicio()
+	}
+
+funcao merge_sort(inteiro vetor[], inteiro inic, inteiro fim)
+	{
+		inteiro meio, a2, j, k, aux[tamanho]
+		
+	     se(inic < fim)
+	     {
+			meio = (inic + fim) / 2
+			merge_sort(vetor, inic, meio)
+			merge_sort(vetor, meio + 1, fim)
+			
+			
+			i = inic
+			j = meio + 1
+			k = inic
+			
+			enquanto(i <= meio e j <= fim)
+			{
+				se(vetor[i] < vetor[j])
+				{
+					aux[k] = vetor[i]
+					i++
+				}
+				senao
+				{
+					aux[k] = vetor[j]
+					j++
+				}
+				k++
+			}
+			enquanto(i <= meio)
+			{
+				aux[k] = vetor[i]
+				i++
+				k++
+			}
+			enquanto(j <= fim)
+			{
+				aux[k] = vetor[j]
+				j++
+				k++
+			}
+			
+			para(i = inic; i <= fim; i++)
+			{
+				vetor[i] = aux[i]
+			}
+	    	}
+	}
+	funcao sair()
+	{
+		caracter resposta
+		
+		limpa()
+		escreva("Tem certeza que vai sair? [S/N]\n")
+		leia(resposta)
+		
+		se(resposta == 'S' ou resposta == 's')
+		{
+			limpa()
+			escreva("Finalizando o sistema em 05 segundos. . .")
+			Util.aguarde(1000)
+	
+			limpa()
+			escreva("Finalizando o sistema em 04 segundos. . .")
+			Util.aguarde(1000)
+	
+			limpa()
+			escreva("Finalizando o sistema em 03 segundos. . .")
+			Util.aguarde(1000)
+	
+			limpa()
+			escreva("Finalizando o sistema em 02 segundos. . .")
+			Util.aguarde(1000)
+	
+			limpa()
+			escreva("Finalizando o sistema em 01 segundos. . .")
+			Util.aguarde(1000)
+	
+			limpa()
+			escreva("Sistema finalizado com sucesso!\n\n\n\n\n")
+		}
+		senao
+		{
+			inicio()
+		}
 	}
 
 	funcao bubllesort_modo_grafico()
@@ -169,7 +486,9 @@ programa
 					alternar_enter = 0
 				}
 			}
+			
 		}
+		
 	}
 
 	funcao definir_tela()
@@ -219,7 +538,7 @@ programa
 			g.definir_estilo_texto(falso, verdadeiro, falso)
 			g.definir_fonte_texto("Star Jedi")
 			g.definir_tamanho_texto(40.0)
-			g.desenhar_texto(210, 400, "Pressione ENTER para comeﾃｧar")
+			g.desenhar_texto(210, 400, "Pressione ENTER para começar")
 			alternar_enter++
 			
 		}
@@ -232,25 +551,21 @@ programa
 		{
 			alternar_enter = 0
 		}
-	}	
-
-	funcao iniciar_modo_grafico()
-	{
-		g.iniciar_modo_grafico(verdadeiro)
-
-
-		g.definir_cor(0x67C2E6)
-		g.definir_dimensoes_janela(largura_janela, altura_janela)
+		
 	}
+	
+				
 }
+
+
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5359; 
+ * @POSICAO-CURSOR = 5920; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {tamanho_vetor, 55, 6, 13}-{total_final, 57, 9, 11};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
