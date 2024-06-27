@@ -17,6 +17,7 @@ programa
 	inteiro aviao = 0
 	inteiro fundo_menu = 0
 	inteiro icone_aviao = 0
+	inteiro icone_aviao_grande = 0
 	
 
 	//Outras variaveis
@@ -27,6 +28,7 @@ programa
 	cadeia hora_atual
 	cadeia aviao_numero[4]
 	inteiro assentos_disponiveis[4]
+	inteiro transparencia = 255
 	
 	funcao inicio()
 	{	
@@ -44,7 +46,8 @@ programa
 				}
 				caso 1:
 				{
-				
+					
+						
 					pare
 				}
 				caso 2:
@@ -64,7 +67,8 @@ programa
 				}
 				caso 5:
 				{
-
+					tela_inicial_final()
+					g.renderizar()
 					pare
 				}
 			}
@@ -142,7 +146,7 @@ programa
 		g.desenhar_texto(286, 105, "FLIGHT")
 
 		//definindo plano de fundo e opacidade para os elemntos anteriores sobreporem a imagem
-		g.definir_opacidade(150)
+		g.definir_opacidade(100)
 		g.desenhar_imagem(0, 0, fundo_menu)
 		
 		g.definir_opacidade(255)
@@ -183,6 +187,38 @@ programa
 
 		}
 			
+	}
+
+	funcao tela_inicial_final()
+	{
+	
+		g.definir_opacidade(255)
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
+		g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
+		
+		g.desenhar_imagem(500, 300, icone_aviao_grande)
+		
+		g.definir_cor(g.COR_BRANCO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(100.0)
+		g.desenhar_texto(40, 350, " SWEET")
+		g.desenhar_texto(770, 350, "FLIGHT")
+
+		se(transparencia <= 255)
+		{
+
+			se(transparencia >= 0)
+			{
+				g.definir_opacidade(transparencia)
+				g.desenhar_imagem(0, 0, fundo_menu)
+				u.aguarde(15)
+				transparencia--
+			}
+		}
+	
 	}
 
 	funcao horario()
@@ -245,6 +281,10 @@ programa
 		temp_img = g.carregar_imagem("./imagens/icone_aviao.png")
 		icone_aviao = g.redimensionar_imagem(temp_img, 80, 80, verdadeiro)
 		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("./imagens/icone_aviao_grande.png")
+		icone_aviao_grande = g.redimensionar_imagem(temp_img, 200, 200, verdadeiro)
+		g.liberar_imagem(temp_img)
 	}
 
 	funcao carregar_fontes()
@@ -252,15 +292,16 @@ programa
 		g.carregar_fonte("./fontes/alarm_clock.ttf")
 	}
 
+
 }
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3918; 
+ * @POSICAO-CURSOR = 5670; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {opcao, 23, 9, 5};
+ * @SIMBOLOS-INSPECIONADOS = {opcao, 24, 9, 5}-{transparencia, 31, 9, 13};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
