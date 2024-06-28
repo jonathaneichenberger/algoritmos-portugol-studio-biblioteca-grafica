@@ -81,13 +81,12 @@ programa
 		inteiro temp_click
 
 		
-		//horario()
+		
 		//Quadros de opções no menu
 		g.definir_cor(g.COR_BRANCO)
 		g.limpar()
 		g.definir_opacidade(255)
-		//g.desenhar_imagem(0, 0, sweet_flight)
-//0x5F68A8
+		
 		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x0013A6, g.COR_BRANCO)
 		g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
 		g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, verdadeiro)
@@ -146,8 +145,12 @@ programa
 		g.desenhar_texto(286, 105, "FLIGHT")
 
 		//definindo plano de fundo e opacidade para os elemntos anteriores sobreporem a imagem
-		g.definir_opacidade(100)
+		g.definir_opacidade(120)
 		g.desenhar_imagem(0, 0, fundo_menu)
+		
+		//horario()
+		
+		//g.definir_fonte_texto("arial")
 		
 		g.definir_opacidade(255)
 	
@@ -184,6 +187,9 @@ programa
 			{
 				opcao = 5
 			}
+			
+			
+			
 
 		}
 			
@@ -214,7 +220,7 @@ programa
 			{
 				g.definir_opacidade(transparencia)
 				g.desenhar_imagem(0, 0, fundo_menu)
-				u.aguarde(15)
+				u.aguarde(5)
 				transparencia--
 			}
 		}
@@ -245,7 +251,8 @@ programa
 		
 		hora_atual = hora + ":" + minuto + ":" + segundo
 
-		g.definir_cor(g.COR_BRANCO)
+		g.definir_cor(g.COR_PRETO)
+		g.definir_opacidade(255)
 		g.definir_fonte_texto("alarm clock")
 		g.definir_estilo_texto(falso, falso, falso)
 		g.definir_tamanho_texto(30.0)
@@ -292,14 +299,13 @@ programa
 		g.carregar_fonte("./fontes/alarm_clock.ttf")
 	}
 
-
 }
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5670; 
+ * @POSICAO-CURSOR = 3800; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {opcao, 24, 9, 5}-{transparencia, 31, 9, 13};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
