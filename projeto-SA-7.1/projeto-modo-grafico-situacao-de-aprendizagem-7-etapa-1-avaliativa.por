@@ -25,7 +25,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = -1
+	inteiro opcao = 1
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -34,12 +34,22 @@ programa
 	inteiro assentos_disponiveis[4]
 	inteiro transparencia = 0
 	logico sair = falso
+	inteiro maximo_linhas = 30
+	inteiro maximo_colunas = 10
+	inteiro largura_poltrona = 25
+	inteiro altura_poltrona = 20
+	inteiro aux = 0
 	
 	funcao inicio()
 	{	
 		carregar_sons()
-		s.definir_volume(50)
-		s.definir_posicao_atual_musica(som_aviao, 3000)
+		
+		se(opcao == -1)
+		{
+			s.definir_volume(50)
+			s.definir_posicao_atual_musica(som_aviao, 3000)
+		}
+		
 		inicializar()
 		
 		faca
@@ -60,8 +70,16 @@ programa
 				}
 				caso 1:
 				{
-					
+					se(aux == 0)
+					{
 						
+						g.definir_dimensoes_janela(1200, 1200)
+						aux++
+						//altura_poltrona = tp.real_para_inteiro(tp.inteiro_para_real(g.altura_janela())/ 920 *  20)
+					}
+					
+					cadastrar_poltronas()
+					g.renderizar()	
 					pare
 				}
 				caso 2:
@@ -261,6 +279,68 @@ programa
 			
 	}
 
+	funcao cadastrar_poltronas()
+	{
+
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo((g.largura_janela()-500)/ 2, 0, 500, g.altura_janela(), falso, verdadeiro)
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) - 10, 0, 10, g.altura_janela(), falso, verdadeiro)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) + 500, 0, 10, g.altura_janela(), falso, verdadeiro)
+
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo(950, 100, 70, 70, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1050, 100, 70, 70, verdadeiro, verdadeiro)
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(980, 105, 10, 60, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(955, 130, 60, 10, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1055, 130, 60, 10, verdadeiro, verdadeiro)
+		
+		
+
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(14.0)
+
+		
+		para(inteiro i = 0; i < maximo_linhas; i++)
+		{
+			se( i < 9)
+			{
+				g.desenhar_texto(((g.largura_janela()-500)/ 2) + 5, 50 + (10 * i) + (altura_poltrona + altura_poltrona * i) + ((altura_poltrona - g.altura_texto(tp.inteiro_para_cadeia(i, 10))) / 2), "0"+ tp.inteiro_para_cadeia(i+1, 10))
+			}
+			senao
+			{
+				g.desenhar_texto(((g.largura_janela()-500)/ 2) + 5, 50 + (10 * i) + (altura_poltrona + altura_poltrona * i) + ((altura_poltrona - g.altura_texto(tp.inteiro_para_cadeia(i, 10))) / 2), tp.inteiro_para_cadeia(i+1, 10))
+			}
+			
+			para(inteiro n = 0; n < maximo_colunas; n++)
+			{
+				
+				se(n < 3)
+				{
+					g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, falso)	
+					g.desenhar_texto((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n) + ((largura_poltrona - g.largura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i) + ((altura_poltrona - g.altura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))
+				}
+				se(n < 7 e n >= 3)
+				{
+					g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, falso)
+					g.desenhar_texto((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n) + ((largura_poltrona - g.largura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i) + ((altura_poltrona - g.altura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))
+				}
+				se(n >= 7)
+				{
+					g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, falso)
+					g.desenhar_texto((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n) + ((largura_poltrona - g.largura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i) + ((altura_poltrona - g.altura_texto(tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))) / 2), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)))
+				}
+			}
+		}
+
+		
+		
+		
+	}
+
 	funcao tela_final()
 	{
 	
@@ -399,9 +479,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1416; 
+ * @POSICAO-CURSOR = 7761; 
+ * @DOBRAMENTO-CODIGO = [110, 142];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {opcao, 28, 9, 5}-{transparencia, 35, 9, 13};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
