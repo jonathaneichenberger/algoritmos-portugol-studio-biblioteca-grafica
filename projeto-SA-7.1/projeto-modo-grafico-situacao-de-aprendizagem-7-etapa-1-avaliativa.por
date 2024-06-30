@@ -1,5 +1,6 @@
 programa
 {
+	inclua biblioteca Sons --> s
 	inclua biblioteca Tipos --> tp
 	inclua biblioteca Calendario --> c
 	inclua biblioteca Util --> u
@@ -19,10 +20,12 @@ programa
 	inteiro icone_aviao = 0
 	inteiro icone_aviao_grande = 0
 	inteiro fundo_logo = 0
-	
+
+
+	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = 0
+	inteiro opcao = -1
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -34,6 +37,9 @@ programa
 	
 	funcao inicio()
 	{	
+		carregar_sons()
+		s.definir_volume(50)
+		s.definir_posicao_atual_musica(som_aviao, 3000)
 		inicializar()
 		
 		faca
@@ -86,9 +92,10 @@ programa
 
 	funcao tela_inicial()
 	{
-		
+	
 		se(transparencia < 255)
 		{
+			
 			g.definir_opacidade(255 - transparencia)
 			g.definir_cor(g.COR_BRANCO)
 			g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
@@ -109,6 +116,7 @@ programa
 		}
 		se(transparencia == 255)
 		{
+			
 			transparencia = 0
 			opcao = 0
 		}
@@ -123,6 +131,7 @@ programa
 
 		se(transparencia < 256)
 		{
+			
 			g.definir_opacidade(transparencia)
 			g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x18548E , 0xFAF5F8)
 			g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
@@ -339,6 +348,7 @@ programa
 		
 		carregar_imagens()
 		carregar_fontes()
+		
 	}
 
 	funcao carregar_imagens()
@@ -367,11 +377,20 @@ programa
 		temp_img = g.carregar_imagem("./imagens/fundo_logo.png")
 		fundo_logo = g.redimensionar_imagem(temp_img, 200, 200, verdadeiro)
 		g.liberar_imagem(temp_img)
+
+		
 	}
 
 	funcao carregar_fontes()
 	{
 		g.carregar_fonte("./fontes/alarm_clock.ttf")
+	}
+
+	funcao carregar_sons()
+	{
+		
+		som_aviao = s.carregar_som("./sons/som_aviao.mp3")
+		
 	}
 
 }
@@ -380,9 +399,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 5211; 
+ * @POSICAO-CURSOR = 1416; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {opcao, 25, 9, 5}-{transparencia, 32, 9, 13};
+ * @SIMBOLOS-INSPECIONADOS = {opcao, 28, 9, 5}-{transparencia, 35, 9, 13};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
