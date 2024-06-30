@@ -18,6 +18,7 @@ programa
 	inteiro fundo_menu = 0
 	inteiro icone_aviao = 0
 	inteiro icone_aviao_grande = 0
+	inteiro fundo_logo = 0
 	
 
 	//Outras variaveis
@@ -28,7 +29,8 @@ programa
 	cadeia hora_atual
 	cadeia aviao_numero[4]
 	inteiro assentos_disponiveis[4]
-	inteiro transparencia = 255
+	inteiro transparencia = 0
+	logico sair = falso
 	
 	funcao inicio()
 	{	
@@ -38,6 +40,12 @@ programa
 		{
 			escolha(opcao)
 			{
+				caso -1:
+				{
+					tela_inicial()
+					g.renderizar()
+					pare
+				}
 				caso 0:
 				{
 					menu()
@@ -67,102 +75,152 @@ programa
 				}
 				caso 5:
 				{
-					tela_inicial_final()
+					tela_final()
 					g.renderizar()
 					pare
 				}
 			}
 			
-		}enquanto(nao t.tecla_pressionada(t.TECLA_ESC))
+		}enquanto(sair ==  falso)
 	}
 
+	funcao tela_inicial()
+	{
+		
+		se(transparencia < 255)
+		{
+			g.definir_opacidade(255 - transparencia)
+			g.definir_cor(g.COR_BRANCO)
+			g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
+			g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
+			g.desenhar_imagem(500, 300, icone_aviao_grande)
+			g.definir_cor(g.COR_BRANCO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_tamanho_texto(100.0)
+			g.desenhar_texto(40, 350, " SWEET")
+			g.desenhar_texto(770, 350, "FLIGHT")
+			
+			g.definir_opacidade(0 + transparencia)
+			g.desenhar_imagem(0, 0, fundo_menu)
+			u.aguarde(15)
+			transparencia++
+		}
+		se(transparencia == 255)
+		{
+			transparencia = 0
+			opcao = 0
+		}
+	}
+	
 	funcao menu()
 	{
 		inteiro temp_click
 
-		
-		
-		//Quadros de opções no menu
-		g.definir_cor(g.COR_BRANCO)
-		g.limpar()
 		g.definir_opacidade(255)
-		
-		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x0013A6, g.COR_BRANCO)
-		g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
-
-		se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 80 e m.posicao_y() <= 200)
-		{
-			g.definir_cor(0xB6D7FA)
-			g.desenhar_retangulo(497, 77, 656, 126, verdadeiro, verdadeiro)
-			g.definir_cor(0x2F76FA)
-			g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
-			
-		}
-		se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 220 e m.posicao_y() <= 340)
-		{
-			g.definir_cor(0xB6D7FA)
-			g.desenhar_retangulo(497, 217, 656, 126, verdadeiro, verdadeiro)
-			g.definir_cor(0x2F76FA)
-			g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, verdadeiro)
-		}
-		se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 360 e m.posicao_y() <= 480)
-		{
-			g.definir_cor(0xB6D7FA)
-			g.desenhar_retangulo(497, 357, 656, 126, verdadeiro, verdadeiro)
-			g.definir_cor(0x2F76FA)
-			g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, verdadeiro)
-		}
-		se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 500 e m.posicao_y() <= 620)
-		{
-			g.definir_cor(0xB6D7FA)
-			g.desenhar_retangulo(497, 497, 656, 126, verdadeiro, verdadeiro)
-			g.definir_cor(0x2F76FA)
-			g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, verdadeiro)
-		}
-		se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 640 e m.posicao_y() <= 760)
-		{
-			g.definir_cor(0xB6D7FA)
-			g.desenhar_retangulo(497, 637, 656, 126, verdadeiro, verdadeiro)
-			g.definir_cor(0x2F76FA)
-			g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
-		}
-
-		//Desenhar logo
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_elipse(120, 25, 200, 200, verdadeiro)
-		g.definir_cor(g.COR_BRANCO)
-		g.desenhar_elipse(140, 45, 160, 160, verdadeiro)
-		g.desenhar_retangulo(0, 85, 500, 80, verdadeiro, verdadeiro)
-		g.desenhar_imagem(180, 85, icone_aviao)
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_tamanho_texto(40.0)
-		g.desenhar_texto(0, 105, " SWEET")
-		g.desenhar_texto(286, 105, "FLIGHT")
-
-		//definindo plano de fundo e opacidade para os elemntos anteriores sobreporem a imagem
-		g.definir_opacidade(120)
 		g.desenhar_imagem(0, 0, fundo_menu)
-		
-		//horario()
-		
-		//g.definir_fonte_texto("arial")
-		
-		g.definir_opacidade(255)
-	
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_tamanho_texto(40.0)
-		g.desenhar_texto(500, 120, "  NÚMERO DOS AVIÕES")
-		g.desenhar_texto(500, 260, "  ASSENTOS DISPONÍVEIS")
-		g.desenhar_texto(500, 400, "  RESERVAR PASSAGEM AÉREA")
-		g.desenhar_texto(500, 540, "  REALIZAR CONSULTA")
-		g.desenhar_texto(500, 680, "  SAIR DO PROGRAMA")
 
+		se(transparencia < 256)
+		{
+			g.definir_opacidade(transparencia)
+			g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x18548E , 0xFAF5F8)
+			g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
+			g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, verdadeiro)
+			g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, verdadeiro)
+			g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, verdadeiro)
+			g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
+	
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, falso)
+			g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, falso)
+			g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, falso)
+			g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, falso)
+			g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, falso)
+	
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 80 e m.posicao_y() <= 200)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 77, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, verdadeiro)
+				
+			}
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 220 e m.posicao_y() <= 340)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 217, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 220, 650, 120, verdadeiro, verdadeiro)
+			}
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 360 e m.posicao_y() <= 480)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 357, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, verdadeiro)
+			}
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 500 e m.posicao_y() <= 620)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 497, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, verdadeiro)
+			}
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 640 e m.posicao_y() <= 760)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 637, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
+			}
+	
+			//Desenhar logo
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_elipse(120, 25, 200, 200, verdadeiro)
+			
+			g.definir_cor(g.COR_BRANCO)
+			g.desenhar_imagem(120, 25, fundo_logo)
+			g.desenhar_porcao_imagem(0, 85, 0, 85, 450, 80, fundo_menu)
+			g.desenhar_imagem(180, 85, icone_aviao)
+			g.definir_cor(g.COR_PRETO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_tamanho_texto(40.0)
+			g.desenhar_texto(0, 105, " SWEET")
+			g.desenhar_texto(286, 105, "FLIGHT")
+	
+			//definindo plano de fundo e opacidade para os elemntos anteriores sobreporem a imagem
+			se(transparencia <= 80)
+			{
+				g.definir_opacidade(transparencia)
+				g.desenhar_imagem(0, 0, fundo_menu)
+			}
+			senao
+			{
+				g.definir_opacidade(80)
+				g.desenhar_imagem(0, 0, fundo_menu)
+			}
+			
+			horario()
+			
+			g.definir_fonte_texto("arial")
+			
+			g.definir_opacidade(transparencia)
+		
+			g.definir_cor(g.COR_PRETO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_tamanho_texto(40.0)
+			g.desenhar_texto(500, 120, "  NÚMERO DOS AVIÕES")
+			g.desenhar_texto(500, 260, "  ASSENTOS DISPONÍVEIS")
+			g.desenhar_texto(500, 400, "  RESERVAR PASSAGEM AÉREA")
+			g.desenhar_texto(500, 540, "  REALIZAR CONSULTA")
+			g.desenhar_texto(500, 680, "  SAIR DO PROGRAMA")
+			
+			se(transparencia < 255)
+			{
+				transparencia++
+			}
+		}
 		se(m.algum_botao_pressionado())
 		{
 			temp_click = m.ler_botao()
@@ -185,46 +243,52 @@ programa
 			}
 			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 640 e m.posicao_y() <= 760)
 			{
+				transparencia = 0
 				opcao = 5
+				
 			}
-			
-			
-			
 
 		}
 			
 	}
 
-	funcao tela_inicial_final()
+	funcao tela_final()
 	{
 	
-		g.definir_opacidade(255)
-		g.definir_cor(g.COR_BRANCO)
-		g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
-		g.definir_cor(g.COR_PRETO)
-		g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
-		g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
-		
-		g.desenhar_imagem(500, 300, icone_aviao_grande)
-		
-		g.definir_cor(g.COR_BRANCO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_tamanho_texto(100.0)
-		g.desenhar_texto(40, 350, " SWEET")
-		g.desenhar_texto(770, 350, "FLIGHT")
-
 		se(transparencia <= 255)
 		{
 
-			se(transparencia >= 0)
-			{
-				g.definir_opacidade(transparencia)
-				g.desenhar_imagem(0, 0, fundo_menu)
-				u.aguarde(5)
-				transparencia--
-			}
+			g.definir_opacidade(0 + transparencia)
+			g.definir_cor(g.COR_BRANCO)
+			g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
+			g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
+			g.desenhar_imagem(500, 300, icone_aviao_grande)
+			g.definir_cor(g.COR_BRANCO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_tamanho_texto(100.0)
+			g.desenhar_texto(40, 350, " SWEET")
+			g.desenhar_texto(770, 350, "FLIGHT")
+
+			
+			g.definir_tamanho_texto(25.0)
+			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
+			g.desenhar_texto(600 - (g.largura_texto("AGRADECEMOS A PREFERENCIA") / 2), 730, "AGRADECEMOS A PREFERENCIA")
+			g.desenhar_texto(600 - (g.largura_texto("VOLTE SEMPRE") / 2), 760, "VOLTE SEMPRE")
+			
+			g.definir_opacidade(255 - transparencia)
+			g.desenhar_imagem(0, 0, fundo_menu)
+			u.aguarde(5)
+			transparencia++
+			
 		}
-	
+		se(transparencia == 255)
+		{
+			u.aguarde(5000)
+			sair = verdadeiro
+		}
+
 	}
 
 	funcao horario()
@@ -234,18 +298,24 @@ programa
 		{
 			hora = "0" + tp.inteiro_para_cadeia(c.hora_atual(falso), 10)
 		}
-		senao se(c.minuto_atual() < 10)
+		senao
+		{
+			hora = tp.inteiro_para_cadeia(c.hora_atual(falso), 10)	
+		}
+		se(c.minuto_atual() < 10)
 		{
 			minuto = "0" + tp.inteiro_para_cadeia(c.minuto_atual(), 10)
 		}
-		senao se(c.segundo_atual() < 10)
+		senao
+		{
+			minuto = tp.inteiro_para_cadeia(c.minuto_atual(), 10)
+		}
+		se(c.segundo_atual() < 10)
 		{
 			segundo =  "0" + tp.inteiro_para_cadeia(c.segundo_atual(), 10)
 		}
 		senao
 		{
-			hora = tp.inteiro_para_cadeia(c.hora_atual(falso), 10)	
-			minuto = tp.inteiro_para_cadeia(c.minuto_atual(), 10)
 			segundo = tp.inteiro_para_cadeia(c.segundo_atual(), 10)
 		}
 		
@@ -265,6 +335,7 @@ programa
 	{
 		g.iniciar_modo_grafico(verdadeiro)
 		g.definir_dimensoes_janela(largura_tela, altura_tela)
+		g.definir_titulo_janela("COMPANHIA AÉREA SWEET FLIGHT -- RESERVAS DE PASSAGENS")
 		
 		carregar_imagens()
 		carregar_fontes()
@@ -292,6 +363,10 @@ programa
 		temp_img = g.carregar_imagem("./imagens/icone_aviao_grande.png")
 		icone_aviao_grande = g.redimensionar_imagem(temp_img, 200, 200, verdadeiro)
 		g.liberar_imagem(temp_img)
+
+		temp_img = g.carregar_imagem("./imagens/fundo_logo.png")
+		fundo_logo = g.redimensionar_imagem(temp_img, 200, 200, verdadeiro)
+		g.liberar_imagem(temp_img)
 	}
 
 	funcao carregar_fontes()
@@ -305,9 +380,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3800; 
+ * @POSICAO-CURSOR = 5211; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {opcao, 24, 9, 5}-{transparencia, 31, 9, 13};
+ * @SIMBOLOS-INSPECIONADOS = {opcao, 25, 9, 5}-{transparencia, 32, 9, 13};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
