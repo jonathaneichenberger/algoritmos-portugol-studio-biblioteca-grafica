@@ -310,7 +310,8 @@ programa
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 		g.definir_tamanho_texto(40.0)
-		g.desenhar_texto(1045,35, "Cadastrar Poltronas")
+		g.desenhar_texto(1045, 35, "Cadastrar Poltronas")
+		
 
 		g.desenhar_retangulo(1020, 15, 450, 80, verdadeiro, falso)
 		g.desenhar_retangulo(1020, 105, 450, 80, verdadeiro, falso)
@@ -319,12 +320,14 @@ programa
 
 
 		
-		g.definir_gradiente(g.GRADIENTE_ABAIXO, g.COR_PRETO , 0xdfdfdf)
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x3D3316 , 0x9C916F)
 		g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, verdadeiro)
 		g.desenhar_retangulo(1030, 200, 70, 70, verdadeiro, verdadeiro)
 
 		g.desenhar_retangulo(1130, 110, 70, 70, verdadeiro, verdadeiro)
 		g.desenhar_retangulo(1130, 200, 70, 70, verdadeiro, verdadeiro)
+
+		g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
 		
 		g.definir_cor(g.COR_PRETO)
 
@@ -343,6 +346,37 @@ programa
 		
 		g.desenhar_retangulo(1110, 115, 10, 60, verdadeiro, verdadeiro)
 		g.desenhar_retangulo(1110, 205, 10, 60, verdadeiro, verdadeiro)
+
+		g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, falso)
+		g.desenhar_texto(1115, 300, "CONFIRMAR")
+
+
+		g.definir_cor(g.COR_VERMELHO)
+		se(m.posicao_x() >= 1030 e m.posicao_x() <= 1100 e m.posicao_y() >= 110 e m.posicao_y() <= 180)
+		{
+			g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, falso)	
+		}
+		se(m.posicao_x() >= 1130 e m.posicao_x() <= 1200 e m.posicao_y() >= 110 e m.posicao_y() <= 180)
+		{
+			g.desenhar_retangulo(1130, 110, 70, 70, verdadeiro, falso)
+		}
+		se(m.posicao_x() >= 1030 e m.posicao_x() <= 1100 e m.posicao_y() >= 200 e m.posicao_y() <= 270)
+		{
+			g.desenhar_retangulo(1030, 200, 70, 70, verdadeiro, falso)
+		}
+		se(m.posicao_x() >= 1130 e m.posicao_x() <= 1200 e m.posicao_y() >= 200 e m.posicao_y() <= 270)
+		{
+			g.desenhar_retangulo(1130, 200, 70, 70, verdadeiro, falso)
+		}
+		se(m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e m.posicao_y() >= 280 e m.posicao_y() <= 360)
+		{
+			//g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, falso)
+			g.definir_cor(0x1D8C00)
+			g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
+			g.definir_cor(g.COR_PRETO)
+			g.desenhar_texto(1115, 300, "CONFIRMAR")
+			
+		}
 
 		
 		se(m.algum_botao_pressionado())
@@ -378,8 +412,10 @@ programa
 				}	
 			}
 		}
-		g.desenhar_texto(1210, 125, tp.inteiro_para_cadeia(temp_linhas, 10) + "  LINHAS")
-		g.desenhar_texto(1210, 215, tp.inteiro_para_cadeia(temp_colunas, 10) + "  COLUNAS")
+		
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_texto(1210, 125, tp.inteiro_para_cadeia(temp_linhas, 10) + " LINHAS")
+		g.desenhar_texto(1210, 215, tp.inteiro_para_cadeia(temp_colunas, 10) + " COLUNAS")
 	
 		g.definir_cor(0xAA6B39)
 		para(inteiro i = 0; i < maximo_linhas; i++)
@@ -582,7 +618,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 10411; 
+ * @POSICAO-CURSOR = 10813; 
  * @DOBRAMENTO-CODIGO = [115, 147];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
