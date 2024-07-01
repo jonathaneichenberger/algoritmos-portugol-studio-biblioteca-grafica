@@ -38,6 +38,10 @@ programa
 	inteiro maximo_colunas = 10
 	inteiro largura_poltrona = 25
 	inteiro altura_poltrona = 20
+	inteiro linhas = 0
+	inteiro colunas = 0
+	inteiro temp_linhas = 0
+	inteiro temp_colunas = 0
 	inteiro aux = 0
 	
 	funcao inicio()
@@ -73,7 +77,7 @@ programa
 					se(aux == 0)
 					{
 						
-						g.definir_dimensoes_janela(1200, 1200)
+						g.definir_dimensoes_janela(1200, 1000)
 						aux++
 						//altura_poltrona = tp.real_para_inteiro(tp.inteiro_para_real(g.altura_janela())/ 920 *  20)
 					}
@@ -281,8 +285,10 @@ programa
 
 	funcao cadastrar_poltronas()
 	{
-
+		inteiro temp_click = 0
+		
 		g.definir_cor(g.COR_BRANCO)
+		//g.limpar()
 		g.desenhar_retangulo((g.largura_janela()-500)/ 2, 0, 500, g.altura_janela(), falso, verdadeiro)
 		g.definir_cor(0xdfdfdf)
 		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) - 10, 0, 10, g.altura_janela(), falso, verdadeiro)
@@ -295,15 +301,56 @@ programa
 		g.definir_cor(g.COR_PRETO)
 		g.desenhar_retangulo(980, 105, 10, 60, verdadeiro, verdadeiro)
 		g.desenhar_retangulo(955, 130, 60, 10, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(1055, 130, 60, 10, verdadeiro, verdadeiro)
-		
-		
+
+
+
+		se(m.algum_botao_pressionado())
+		{
+			temp_click = m.ler_botao()
+
+			se( temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 950 e m.posicao_x() <= 1020 e m.posicao_y() >= 100 e m.posicao_y() <= 170)
+			{
+				se(temp_linhas < 30)
+				{
+					temp_linhas++
+				}
+				se(temp_colunas < 10)
+				{
+					temp_colunas++
+				}
+				
+			}
+		}
+	
+		g.definir_cor(0xAA6B39)
+		para(inteiro i = 0; i < maximo_linhas; i++)
+		{
+			para(inteiro n = 0; n < maximo_colunas; n++)
+			{
+				se(i >= temp_linhas ou n >= temp_colunas)
+				{
+					se(n < 3)
+					{
+						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)	
+						
+					}
+					se(n < 7 e n >= 3)
+					{
+						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+						
+					}
+					se(n >= 7)
+					{
+						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+						
+					}
+				}
+			}
+		}
 
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 		g.definir_tamanho_texto(14.0)
-
-		
 		para(inteiro i = 0; i < maximo_linhas; i++)
 		{
 			se( i < 9)
@@ -479,8 +526,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 7761; 
- * @DOBRAMENTO-CODIGO = [110, 142];
+ * @POSICAO-CURSOR = 8393; 
+ * @DOBRAMENTO-CODIGO = [114, 146];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
