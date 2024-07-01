@@ -20,6 +20,7 @@ programa
 	inteiro icone_aviao = 0
 	inteiro icone_aviao_grande = 0
 	inteiro fundo_logo = 0
+	inteiro poltronas_aviao = 0
 
 
 	inteiro som_aviao = 0
@@ -77,7 +78,7 @@ programa
 					se(aux == 0)
 					{
 						
-						g.definir_dimensoes_janela(1200, 1000)
+						g.definir_dimensoes_janela(1500, 1000)
 						aux++
 						//altura_poltrona = tp.real_para_inteiro(tp.inteiro_para_real(g.altura_janela())/ 920 *  20)
 					}
@@ -286,41 +287,99 @@ programa
 	funcao cadastrar_poltronas()
 	{
 		inteiro temp_click = 0
+
 		
 		g.definir_cor(g.COR_BRANCO)
-		//g.limpar()
+		g.limpar()
+		g.desenhar_imagem(0, 0, poltronas_aviao)
+		
 		g.desenhar_retangulo((g.largura_janela()-500)/ 2, 0, 500, g.altura_janela(), falso, verdadeiro)
 		g.definir_cor(0xdfdfdf)
 		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) - 10, 0, 10, g.altura_janela(), falso, verdadeiro)
 		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) + 500, 0, 10, g.altura_janela(), falso, verdadeiro)
 
-		g.definir_cor(g.COR_BRANCO)
-		g.desenhar_retangulo(950, 100, 70, 70, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(1050, 100, 70, 70, verdadeiro, verdadeiro)
+		g.definir_cor(0xdfdfdf)
+		g.definir_opacidade(200)
+
+		g.desenhar_retangulo(1020, 15, 450, 80, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1020, 105, 450, 80, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1020, 195, 450, 80, verdadeiro, verdadeiro)
+		
+		g.definir_opacidade(255)
 		
 		g.definir_cor(g.COR_PRETO)
-		g.desenhar_retangulo(980, 105, 10, 60, verdadeiro, verdadeiro)
-		g.desenhar_retangulo(955, 130, 60, 10, verdadeiro, verdadeiro)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(1045,35, "Cadastrar Poltronas")
+
+		g.desenhar_retangulo(1020, 15, 450, 80, verdadeiro, falso)
+		g.desenhar_retangulo(1020, 105, 450, 80, verdadeiro, falso)
+		g.desenhar_retangulo(1020, 195, 450, 80, verdadeiro, falso)
+		
 
 
+		
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, g.COR_PRETO , 0xdfdfdf)
+		g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1030, 200, 70, 70, verdadeiro, verdadeiro)
 
+		g.desenhar_retangulo(1130, 110, 70, 70, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1130, 200, 70, 70, verdadeiro, verdadeiro)
+		
+		g.definir_cor(g.COR_PRETO)
+
+		g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, falso)
+		g.desenhar_retangulo(1030, 200, 70, 70, verdadeiro, falso)
+		g.desenhar_retangulo(1130, 110, 70, 70, verdadeiro, falso)
+		g.desenhar_retangulo(1130, 200, 70, 70, verdadeiro, falso)
+		
+		g.desenhar_retangulo(1060, 115, 10, 60, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1035, 140, 60, 10, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1060, 205, 10, 60, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1035, 230, 60, 10, verdadeiro, verdadeiro)
+
+		g.desenhar_retangulo(1135, 140, 60, 10, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1135, 230, 60, 10, verdadeiro, verdadeiro)
+		
+		g.desenhar_retangulo(1110, 115, 10, 60, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1110, 205, 10, 60, verdadeiro, verdadeiro)
+
+		
 		se(m.algum_botao_pressionado())
 		{
 			temp_click = m.ler_botao()
 
-			se( temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 950 e m.posicao_x() <= 1020 e m.posicao_y() >= 100 e m.posicao_y() <= 170)
-			{
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1100 e m.posicao_y() >= 110 e m.posicao_y() <= 180)
+			{	
 				se(temp_linhas < 30)
 				{
 					temp_linhas++
+				}	
+			}
+			senao se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1130 e m.posicao_x() <= 1200 e m.posicao_y() >= 110 e m.posicao_y() <= 180)
+			{
+				se(temp_linhas > 0)
+				{
+					temp_linhas--
 				}
+			}
+			senao se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1100 e m.posicao_y() >= 200 e m.posicao_y() <= 270)
+			{
 				se(temp_colunas < 10)
 				{
 					temp_colunas++
-				}
-				
+				}	
+			}
+			senao se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1130 e m.posicao_x() <= 1200 e m.posicao_y() >= 200 e m.posicao_y() <= 270)
+			{
+				se(temp_colunas > 0)
+				{
+					temp_colunas--
+				}	
 			}
 		}
+		g.desenhar_texto(1210, 125, tp.inteiro_para_cadeia(temp_linhas, 10) + "  LINHAS")
+		g.desenhar_texto(1210, 215, tp.inteiro_para_cadeia(temp_colunas, 10) + "  COLUNAS")
 	
 		g.definir_cor(0xAA6B39)
 		para(inteiro i = 0; i < maximo_linhas; i++)
@@ -382,10 +441,10 @@ programa
 				}
 			}
 		}
-
 		
-		
-		
+		g.definir_opacidade(50)
+		g.desenhar_imagem(0, 0, poltronas_aviao)
+		g.definir_opacidade(255)
 	}
 
 	funcao tela_final()
@@ -483,12 +542,6 @@ programa
 		//A variavel temp_img vai receber temporariamente o valor do espaço de memória para carregar as imagens
 		inteiro temp_img = 0
 
-		//temp_img recebe o endereço de memória vindo do endereço passado
-		temp_img = g.carregar_imagem("./imagens/sweet_flight.png")
-		//sweet_flight recebe a imagem com os dimensionamentos de "largura" e "altura" e qualidade "verdadeiro"
-		sweet_flight = g.redimensionar_imagem(temp_img, 500, 250, verdadeiro)
-		g.liberar_imagem(temp_img)
-
 		temp_img = g.carregar_imagem("./imagens/fundo_menu.jpg")
 		fundo_menu = g.redimensionar_imagem(temp_img, 1200, 800, verdadeiro)
 		g.liberar_imagem(temp_img)
@@ -505,6 +558,9 @@ programa
 		fundo_logo = g.redimensionar_imagem(temp_img, 200, 200, verdadeiro)
 		g.liberar_imagem(temp_img)
 
+		temp_img = g.carregar_imagem("./imagens/poltronas_aviao.jpg")
+		poltronas_aviao = g.redimensionar_imagem(temp_img, 1500, 1000, verdadeiro)
+		g.liberar_imagem(temp_img)
 		
 	}
 
@@ -526,8 +582,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 8393; 
- * @DOBRAMENTO-CODIGO = [114, 146];
+ * @POSICAO-CURSOR = 10411; 
+ * @DOBRAMENTO-CODIGO = [115, 147];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
