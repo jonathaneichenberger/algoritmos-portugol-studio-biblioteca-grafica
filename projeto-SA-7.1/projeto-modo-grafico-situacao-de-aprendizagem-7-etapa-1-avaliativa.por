@@ -10,8 +10,8 @@ programa
 	inclua biblioteca Teclado --> t
 
 	//Definiçoes de tela e proporção
-	inteiro largura_tela = 1200
-	inteiro altura_tela = 800
+	inteiro largura_tela = 1500
+	inteiro altura_tela = 1000
 
 	//Variaveis das imagens carregadas
 	inteiro sweet_flight = 0
@@ -26,7 +26,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = 1
+	inteiro opcao = -1
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -75,14 +75,6 @@ programa
 				}
 				caso 1:
 				{
-					se(aux == 0)
-					{
-						
-						g.definir_dimensoes_janela(1500, 1000)
-						aux++
-						//altura_poltrona = tp.real_para_inteiro(tp.inteiro_para_real(g.altura_janela())/ 920 *  20)
-					}
-					
 					cadastrar_poltronas()
 					g.renderizar()	
 					pare
@@ -121,16 +113,16 @@ programa
 			
 			g.definir_opacidade(255 - transparencia)
 			g.definir_cor(g.COR_BRANCO)
-			g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
+			g.desenhar_elipse(500, 250, 500, 500, verdadeiro)
 			g.definir_cor(g.COR_PRETO)
-			g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
-			g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
-			g.desenhar_imagem(500, 300, icone_aviao_grande)
+			g.desenhar_elipse(525, 275, 450, 450, verdadeiro)
+			g.desenhar_retangulo(0, 400, 1200, 200, verdadeiro, verdadeiro)
+			g.desenhar_imagem(650, 400, icone_aviao_grande)
 			g.definir_cor(g.COR_BRANCO)
 			g.definir_estilo_texto(falso, verdadeiro, falso)
 			g.definir_tamanho_texto(100.0)
-			g.desenhar_texto(40, 350, " SWEET")
-			g.desenhar_texto(770, 350, "FLIGHT")
+			g.desenhar_texto(190, 450, " SWEET")
+			g.desenhar_texto(920, 450, "FLIGHT")
 			
 			g.definir_opacidade(0 + transparencia)
 			g.desenhar_imagem(0, 0, fundo_menu)
@@ -287,7 +279,7 @@ programa
 	funcao cadastrar_poltronas()
 	{
 		inteiro temp_click = 0
-
+		inteiro temp_tecla = 0
 		
 		g.definir_cor(g.COR_BRANCO)
 		g.limpar()
@@ -311,14 +303,11 @@ programa
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 		g.definir_tamanho_texto(40.0)
 		g.desenhar_texto(1045, 35, "Cadastrar Poltronas")
-		
 
+		
 		g.desenhar_retangulo(1020, 15, 450, 80, verdadeiro, falso)
 		g.desenhar_retangulo(1020, 105, 450, 80, verdadeiro, falso)
 		g.desenhar_retangulo(1020, 195, 450, 80, verdadeiro, falso)
-		
-
-
 		
 		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x3D3316 , 0x9C916F)
 		g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, verdadeiro)
@@ -350,6 +339,9 @@ programa
 		g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, falso)
 		g.desenhar_texto(1115, 300, "CONFIRMAR")
 
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0xdfdfdf , g.COR_BRANCO)
+		g.desenhar_retangulo(1020, 400, 450, 580, verdadeiro, verdadeiro)
+		
 
 		g.definir_cor(g.COR_VERMELHO)
 		se(m.posicao_x() >= 1030 e m.posicao_x() <= 1100 e m.posicao_y() >= 110 e m.posicao_y() <= 180)
@@ -370,15 +362,23 @@ programa
 		}
 		se(m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e m.posicao_y() >= 280 e m.posicao_y() <= 360)
 		{
-			//g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, falso)
-			g.definir_cor(0x1D8C00)
-			g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
-			g.definir_cor(g.COR_PRETO)
-			g.desenhar_texto(1115, 300, "CONFIRMAR")
-			
+			se(temp_linhas < linhas ou temp_colunas < colunas)
+			{
+				g.definir_cor(g.COR_VERMELHO)
+				g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_texto(1115, 300, "CONFIRMAR")
+			}
+			senao
+			{
+				g.definir_cor(0x1D8C00)
+				g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
+				g.definir_cor(g.COR_PRETO)
+				g.desenhar_texto(1115, 300, "CONFIRMAR")
+			}
+				
 		}
 
-		
 		se(m.algum_botao_pressionado())
 		{
 			temp_click = m.ler_botao()
@@ -411,8 +411,131 @@ programa
 					temp_colunas--
 				}	
 			}
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e m.posicao_y() >= 280 e m.posicao_y() <= 360)
+			{
+				se(temp_linhas >= linhas e temp_colunas >= colunas)
+				{
+					linhas = temp_linhas
+					colunas = temp_colunas
+				}
+			}
 		}
+
 		
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(30.0)
+		g.desenhar_texto(1080, 410, "Poltronas Disponíveis")
+		g.desenhar_texto(1040, 450, "A -")
+		g.desenhar_texto(1040, 490, "B -")
+		g.desenhar_texto(1040, 530, "C -")
+		g.desenhar_texto(1040, 570, "D -")
+		g.desenhar_texto(1040, 610, "E -")
+		g.desenhar_texto(1040, 650, "F -")
+		g.desenhar_texto(1040, 690, "G -")
+		g.desenhar_texto(1040, 730, "H -")
+		g.desenhar_texto(1040, 770, "I -")
+		g.desenhar_texto(1040, 810, "J -")
+		g.desenhar_texto(1040, 880, "TOTAL = " + tp.inteiro_para_cadeia(linhas * colunas, 10) + " Poltronas")
+		
+
+		g.definir_estilo_texto(verdadeiro, falso, falso)
+		
+		se(colunas >= 0 e linhas >= 0)
+		{
+			//tp.inteiro_para_cadeia(linhas, 10)
+			se(colunas >= 1)
+			{
+				g.desenhar_texto(1090, 450, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 450, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 2)
+			{
+				g.desenhar_texto(1090, 490, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 490, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 3)
+			{
+				g.desenhar_texto(1090, 530, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 530, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 4)
+			{
+				g.desenhar_texto(1090, 570, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 570, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 5)
+			{
+				g.desenhar_texto(1090, 610, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 610, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 6)
+			{
+				g.desenhar_texto(1090, 650, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")		
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 650, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 7)
+			{
+				g.desenhar_texto(1090, 690, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 690, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 8)
+			{
+				g.desenhar_texto(1090, 730, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 730, "Poltronas indisponíves")	
+			}
+			
+			se(colunas >= 9)
+			{
+				g.desenhar_texto(1090, 770, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 770, "Poltronas indisponíves")	
+			}
+			
+			se(colunas == 10)
+			{
+				g.desenhar_texto(1090, 810, tp.inteiro_para_cadeia(linhas, 10) + " Poltronas")	
+			}
+			senao
+			{
+				g.desenhar_texto(1090, 810, "Poltronas indisponíves")	
+			}
+				
+		}
+
 		g.definir_cor(g.COR_PRETO)
 		g.desenhar_texto(1210, 125, tp.inteiro_para_cadeia(temp_linhas, 10) + " LINHAS")
 		g.desenhar_texto(1210, 215, tp.inteiro_para_cadeia(temp_colunas, 10) + " COLUNAS")
@@ -481,6 +604,16 @@ programa
 		g.definir_opacidade(50)
 		g.desenhar_imagem(0, 0, poltronas_aviao)
 		g.definir_opacidade(255)
+
+		se(t.alguma_tecla_pressionada())
+		{
+			temp_tecla = t.ler_tecla()
+
+			se(temp_tecla == t.TECLA_ESC)
+			{
+				opcao = 0
+			}
+		}
 	}
 
 	funcao tela_final()
@@ -491,22 +624,22 @@ programa
 
 			g.definir_opacidade(0 + transparencia)
 			g.definir_cor(g.COR_BRANCO)
-			g.desenhar_elipse(350, 150, 500, 500, verdadeiro)
+			g.desenhar_elipse(500, 250, 500, 500, verdadeiro)
 			g.definir_cor(g.COR_PRETO)
-			g.desenhar_elipse(375, 175, 450, 450, verdadeiro)
-			g.desenhar_retangulo(0, 300, 1200, 200, verdadeiro, verdadeiro)
-			g.desenhar_imagem(500, 300, icone_aviao_grande)
+			g.desenhar_elipse(525, 275, 450, 450, verdadeiro)
+			g.desenhar_retangulo(0, 400, 1200, 200, verdadeiro, verdadeiro)
+			g.desenhar_imagem(650, 400, icone_aviao_grande)
 			g.definir_cor(g.COR_BRANCO)
 			g.definir_estilo_texto(falso, verdadeiro, falso)
 			g.definir_tamanho_texto(100.0)
-			g.desenhar_texto(40, 350, " SWEET")
-			g.desenhar_texto(770, 350, "FLIGHT")
+			g.desenhar_texto(190, 450, " SWEET")
+			g.desenhar_texto(920, 450, "FLIGHT")
 
 			
 			g.definir_tamanho_texto(25.0)
 			g.definir_estilo_texto(verdadeiro, verdadeiro, falso)
-			g.desenhar_texto(600 - (g.largura_texto("AGRADECEMOS A PREFERENCIA") / 2), 730, "AGRADECEMOS A PREFERENCIA")
-			g.desenhar_texto(600 - (g.largura_texto("VOLTE SEMPRE") / 2), 760, "VOLTE SEMPRE")
+			g.desenhar_texto(750 - (g.largura_texto("AGRADECEMOS A PREFERENCIA") / 2), 930, "AGRADECEMOS A PREFERENCIA")
+			g.desenhar_texto(750 - (g.largura_texto("VOLTE SEMPRE") / 2), 960, "VOLTE SEMPRE")
 			
 			g.definir_opacidade(255 - transparencia)
 			g.desenhar_imagem(0, 0, fundo_menu)
@@ -579,7 +712,7 @@ programa
 		inteiro temp_img = 0
 
 		temp_img = g.carregar_imagem("./imagens/fundo_menu.jpg")
-		fundo_menu = g.redimensionar_imagem(temp_img, 1200, 800, verdadeiro)
+		fundo_menu = g.redimensionar_imagem(temp_img, 1500, 1000, verdadeiro)
 		g.liberar_imagem(temp_img)
 
 		temp_img = g.carregar_imagem("./imagens/icone_aviao.png")
@@ -618,8 +751,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 10813; 
- * @DOBRAMENTO-CODIGO = [115, 147];
+ * @POSICAO-CURSOR = 19501; 
+ * @DOBRAMENTO-CODIGO = [107, 139, 278];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
