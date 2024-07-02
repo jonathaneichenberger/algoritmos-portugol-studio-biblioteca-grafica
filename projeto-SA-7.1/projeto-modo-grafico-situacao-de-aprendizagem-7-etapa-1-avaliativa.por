@@ -967,7 +967,7 @@ programa
 
 			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e  m.posicao_y() >= 460 e m.posicao_y() <= 540 e confimar_poltrona == verdadeiro e (idade > 0 e idade <= 125) e linha_poltrona_selecionada >= 0)
 			{
-				se((idade > 0 e idade <= 125) e digitado == verdadeiro e confimar_poltrona == verdadeiro)
+				se((idade > 0 e idade <= 125) e digitado == verdadeiro e confimar_poltrona == verdadeiro e txt.numero_caracteres(nome_digitado) >= 3)
 				{
 					idade_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada] = idade
 					nome_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada] = nome_digitado
@@ -1074,7 +1074,7 @@ programa
 		
 		se(m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e m.posicao_y() >= 460 e m.posicao_y() <= 540)
 		{
-			se((idade > 0 e idade <= 125) e digitado == verdadeiro e confimar_poltrona == verdadeiro)
+			se((idade > 0 e idade <= 125) e digitado == verdadeiro e confimar_poltrona == verdadeiro e  txt.numero_caracteres(nome_digitado) >= 3)
 			{
 				g.definir_cor(g.COR_PRETO)
 				g.definir_estilo_texto(falso, verdadeiro, falso)
@@ -1537,8 +1537,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 775; 
- * @DOBRAMENTO-CODIGO = [127, 159, 299, 689, 1331, 1370, 1410, 1421, 1451, 1456, 1463, 1476];
+ * @POSICAO-CURSOR = 38842; 
+ * @DOBRAMENTO-CODIGO = [127, 159, 299, 1331, 1370, 1410, 1421, 1451, 1456, 1463, 1476];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {poltronas_disponiveis, 48, 9, 21}-{linha_poltrona_selecionada, 50, 9, 26}-{coluna_poltrona_selecionada, 51, 9, 27}-{nome_passageiro, 56, 8, 15}-{idade_passageiro, 57, 9, 16}-{quantidade_passageiros, 62, 9, 22};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
