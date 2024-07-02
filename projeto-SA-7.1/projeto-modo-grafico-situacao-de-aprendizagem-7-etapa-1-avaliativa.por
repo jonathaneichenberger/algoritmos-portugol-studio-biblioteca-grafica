@@ -52,6 +52,13 @@ programa
 	inteiro coluna_poltrona_selecionada = -1
 	inteiro poltronas_selecionada[maximo_linhas][maximo_colunas]
 	logico confimar_poltrona = falso
+	logico digitando = falso
+	cadeia nome_digitado = ""
+	cadeia nome_passageiro[maximo_linhas][maximo_colunas]
+	inteiro idade_passageiro[maximo_linhas][maximo_colunas]
+	inteiro idade = 0
+	logico digitado = falso
+	inteiro tamanho = 0
 	
 	funcao inicio()
 	{	
@@ -792,6 +799,7 @@ programa
 		g.desenhar_texto(0, 105, " SWEET")
 		g.desenhar_texto(286, 105, "FLIGHT")
 
+		
 		desenhar_poltronas()
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(falso, falso, falso)
@@ -913,9 +921,25 @@ programa
 				g.desenhar_texto(1180 + ((280 - g.largura_texto("ESCOLHA UMA")) / 2), 165, "ESCOLHA UMA")
 				g.desenhar_texto(1180 + ((280 - g.largura_texto("POLTRONA LIVRE")) / 2), 193, "POLTRONA LIVRE")
 				
-		
 			}
-
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1050 e m.posicao_x() <= 1440 e  m.posicao_y() >= 270 e m.posicao_y() <= 330)
+			{
+				digitando = verdadeiro
+				
+			}
+		
+		}
+		
+		se(digitado == verdadeiro)
+		{
+			g.definir_cor(g.COR_PRETO)
+			g.definir_estilo_texto(falso, falso, falso)
+			g.definir_tamanho_texto(20.0)
+			g.desenhar_texto(1050, 290, nome_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada])
+		}
+		se(digitando == verdadeiro e confimar_poltrona == verdadeiro)
+		{
+			desenhar_imput()
 		}
 
 		se(linha_poltrona_selecionada <= linhas - 1 e coluna_poltrona_selecionada <= colunas - 1 e confimar_poltrona == falso)
@@ -931,7 +955,7 @@ programa
 				g.definir_estilo_texto(falso, verdadeiro, falso)
 				g.definir_tamanho_texto(40.0)
 				g.desenhar_texto(1180 + ((280 - g.largura_texto("CONFIRMAR")) / 2), 160 + ((60 - g.altura_texto("CONFIRMAR")) / 2), "CONFIRMAR")
-			
+
 			}	
 		}	
 		senao
@@ -958,14 +982,13 @@ programa
 				g.desenhar_texto(1180 + ((280 - g.largura_texto("ESCOLHA UMA")) / 2), 165, "ESCOLHA UMA")
 				g.desenhar_texto(1180 + ((280 - g.largura_texto("POLTRONA LIVRE")) / 2), 193, "POLTRONA LIVRE")
 			}
-			
-		
 		}
 
 		se(confimar_poltrona == verdadeiro)
 		{
 			poltrona = tp.caracter_para_cadeia(t.caracter_tecla(65 + coluna_poltrona_selecionada)) + "-" + tp.inteiro_para_cadeia(linha_poltrona_selecionada + 1, 10)
 		}
+		
 
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
@@ -1261,16 +1284,79 @@ programa
 		}
 	}
 
+	funcao desenhar_imput()
+	{
+		inteiro tecla_pressionada = 0
+		
+	
+			se(t.alguma_tecla_pressionada())
+			{
+				tecla_pressionada = t.ler_tecla()
+				
+				se ((tecla_pressionada >= t.TECLA_A e tecla_pressionada <= t.TECLA_Z) ou tecla_pressionada == t.TECLA_ESPACO ou tecla_pressionada == t.TECLA_BACKSPACE)
+				{
+					se (tecla_pressionada == t.TECLA_BACKSPACE)
+					{
+						tamanho = txt.numero_caracteres(nome_digitado)
+						
+						se (tamanho >= 1)
+						{			
+							nome_digitado = txt.extrair_subtexto(nome_digitado, 0, tamanho - 1)
+						}
+					}
+					senao
+					{
+						tamanho = txt.numero_caracteres(nome_digitado)
+						
+						se(tamanho < 29)
+						{
+							nome_digitado += t.caracter_tecla(tecla_pressionada)
+						}
+						
+					}	
+				}
+			}
+			se(digitando == verdadeiro)
+			{
+				g.definir_cor(g.COR_PRETO)
+				g.definir_estilo_texto(falso, falso, falso)
+				g.definir_tamanho_texto(20.0)
+				g.desenhar_texto(1245 - (g.largura_texto(nome_digitado) / 2), 290, nome_digitado)
+				
+				se((u.tempo_decorrido()/500) % 2 == 0)
+				{
+					g.definir_estilo_texto(falso, falso, falso)
+					//g.altura_texto(texto)
+					g.largura_texto(nome_digitado)
+					g.desenhar_texto(1245 + (g.largura_texto(nome_digitado) / 2), 290, "|")
+					
+				}
+			}
+			
+			se(tecla_pressionada == t.TECLA_ENTER)
+			{
+				digitando = falso
+				nome_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada] = nome_digitado
+				nome_digitado = ""
+				digitado = verdadeiro
+				tamanho = 0
+			}
+			
+		
+			
+		
+	}
+
 }
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 33906; 
- * @DOBRAMENTO-CODIGO = [119, 151, 291, 1027];
+ * @POSICAO-CURSOR = 47451; 
+ * @DOBRAMENTO-CODIGO = [126, 158, 298, 1050];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {linhas, 44, 9, 6}-{colunas, 45, 9, 7}-{poltronas_disponiveis, 49, 9, 21}-{linha_poltrona_selecionada, 51, 9, 26}-{coluna_poltrona_selecionada, 52, 9, 27}-{poltronas_selecionada, 53, 9, 21}-{temp_click, 684, 10, 10};
+ * @SIMBOLOS-INSPECIONADOS = {linhas, 44, 9, 6}-{colunas, 45, 9, 7}-{poltronas_disponiveis, 49, 9, 21}-{linha_poltrona_selecionada, 51, 9, 26}-{coluna_poltrona_selecionada, 52, 9, 27}-{poltronas_selecionada, 53, 9, 21}-{nome_passageiro, 57, 8, 15}-{idade_passageiro, 58, 9, 16}-{temp_click, 691, 10, 10};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
