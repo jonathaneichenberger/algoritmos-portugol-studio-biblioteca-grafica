@@ -30,7 +30,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = 4
+	inteiro opcao = -1
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -2069,7 +2069,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 49689; 
+ * @POSICAO-CURSOR = 785; 
  * @DOBRAMENTO-CODIGO = [146, 178, 329, 719, 1160, 1786, 1690, 1865, 1904, 1944, 1955, 1985, 1990, 1997, 2010];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {quantidade_passageiros, 63, 9, 22};
