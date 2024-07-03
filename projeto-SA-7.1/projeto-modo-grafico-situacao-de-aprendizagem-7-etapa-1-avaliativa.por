@@ -30,7 +30,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = 4
+	inteiro opcao = -1
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -68,7 +68,7 @@ programa
 	logico verificar_idade = falso
 	logico atualizar = verdadeiro
 	logico encontrado = falso
-	
+	cadeia nome_consulta[maximo_linhas][maximo_colunas] 
 	
 	
 	funcao inicio()
@@ -1313,12 +1313,22 @@ programa
 
 			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1480 e m.posicao_y() >= 270 e m.posicao_y() <= 330)
 			{
-	
+				digitado = falso
+				encontrado = falso
 				digitando = verdadeiro
+				
+				para(inteiro i = 0; i < linhas; i++)
+				{
+					para(inteiro n = 0; n < colunas; n++)
+					{
+						poltronas_selecionada[i][n] = - 1
+					}
+				}
+
 				
 			}
 
-			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1050 e m.posicao_x() <= 1460 e m.posicao_y() >= 360 e m.posicao_y() <= 440)
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1050 e m.posicao_x() <= 1460 e m.posicao_y() >= 360 e m.posicao_y() <= 440 e digitado == verdadeiro)
 			{
 				se(digitado == verdadeiro e encontrado == falso)
 				{
@@ -1328,6 +1338,7 @@ programa
 						{
 							se(nome_digitado == nome_passageiro[i][n] e poltronas_disponiveis[i][n] == 0)
 							{
+								
 								poltronas_selecionada[i][n] = - 2
 								encontrado = verdadeiro
 									
@@ -1336,32 +1347,65 @@ programa
 					}
 					
 				}
+				nome_digitado = ""
+			
 			}
+		}
+
+		se(m.posicao_x() >= 1050 e m.posicao_x() <= 1460 e m.posicao_y() >= 360 e m.posicao_y() <= 440)
+		{ 
+			se(digitado == verdadeiro)
+			{
+				g.definir_cor(0x1D8C00)
+				g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, verdadeiro)
+				g.definir_cor(g.COR_PRETO)
+				g.definir_tamanho_texto(40.0)
+				g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, falso)
+				g.desenhar_texto(1050 +((410 - g.largura_texto("CONFIRMAR")) / 2), 380, "CONFIRMAR")
+			}
+			senao
+			{
+				g.definir_cor(g.COR_VERMELHO)
+				g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, verdadeiro)
+				g.definir_cor(g.COR_PRETO)
+				g.definir_tamanho_texto(40.0)
+				g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, falso)
+				g.desenhar_texto(1050 +((410 - g.largura_texto("CONFIRMAR")) / 2), 380, "CONFIRMAR")
+			}
+			
 		}
 
 		g.definir_estilo_texto(falso, verdadeiro, falso)
 		g.definir_tamanho_texto(30.0)
 		g.desenhar_texto(1030, 500 , "NOME")
-		g.desenhar_texto(1300 , 500 , "IDADE")
+		g.desenhar_texto(1270 , 500 , "IDADE")
 		g.desenhar_texto(1410 , 500 , "POS")
 		
-		para(inteiro i = 0; i < linhas; i++)
-		{
-			para(inteiro n = 0; n < colunas; n++)
-			{
-				se(poltronas_selecionada[i][n] == - 2)
-				{
-					g.definir_tamanho_texto(20.0)
-					g.definir_estilo_texto(verdadeiro, falso, falso)
 
-					g.desenhar_texto(1030 , 540 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
-					g.desenhar_texto(1335 , 540 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
-					g.desenhar_texto(1420 , 540 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
-					g.desenhar_linha(1030 , 560 + (30 * quantidade_passageiros + 5), 1460, 560 + (30 * quantidade_passageiros + 5))
-					
-					quantidade_passageiros++
+		se(digitado == verdadeiro e encontrado == verdadeiro)
+		{
+			para(inteiro i = 0; i < linhas; i++)
+			{
+				para(inteiro n = 0; n < colunas; n++)
+				{
+
+					se(poltronas_selecionada[i][n] == - 2)
+					{
+						
+						g.definir_tamanho_texto(20.0)
+						g.definir_estilo_texto(verdadeiro, falso, falso)
+	
+						g.desenhar_texto(1030 , 540 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
+						g.desenhar_texto(1335 , 540 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
+						g.desenhar_texto(1420 , 540 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
+						g.desenhar_linha(1030 , 560 + (30 * quantidade_passageiros + 5), 1460, 560 + (30 * quantidade_passageiros + 5))
+						
+						
+						quantidade_passageiros++
+					}
 				}
 			}
+			
 		}
 		
 		quantidade_passageiros = 0
@@ -1933,7 +1977,7 @@ programa
 	funcao desenhar_imput()
 	{
 		inteiro tecla_pressionada = 0
-		
+
 	
 			se(t.alguma_tecla_pressionada())
 			{
@@ -1993,8 +2037,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 46594; 
- * @DOBRAMENTO-CODIGO = [144, 176, 327, 717, 1429, 1612, 1787, 1826, 1866, 1877, 1907, 1912, 1919];
+ * @POSICAO-CURSOR = 785; 
+ * @DOBRAMENTO-CODIGO = [144, 176, 327, 717, 1158, 1269, 1473, 1656, 1831, 1870, 1910, 1921, 1951, 1956, 1963, 1976];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
