@@ -60,6 +60,12 @@ programa
 	inteiro tamanho = 0
 	logico idade_digitada = falso
 	inteiro quantidade_passageiros = 0
+	inteiro criancas = 0
+	inteiro adolescentes = 0
+	inteiro adultos = 0
+	inteiro idosos = 0
+	logico verificar_idade = falso
+	
 	
 	funcao inicio()
 	{	
@@ -111,10 +117,17 @@ programa
 				}
 				caso 4:
 				{
-
+					consultar_passageiro()
+					g.renderizar()
 					pare
 				}
 				caso 5:
+				{
+					status_aeronave()
+					g.renderizar()
+					pare
+				}
+				caso 6:
 				{
 					tela_final()
 					g.renderizar()
@@ -174,6 +187,7 @@ programa
 			g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, verdadeiro)
 			g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, verdadeiro)
 			g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
+			g.desenhar_retangulo(500, 780, 650, 120, verdadeiro, verdadeiro)
 	
 			g.definir_cor(g.COR_PRETO)
 			g.desenhar_retangulo(500, 80, 650, 120, verdadeiro, falso)
@@ -181,6 +195,7 @@ programa
 			g.desenhar_retangulo(500, 360, 650, 120, verdadeiro, falso)
 			g.desenhar_retangulo(500, 500, 650, 120, verdadeiro, falso)
 			g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, falso)
+			g.desenhar_retangulo(500, 780, 650, 120, verdadeiro, falso)
 	
 			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 80 e m.posicao_y() <= 200)
 			{
@@ -217,6 +232,13 @@ programa
 				g.desenhar_retangulo(497, 637, 656, 126, verdadeiro, verdadeiro)
 				g.definir_cor(0x2F76FA)
 				g.desenhar_retangulo(500, 640, 650, 120, verdadeiro, verdadeiro)
+			}
+			se(m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 780 e m.posicao_y() <= 900)
+			{
+				g.definir_cor(0xB6D7FA)
+				g.desenhar_retangulo(497, 777, 656, 126, verdadeiro, verdadeiro)
+				g.definir_cor(0x2F76FA)
+				g.desenhar_retangulo(500, 780, 650, 120, verdadeiro, verdadeiro)
 			}
 	
 			//Desenhar logo
@@ -259,7 +281,8 @@ programa
 			g.desenhar_texto(500 + ((650 - g.largura_texto("REALIZAR RESERVAS")) / 2), 260, "REALIZAR RESERVAS")
 			g.desenhar_texto(500 + ((650 - g.largura_texto("VISUALIZAR POLTRONAS")) / 2), 400, "VISUALIZAR POLTRONAS")
 			g.desenhar_texto(500 + ((650 - g.largura_texto("CONSULTAR PASSAGEIRO")) / 2), 540, "CONSULTAR PASSAGEIRO")
-			g.desenhar_texto(500 + ((650 - g.largura_texto("SAIR DO PROGRAMA")) / 2), 680, "SAIR DO PROGRAMA")
+			g.desenhar_texto(500 + ((650 - g.largura_texto("EXIBIR STATUS AERONAVE")) / 2), 680, "EXIBIR STATUS AERONAVE")
+			g.desenhar_texto(500 + ((650 - g.largura_texto("SAIR DO PROGRAMA")) / 2), 820, "SAIR DO PROGRAMA")
 			//+ ((650 - g.largura_texto("SAIR DO PROGRAMA")) / 2)
 			se(transparencia < 255)
 			{
@@ -287,14 +310,15 @@ programa
 				opcao = 4
 			}
 			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 640 e m.posicao_y() <= 760)
+			{	
+				opcao = 5
+			}
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 500 e m.posicao_x() <= 1150 e m.posicao_y() >= 780 e m.posicao_y() <= 900)
 			{
 				transparencia = 0
-				opcao = 5
-				
+				opcao = 6
 			}
-
-		}
-			
+		}	
 	}
 
 	funcao cadastrar_poltronas()
@@ -980,6 +1004,7 @@ programa
 					confimar_poltrona = falso
 					digitando = falso
 					digitado = falso
+					quantidade_passageiros++
 				}
 				
 			}
@@ -1237,6 +1262,250 @@ programa
 		}
 		
 	}
+	
+	funcao consultar_passageiro()
+	{
+		inteiro temp_tecla = 0
+		cadeia nome_consultado
+		
+		g.definir_cor(g.COR_BRANCO)
+		g.limpar()
+		g.desenhar_imagem(0, 0, poltronas_aviao)
+
+		//base dos assentos
+		g.desenhar_retangulo((g.largura_janela()-500)/ 2, 0, 500, g.altura_janela(), falso, verdadeiro)
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) - 10, 0, 10, g.altura_janela(), falso, verdadeiro)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) + 500, 0, 10, g.altura_janela(), falso, verdadeiro)
+
+		g.definir_cor(0xdfdfdf)
+		g.definir_opacidade(200)
+		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, verdadeiro)
+		
+		g.definir_opacidade(255)
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+
+		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, falso)
+		g.desenhar_texto(1020 + ((460 - g.largura_texto("PASSAGEIROS")) / 2), 35, "PASSAGEIROS")
+
+		//desenhar_imput()
+
+		nome_consultado = nome_digitado
+	
+		para(inteiro i = 0; i < linhas; i++)
+		{
+			para(inteiro n = 0; n < colunas; n++)
+			{
+				se(nome_consultado == nome_passageiro[i][n])
+				{
+
+					g.definir_estilo_texto(falso, verdadeiro, falso)
+					g.definir_tamanho_texto(30.0)
+					g.desenhar_texto(1030, 100 , "NOME")
+					g.desenhar_texto(1300 , 100 , "IDADE")
+					g.desenhar_texto(1410 , 100 , "POS")
+					g.definir_tamanho_texto(20.0)
+					g.definir_estilo_texto(verdadeiro, falso, falso)
+
+					g.desenhar_texto(1030 , 140 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
+					g.desenhar_texto(1335 , 140 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
+					g.desenhar_texto(1420 , 140 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
+					g.desenhar_linha(1030, 160 + (30 * quantidade_passageiros + 5), 1460, 160 + (30 * quantidade_passageiros + 5))
+				
+					quantidade_passageiros++
+				}
+			}
+		}
+		quantidade_passageiros = 0
+
+		//quadro legenda
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0xdfdfdf , g.COR_BRANCO)
+		g.desenhar_retangulo(20, 300, 450, 500, verdadeiro, verdadeiro)
+		
+		//quadro legenda
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(20, 300, 450, 500, verdadeiro, falso)
+		
+		//cores legenda
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo(40, 400, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0x00ED00)
+		g.desenhar_retangulo(40, 500, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0xFF1E00)
+		g.desenhar_retangulo(40, 600, 50, 50, verdadeiro, verdadeiro)
+		//borda cores legenda	
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(40, 400, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 500, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 600, 50, 50, verdadeiro, falso)
+
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(20 + ((450 - g.largura_texto("LEGENDAS")) / 2), 310, "LEGENDAS")
+		
+		g.desenhar_texto(100 , 410, "DISPONÍVEL")
+		g.desenhar_texto(100 , 510, "RESERVADA")
+		g.desenhar_texto(100 , 610, "INDISPONÍVEL")
+
+		//logo sweet flight
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_elipse(120, 25, 200, 200, verdadeiro)
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_imagem(120, 25, fundo_logo_poltronas)
+		g.desenhar_porcao_imagem(0, 85, 0, 85, 450, 80, poltronas_aviao)
+		g.desenhar_imagem(180, 85, icone_aviao)
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(0, 105, " SWEET")
+		g.desenhar_texto(286, 105, "FLIGHT")
+
+		desenhar_poltronas()
+
+		se(t.alguma_tecla_pressionada())
+		{
+			temp_tecla = t.ler_tecla()
+
+			se(temp_tecla == t.TECLA_ESC)
+			{
+				opcao = 0
+			}
+		}
+	}
+
+	funcao status_aeronave()
+	{
+		inteiro temp_tecla = 0
+		cadeia nome_consultado
+
+		verificar_idade = verdadeiro
+		
+		g.definir_cor(g.COR_BRANCO)
+		g.limpar()
+		g.desenhar_imagem(0, 0, poltronas_aviao)
+
+		//base dos assentos
+		g.desenhar_retangulo((g.largura_janela()-500)/ 2, 0, 500, g.altura_janela(), falso, verdadeiro)
+		g.definir_cor(0xdfdfdf)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) - 10, 0, 10, g.altura_janela(), falso, verdadeiro)
+		g.desenhar_retangulo(((g.largura_janela()-500)/ 2) + 500, 0, 10, g.altura_janela(), falso, verdadeiro)
+
+		g.definir_cor(0xdfdfdf)
+		g.definir_opacidade(200)
+		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, verdadeiro)
+		
+		g.definir_opacidade(255)
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+
+		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, falso)
+		g.desenhar_texto(1020 + ((460 - g.largura_texto("STATUS OCUPAÇÃO")) / 2), 35, "STATUS OCUPAÇÃO")
+
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(30.0)
+		g.desenhar_texto(1020 + ((460 - g.largura_texto("Poltronas reservadas")) / 2), 100, "Poltronas reservadas")
+		
+
+		para(inteiro i = 0; i < linhas; i++)
+		{
+			para(inteiro n = 0; n < colunas; n++)
+			{
+				se(idade_passageiro[i][n] > 0)
+				{
+					se(idade_passageiro[i][n] >= 0 e idade_passageiro[i][n] <= 12)
+					{
+						criancas++
+					} 
+					senao se(idade_passageiro[i][n] > 12 e idade_passageiro[i][n] <= 17)
+					{
+						adolescentes++
+					}
+					senao se(idade_passageiro[i][n] > 18 e idade_passageiro[i][n] <= 59)
+					{
+						adultos++
+					}
+					senao se(idade_passageiro[i][n] > 60 )
+					{
+						idosos++
+					}
+				}
+			}
+		}
+		//quantidade_passageiros
+		//criancas F300D5
+		//adolescentes FFBF00
+		//adultos 0D5EF2
+		//idosos 580C88
+
+		//quadro legenda
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0xdfdfdf , g.COR_BRANCO)
+		g.desenhar_retangulo(20, 300, 450, 600, verdadeiro, verdadeiro)
+		
+		//quadro legenda
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(20, 300, 450, 600, verdadeiro, falso)
+		
+		//cores legenda
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo(40, 400, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0xF300D5)
+		g.desenhar_retangulo(40, 500, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0xFFBF00)
+		g.desenhar_retangulo(40, 600, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0x0D5EF2)
+		g.desenhar_retangulo(40, 700, 50, 50, verdadeiro, verdadeiro)
+		g.definir_cor(0x580C88)
+		g.desenhar_retangulo(40, 800, 50, 50, verdadeiro, verdadeiro)
+		
+		//borda cores legenda	
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_retangulo(40, 400, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 500, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 600, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 700, 50, 50, verdadeiro, falso)
+		g.desenhar_retangulo(40, 800, 50, 50, verdadeiro, falso)
+		
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(20 + ((450 - g.largura_texto("LEGENDAS")) / 2), 310, "LEGENDAS")
+		
+		g.desenhar_texto(100 , 410, "DISPONÍVEL")
+		g.desenhar_texto(100 , 510, "CRIANÇAS")
+		g.desenhar_texto(100 , 610, "ADOLESCENTES")
+		g.desenhar_texto(100 , 710, "ADULTOS")
+		g.desenhar_texto(100 , 810, "IDOSOS")
+
+		//logo sweet flight
+		g.definir_cor(g.COR_PRETO)
+		g.desenhar_elipse(120, 25, 200, 200, verdadeiro)
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_imagem(120, 25, fundo_logo_poltronas)
+		g.desenhar_porcao_imagem(0, 85, 0, 85, 450, 80, poltronas_aviao)
+		g.desenhar_imagem(180, 85, icone_aviao)
+		g.definir_cor(g.COR_PRETO)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(0, 105, " SWEET")
+		g.desenhar_texto(286, 105, "FLIGHT")
+
+		desenhar_poltronas()
+
+		se(t.alguma_tecla_pressionada())
+		{
+			temp_tecla = t.ler_tecla()
+
+			se(temp_tecla == t.TECLA_ESC)
+			{
+				verificar_idade = falso
+				opcao = 0
+			}
+		}
+	}
 
 	funcao desenhar_poltronas()
 	{
@@ -1272,22 +1541,61 @@ programa
 				}
 				se(poltronas_disponiveis[i][n] == 0)
 				{
-					g.definir_cor(0x00ED00)
-					se(n < 3)
+
+					se(verificar_idade == verdadeiro)
 					{
-						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+						se(idade_passageiro[i][n] >= 0 e idade_passageiro[i][n] <= 12)
+						{
+							g.definir_cor(0xF300D5)
+						} 
+						senao se(idade_passageiro[i][n] > 12 e idade_passageiro[i][n] <= 17)
+						{
+							g.definir_cor(0xFFBF00)
+						}
+						senao se(idade_passageiro[i][n] > 18 e idade_passageiro[i][n] <= 59)
+						{
+							g.definir_cor(0x0D5EF2)
+						}
+						senao se(idade_passageiro[i][n] > 60 )
+						{
+							g.definir_cor(0x580C88)
+						}
+
+						se(n < 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+								
+						}
+						se(n < 7 e n >= 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
 							
+						}
+						se(n >= 7)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
 					}
-					se(n < 7 e n >= 3)
+					senao
 					{
-						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
-						
-					}
-					se(n >= 7)
-					{
-						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
-						
-					}
+						g.definir_cor(0x00ED00)
+						se(n < 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+								
+						}
+						se(n < 7 e n >= 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
+						se(n >= 7)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
+					}	
 				}
 				//teste aqui
 				se(poltronas_selecionada[i][n] == -2 e poltronas_disponiveis[i][n] == 0)
@@ -1331,6 +1639,7 @@ programa
 						}
 					}
 				}
+				
 			}
 		}
 
@@ -1581,8 +1890,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 41237; 
- * @DOBRAMENTO-CODIGO = [127, 159, 299];
+ * @POSICAO-CURSOR = 36263; 
+ * @DOBRAMENTO-CODIGO = [140, 172, 323, 1154, 1265, 1509, 1684, 1723, 1763, 1774, 1804, 1809, 1816, 1829];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {poltronas_disponiveis, 48, 9, 21}-{linha_poltrona_selecionada, 50, 9, 26}-{coluna_poltrona_selecionada, 51, 9, 27}-{poltronas_selecionada, 52, 9, 21}-{nome_passageiro, 56, 8, 15}-{idade_passageiro, 57, 9, 16}-{quantidade_passageiros, 62, 9, 22};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
