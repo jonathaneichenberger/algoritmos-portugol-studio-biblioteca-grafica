@@ -29,7 +29,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = -1
+	inteiro opcao = 0
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -74,7 +74,7 @@ programa
 		}
 		
 		inicializar()
-		
+
 		faca
 		{
 			escolha(opcao)
@@ -933,7 +933,7 @@ programa
 				
 			}
 			
-			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1125 e m.posicao_x() <= 1185 e  m.posicao_y() >= 380 e m.posicao_y() <= 440)
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1125 e m.posicao_x() <= 1185 e  m.posicao_y() >= 380 e m.posicao_y() <= 440 e digitado == verdadeiro)
 			{
 				se(idade >= 1)
 				{
@@ -941,7 +941,7 @@ programa
 				}
 			}
 			
-			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1305 e m.posicao_x() <= 1365 e  m.posicao_y() >= 380 e m.posicao_y() <= 440)
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1305 e m.posicao_x() <= 1365 e  m.posicao_y() >= 380 e m.posicao_y() <= 440 e digitado == verdadeiro)
 			{
 				se(idade <=124)
 				{
@@ -949,7 +949,7 @@ programa
 				}
 			}
 			
-			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1120 e  m.posicao_y() >= 380 e m.posicao_y() <= 440)
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1120 e  m.posicao_y() >= 380 e m.posicao_y() <= 440 e digitado == verdadeiro)
 			{
 				se(idade >= 10)
 				{
@@ -957,7 +957,7 @@ programa
 				}
 			}
 			
-			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1370 e m.posicao_x() <= 1460 e  m.posicao_y() >= 380 e m.posicao_y() <= 440)
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1370 e m.posicao_x() <= 1460 e  m.posicao_y() >= 380 e m.posicao_y() <= 440 e digitado == verdadeiro)
 			{
 				se(idade <= 115)
 				{
@@ -971,7 +971,6 @@ programa
 				{
 					idade_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada] = idade
 					nome_passageiro[linha_poltrona_selecionada][coluna_poltrona_selecionada] = nome_digitado
-					
 					poltronas_disponiveis[linha_poltrona_selecionada][coluna_poltrona_selecionada] = 0
 					linha_poltrona_selecionada = -1
 					coluna_poltrona_selecionada = -1
@@ -979,10 +978,13 @@ programa
 					nome_digitado = ""
 					idade = 0
 					confimar_poltrona = falso
-					
+					digitando = falso
+					digitado = falso
 				}
 				
 			}
+			
+			temp_click = -1
 			
 		}
 		//idade_digitada
@@ -1064,13 +1066,15 @@ programa
 		se(confimar_poltrona == verdadeiro)
 		{
 			poltrona = tp.caracter_para_cadeia(t.caracter_tecla(65 + coluna_poltrona_selecionada)) + "-" + tp.inteiro_para_cadeia(linha_poltrona_selecionada + 1, 10)
+			
 		}
 		
-		g.definir_cor(g.COR_PRETO)
-		g.definir_estilo_texto(falso, verdadeiro, falso)
-		g.definir_tamanho_texto(40.0)
-
-		g.desenhar_texto(1050 + ((120 - g.largura_texto(poltrona)) / 2), 170, poltrona)
+			g.definir_cor(g.COR_PRETO)
+			g.definir_estilo_texto(falso, verdadeiro, falso)
+			g.definir_tamanho_texto(40.0)
+			g.desenhar_texto(1050 + ((120 - g.largura_texto(poltrona)) / 2), 170, poltrona)
+		
+		
 		
 		se(m.posicao_x() >= 1020 e m.posicao_x() <= 1470 e m.posicao_y() >= 460 e m.posicao_y() <= 540)
 		{
@@ -1150,28 +1154,26 @@ programa
 		g.desenhar_texto(1020 + ((460 - g.largura_texto("PASSAGEIROS")) / 2), 35, "PASSAGEIROS")
 
 		
-		g.definir_tamanho_texto(20.0)
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(30.0)
+		g.desenhar_texto(1030, 100 , "NOME")
+		g.desenhar_texto(1300 , 100 , "IDADE")
+		g.desenhar_texto(1410 , 100 , "POS")
+		
 		para(inteiro i = 0; i < linhas; i++)
 		{
 			para(inteiro n = 0; n < colunas; n++)
 			{
 				se(poltronas_disponiveis[i][n] == 0)
 				{
-					
-					g.definir_estilo_texto(falso, verdadeiro, falso)
-					g.desenhar_texto(1030, 80 + (80 * quantidade_passageiros + 5) , "Poltrona: ")
+					g.definir_tamanho_texto(20.0)
 					g.definir_estilo_texto(verdadeiro, falso, falso)
-					g.desenhar_texto(1030 + g.largura_texto("Poltrona:  "), 80 + (80 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
-					g.definir_estilo_texto(falso, verdadeiro, falso)
-					g.desenhar_texto(1030, 105 + (80 * quantidade_passageiros + 5), "Nome: ")
-					g.definir_estilo_texto(verdadeiro, falso, falso)
-					g.desenhar_texto(1030 + g.largura_texto("Nome: "), 105 + (80 * quantidade_passageiros + 5), nome_passageiro[i][n])
-					g.definir_estilo_texto(falso, verdadeiro, falso)
-					g.desenhar_texto(1030, 130 + (80 * quantidade_passageiros + 5), "Idade: ")
-					g.definir_estilo_texto(verdadeiro, falso, falso)
-					g.desenhar_texto(1030 + g.largura_texto("Idade: "), 130 + (80 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
-					g.desenhar_linha(1030, 155 + (80 * quantidade_passageiros + 5), 1460, 155 + (80 * quantidade_passageiros + 5))
 
+					g.desenhar_texto(1030 , 140 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
+					g.desenhar_texto(1335 , 140 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
+					g.desenhar_texto(1420 , 140 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
+					g.desenhar_linha(1030, 160 + (30 * quantidade_passageiros + 5), 1460, 160 + (30 * quantidade_passageiros + 5))
+				
 					quantidade_passageiros++
 				}
 			}
@@ -1285,6 +1287,48 @@ programa
 					{
 						g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
 						
+					}
+				}
+				//teste aqui
+				se(poltronas_selecionada[i][n] == -2 e poltronas_disponiveis[i][n] == 0)
+				{
+					g.definir_cor(0xFF5F00)
+					se((u.tempo_decorrido()/1000) % 2 == 0)
+					{
+						se(n < 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+								
+						}
+						se(n < 7 e n >= 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
+						se(n >= 7)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
+					}
+					senao
+					{
+						g.definir_cor(0x00ED00)
+						se(n < 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 40) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+								
+						}
+						se(n < 7 e n >= 3)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 85) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
+						se(n >= 7)
+						{
+							g.desenhar_retangulo((((g.largura_janela()-500)/ 2) + 130) + (10 * n) + ( largura_poltrona * n), 50 + (10 * i) + (altura_poltrona + altura_poltrona * i), largura_poltrona, altura_poltrona, verdadeiro, verdadeiro)
+							
+						}
 					}
 				}
 			}
@@ -1537,10 +1581,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 38842; 
- * @DOBRAMENTO-CODIGO = [127, 159, 299, 1331, 1370, 1410, 1421, 1451, 1456, 1463, 1476];
+ * @POSICAO-CURSOR = 41237; 
+ * @DOBRAMENTO-CODIGO = [127, 159, 299];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {poltronas_disponiveis, 48, 9, 21}-{linha_poltrona_selecionada, 50, 9, 26}-{coluna_poltrona_selecionada, 51, 9, 27}-{nome_passageiro, 56, 8, 15}-{idade_passageiro, 57, 9, 16}-{quantidade_passageiros, 62, 9, 22};
+ * @SIMBOLOS-INSPECIONADOS = {poltronas_disponiveis, 48, 9, 21}-{linha_poltrona_selecionada, 50, 9, 26}-{coluna_poltrona_selecionada, 51, 9, 27}-{poltronas_selecionada, 52, 9, 21}-{nome_passageiro, 56, 8, 15}-{idade_passageiro, 57, 9, 16}-{quantidade_passageiros, 62, 9, 22};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
