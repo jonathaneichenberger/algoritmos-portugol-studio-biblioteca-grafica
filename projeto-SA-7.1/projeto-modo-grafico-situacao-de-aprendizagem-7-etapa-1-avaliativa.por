@@ -30,7 +30,7 @@ programa
 	inteiro som_aviao = 0
 
 	//Outras variaveis
-	inteiro opcao = 0
+	inteiro opcao = 4
 	cadeia hora
 	cadeia minuto
 	cadeia segundo
@@ -67,6 +67,8 @@ programa
 	inteiro idosos = 0
 	logico verificar_idade = falso
 	logico atualizar = verdadeiro
+	logico encontrado = falso
+	
 	
 	
 	funcao inicio()
@@ -364,7 +366,7 @@ programa
 		g.desenhar_retangulo(1130, 200, 70, 70, verdadeiro, verdadeiro)
 
 		g.desenhar_retangulo(1020, 280, 450, 80, verdadeiro, verdadeiro)
-		
+
 		g.definir_cor(g.COR_PRETO)
 
 		g.desenhar_retangulo(1030, 110, 70, 70, verdadeiro, falso)
@@ -1269,6 +1271,7 @@ programa
 	{
 		inteiro temp_tecla = 0
 		cadeia nome_consultado
+		inteiro temp_click = -1
 		
 		g.definir_cor(g.COR_BRANCO)
 		g.limpar()
@@ -1282,46 +1285,92 @@ programa
 
 		g.definir_cor(0xdfdfdf)
 		g.definir_opacidade(200)
-		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, verdadeiro)
+		g.desenhar_retangulo(1020, 180, 470, 800, verdadeiro, verdadeiro)
+		
+		
+		g.definir_cor(g.COR_BRANCO)
+		g.desenhar_retangulo(1030, 270, 450, 60, verdadeiro, verdadeiro)
+
+		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0x3D3316 , 0x9C916F)
+		g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, verdadeiro)
 		
 		g.definir_opacidade(255)
 		g.definir_cor(g.COR_PRETO)
 		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(35.0)
+
+		g.desenhar_retangulo(1020, 180, 470, 800, verdadeiro, falso)
+		g.desenhar_retangulo(1030, 270, 450, 60, verdadeiro, falso)//input
+		g.desenhar_retangulo(1050, 360, 410, 80, verdadeiro, falso)//confirmar
+		g.desenhar_texto(1020 + ((470 - g.largura_texto("DIGITE O NOME")) / 2), 205, "DIGITE O NOME")
+
 		g.definir_tamanho_texto(40.0)
+		g.desenhar_texto(1050 +((410 - g.largura_texto("CONFIRMAR")) / 2), 380, "CONFIRMAR")
+		
+		se(m.algum_botao_pressionado())
+		{
+			temp_click = m.ler_botao()
 
-		g.desenhar_retangulo(1020, 10, 460, 980, verdadeiro, falso)
-		g.desenhar_texto(1020 + ((460 - g.largura_texto("PASSAGEIROS")) / 2), 35, "PASSAGEIROS")
-
-		//desenhar_imput()
-
-		nome_consultado = nome_digitado
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1030 e m.posicao_x() <= 1480 e m.posicao_y() >= 270 e m.posicao_y() <= 330)
+			{
 	
+				digitando = verdadeiro
+				
+			}
+
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= 1050 e m.posicao_x() <= 1460 e m.posicao_y() >= 360 e m.posicao_y() <= 440)
+			{
+				se(digitado == verdadeiro e encontrado == falso)
+				{
+					para(inteiro i = 0; i < linhas; i++)
+					{
+						para(inteiro n = 0; n < colunas; n++)
+						{
+							se(nome_digitado == nome_passageiro[i][n] e poltronas_disponiveis[i][n] == 0)
+							{
+								poltronas_selecionada[i][n] = - 2
+								encontrado = verdadeiro
+									
+							}
+						}
+					}
+					
+				}
+			}
+		}
+
+		g.definir_estilo_texto(falso, verdadeiro, falso)
+		g.definir_tamanho_texto(30.0)
+		g.desenhar_texto(1030, 500 , "NOME")
+		g.desenhar_texto(1300 , 500 , "IDADE")
+		g.desenhar_texto(1410 , 500 , "POS")
+		
 		para(inteiro i = 0; i < linhas; i++)
 		{
 			para(inteiro n = 0; n < colunas; n++)
 			{
-				se(nome_consultado == nome_passageiro[i][n])
+				se(poltronas_selecionada[i][n] == - 2)
 				{
-
-					g.definir_estilo_texto(falso, verdadeiro, falso)
-					g.definir_tamanho_texto(30.0)
-					g.desenhar_texto(1030, 100 , "NOME")
-					g.desenhar_texto(1300 , 100 , "IDADE")
-					g.desenhar_texto(1410 , 100 , "POS")
 					g.definir_tamanho_texto(20.0)
 					g.definir_estilo_texto(verdadeiro, falso, falso)
 
-					g.desenhar_texto(1030 , 140 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
-					g.desenhar_texto(1335 , 140 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
-					g.desenhar_texto(1420 , 140 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
-					g.desenhar_linha(1030, 160 + (30 * quantidade_passageiros + 5), 1460, 160 + (30 * quantidade_passageiros + 5))
-				
+					g.desenhar_texto(1030 , 540 + (30 * quantidade_passageiros + 5), nome_passageiro[i][n])
+					g.desenhar_texto(1335 , 540 + (30 * quantidade_passageiros + 5), tp.inteiro_para_cadeia(idade_passageiro[i][n], 10))
+					g.desenhar_texto(1420 , 540 + (30 * quantidade_passageiros + 5), tp.caracter_para_cadeia(t.caracter_tecla(65 + n)) + "-" + tp.inteiro_para_cadeia(i, 10))
+					g.desenhar_linha(1030 , 560 + (30 * quantidade_passageiros + 5), 1460, 560 + (30 * quantidade_passageiros + 5))
+					
 					quantidade_passageiros++
 				}
 			}
 		}
+		
 		quantidade_passageiros = 0
-
+		
+		se(digitando == verdadeiro)
+		{
+			desenhar_imput()
+		}
+		
 		//quadro legenda
 		g.definir_gradiente(g.GRADIENTE_ABAIXO, 0xdfdfdf , g.COR_BRANCO)
 		g.desenhar_retangulo(20, 300, 450, 500, verdadeiro, verdadeiro)
@@ -1433,6 +1482,7 @@ programa
 		g.desenhar_linha(1030, 580, 1460, 580)
 		g.desenhar_linha(1030, 730, 1460, 730)
 		g.desenhar_linha(1030, 880, 1460, 880)
+		
 		g.definir_estilo_texto(verdadeiro, falso, falso)
 		g.definir_tamanho_texto(26.0)
 		g.desenhar_texto(1020 + ((460 - g.largura_texto(tp.inteiro_para_cadeia(total_poltronas, 10) + "   Poltronas")) / 2), 145, tp.inteiro_para_cadeia(total_poltronas, 10) + "  Poltronas")
@@ -1943,10 +1993,10 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 50898; 
- * @DOBRAMENTO-CODIGO = [142, 174, 325, 715, 1156, 1267];
+ * @POSICAO-CURSOR = 46594; 
+ * @DOBRAMENTO-CODIGO = [144, 176, 327, 717, 1429, 1612, 1787, 1826, 1866, 1877, 1907, 1912, 1919];
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = {poltronas_disponiveis, 49, 9, 21}-{linha_poltrona_selecionada, 51, 9, 26}-{coluna_poltrona_selecionada, 52, 9, 27}-{poltronas_selecionada, 53, 9, 21}-{nome_passageiro, 57, 8, 15}-{idade_passageiro, 58, 9, 16}-{quantidade_passageiros, 63, 9, 22}-{criancas, 64, 9, 8};
+ * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
