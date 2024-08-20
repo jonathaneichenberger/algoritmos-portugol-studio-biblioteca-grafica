@@ -34,6 +34,19 @@ Um algoritmo de ordenação é um conjunto de instruções que reorganiza uma li
 | Espaço extra | Requer | Não requer |
 | Implementação | Mais complexa | Mais simples |
 
+### Algoritmo em Portugol Studio
+
+* Com base nos estudos de lógica de programação e conforme eu me aprofundava cada vez mais na biblioteca gráfica do portugol, resolvi desenvolver este algoritmo didático para mostrar visualmente a diferença de tempo para ordenação de um vetor com os metódos merge sort e bublle sort.
+
+### Funcionamento do Algoritmo
+
+* O algoritmo começa definindo o valor de 5000 posições para o vetor e cria valores em ordem crescente em cada posição do vetor.
+* Na sequencia o algoritmo faz o embaralhamento do vetor com o método de Fisher-Iates.
+* Então é chamado inicialmente a função com o metódo Bublle Sort e no momento da chamada começa a contagem do tempo e finaliza quando a função termina de organizar.
+* Agora é a vez embaralhar novamente e de chamar a função do Merge Sort e novamente no mesmo processo, começamos a contar o tempo quando a função é chamada e termina quando a função tiver terminado de organizar o vetor.
+* Por último, com os devidos tempos coletados, faço com que eles sejam plotados em uma pequena tela como na foto abaixo e após a plotagem com os dados de 5000 posições no vetor, o algoritmo recomeça adicionando novamente 5000 posições no vetor e esse processo se repete até termos o gráfico final como na foto abaixo.
+
+
 ### Visualização
 
 ![mergesort-bubllesort](https://github.com/user-attachments/assets/729336f5-ca29-4e64-8aaf-64008ab8bb2c)
