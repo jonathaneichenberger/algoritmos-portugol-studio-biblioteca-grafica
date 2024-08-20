@@ -84,7 +84,7 @@ programa
 				iniciar_modo_grafico()
 				
 				g.definir_fonte_texto("Arial")
-         		 	g.definir_titulo_janela("SITUAÇÃO DE APREDIZAGEM 6 ETAPA 1 -- BUBLLE SORT --")
+         		 	g.definir_titulo_janela("GRÁFICO DESEMPENHO -- MERGE SORT VS BUBLLE SORT --")
 
           		enquanto(nao t.tecla_pressionada(t.TECLA_ENTER))
           		{
@@ -377,7 +377,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 704; 
+ * @POSICAO-CURSOR = 1385; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = {tempo_bubllesort, 21, 6, 16}-{tempo_mergesort, 22, 6, 15}-{tempo_embaralhar, 24, 6, 16}-{tamanho_vetor, 27, 6, 13};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

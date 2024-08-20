@@ -26,6 +26,7 @@ programa
 	//Variaveis para o controle de fps
 	inteiro tempo = u.tempo_decorrido()
 	inteiro espera = 16
+	inteiro quantidade = 0
 	
 	funcao inicio()
 	{
@@ -62,6 +63,8 @@ programa
 		real borda_retangulo 
 		inteiro cor_interno
 		inteiro cor_borda
+		inteiro temp_click
+		
 
 		borda_esquerda = 10.0
 		borda_direita = 10.0
@@ -73,17 +76,28 @@ programa
 		cor_interno = g.COR_BRANCO
 		cor_borda = 0xdfdfdf
 
+		se(m.algum_botao_pressionado())
+		{
+			temp_click = m.ler_botao()
+			
+			se(temp_click == m.BOTAO_ESQUERDO e m.posicao_x() >= g.largura_janela() / 2  e m.posicao_x() <= g.largura_janela() e m.posicao_y() >= 0 e m.posicao_y() <= g.altura_janela())
+			{
+				quantidade++
+			}
+		}
+		g.largura_janela()
+		g.altura_janela()
 		g.definir_cor(g.COR_AZUL)
 		g.limpar()
-		desenhar_retangulo(borda_esquerda, borda_direita, borda_superior, espaco_entre_opcoes, largura_retangulo, altura_retangulo, borda_retangulo, cor_interno, cor_borda)
+		desenhar_retangulo(borda_esquerda, borda_direita, borda_superior, espaco_entre_opcoes, largura_retangulo, altura_retangulo, borda_retangulo, cor_interno, cor_borda, quantidade)
 
 		
 	}
 
-	funcao desenhar_retangulo(real borda_esquerda, real borda_direita, real borda_superior, real espaco_entre_opcoes, real largura_retangulo, real altura_retangulo, real borda_retangulo, inteiro cor_interno, inteiro cor_borda)
+	funcao desenhar_retangulo(real borda_esquerda, real borda_direita, real borda_superior, real espaco_entre_opcoes, real largura_retangulo, real altura_retangulo, real borda_retangulo, inteiro cor_interno, inteiro cor_borda, inteiro quantidade)
 	{
 
-		para(inteiro i = 0; i < 10; i++)
+		para(inteiro i = 0; i < quantidade; i++)
 		{
 
 			g.definir_cor(cor_borda)
@@ -128,7 +142,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1441; 
+ * @POSICAO-CURSOR = 893; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
