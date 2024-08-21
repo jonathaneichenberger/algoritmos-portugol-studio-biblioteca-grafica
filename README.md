@@ -36,7 +36,7 @@ Um algoritmo de ordenação é um conjunto de instruções que reorganiza uma li
 
 ### Algoritmo em Portugol Studio
 
-* Com base nos estudos de lógica de programação e conforme eu me aprofundava cada vez mais na biblioteca gráfica do portugol, resolvi desenvolver este algoritmo didático para mostrar visualmente a diferença de tempo para ordenação de um vetor com os metódos merge sort e bublle sort.
+* Com base nos estudos de lógica de programação e conforme eu me aprofundava cada vez mais na biblioteca gráfica do **Portugol Studio**, resolvi desenvolver este algoritmo didático para mostrar visualmente a diferença de tempo para ordenação de um vetor com os metódos merge sort e bublle sort.
 
 ### Funcionamento do Algoritmo
 
